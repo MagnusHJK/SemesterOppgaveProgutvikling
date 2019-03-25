@@ -12,28 +12,6 @@ Semester Oppgave for DATA1600 Programutvikling
 * **Bruk av OOP og Model - View - Controller**
 
 
-## Klasser
-
-Design mønster for hele prosjektet: Model–view–controller
-
-**Klasse 1**  
-Designmønster:  
-Funksjon:  
-Metoder:  
-
-
-**Klasse 2**  
-Designmønster:  
-Funksjon:  
-Metoder:  
-
-
-
-**Klasse 3**  
-Designmønster:  
-Funksjon:  
-Metoder:  
-
 ## Built With
 
 * [JavaFX](https://openjfx.io/) - JavaFX is a software platform for creating and delivering desktop applications
