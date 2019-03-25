@@ -3,13 +3,36 @@ Semester Oppgave for DATA1600 Programutvikling
 
 
 
-## Getting Started
+## Tekniske krav og krav til funksjonalitet
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+* **Registrering av elementer**
+* **Visualisering av eksisterende elementer**
+* **Lagring av data til fil**
+* **Innlesning av data fra fil**
+* **Bruk av OOP og Model - View - Controller**
 
-### Prerequisites
 
-What things you need to install the software and how to install them
+### Klasser
+
+Design mønster for hele prosjektet: Model–view–controller
+
+**Klasse 1**
+Designmønster:
+Funksjon:
+Metoder:
+
+
+**Klasse 2**
+Designmønster:
+Funksjon:
+Metoder:
+
+
+
+**Klasse 3**
+Designmønster:
+Funksjon:
+Metoder:
 
 ```
 Give examples
