@@ -16,23 +16,23 @@ Semester Oppgave for DATA1600 Programutvikling
 
 Design mønster for hele prosjektet: Model–view–controller
 
-**Klasse 1**
-Designmønster:
-Funksjon:
-Metoder:
+**Klasse 1**  
+Designmønster:  
+Funksjon:  
+Metoder:  
 
 
-**Klasse 2**
-Designmønster:
-Funksjon:
-Metoder:
+**Klasse 2**  
+Designmønster:  
+Funksjon:  
+Metoder:  
 
 
 
-**Klasse 3**
-Designmønster:
-Funksjon:
-Metoder:
+**Klasse 3**  
+Designmønster:  
+Funksjon:  
+Metoder:  
 
 ```
 Give examples
