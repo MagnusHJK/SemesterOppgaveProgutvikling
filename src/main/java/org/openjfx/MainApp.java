@@ -11,15 +11,16 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
+    public void start(Stage stageMain) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("sceneMain.fxml"));
+
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
-        stage.show();
+        stageMain.setTitle("Kulturhuset Ottestad");
+        stageMain.setScene(scene);
+        stageMain.show();
     }
 
     /**
