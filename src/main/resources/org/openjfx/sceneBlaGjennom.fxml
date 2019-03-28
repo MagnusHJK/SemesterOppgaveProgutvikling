@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.ControllerBlaGjennom">
+<AnchorPane fx:id="paneBlaGjennom" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.ControllerBlaGjennom">
    <children>
       <SplitPane dividerPositions="0.3193717277486911" layoutX="16.0" layoutY="48.0" prefHeight="440.0" prefWidth="766.0">
         <items>
@@ -41,7 +40,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button layoutX="510.0" layoutY="531.0" mnemonicParsing="false" text="Kjøp" />
-      <Button layoutX="281.0" layoutY="531.0" mnemonicParsing="false" text="Tilbake" />
+      <Button fx:id="btnKjopSide" layoutX="510.0" layoutY="531.0" mnemonicParsing="false" onAction="#actionKjopSide" text="Kjøp" />
+      <Button fx:id="btnHjemSide" layoutX="281.0" layoutY="531.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Tilbake" />
    </children>
 </AnchorPane>

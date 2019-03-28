@@ -20,12 +20,14 @@ public class ControllerMain {
     @FXML
     private AnchorPane paneHjem;
 
-
     @FXML
     private Label label;
 
     @FXML
     private Button btnAdminSide;
+
+    @FXML
+    private Button btnBlaGjennomSide;
 
 
     @FXML
@@ -33,6 +35,14 @@ public class ControllerMain {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneAdmin.fxml"));
         paneHjem.getChildren().setAll(pane);
         System.out.println("Tar deg til Admin siden.");
+    }
+
+
+    @FXML
+    private void actionBlaGjennomSide(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneBlaGjennom.fxml"));
+        paneHjem.getChildren().setAll(pane);
+        System.out.println("Tar det til Bla Gjennom siden.");
     }
 
 }
