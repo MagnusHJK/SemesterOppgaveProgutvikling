@@ -15,4 +15,11 @@ public class AppInfo {
     public String getGit(){
         return git;
     }
+
+    @Override
+    public String toString(){
+
+        return "Versjon: " + getVersjon() + "\n" +
+               "GitHub: " + getGit();
+    }
 }
