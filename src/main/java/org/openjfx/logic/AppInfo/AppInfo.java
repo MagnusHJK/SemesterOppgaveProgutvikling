@@ -5,7 +5,7 @@ package org.openjfx.logic.AppInfo;
 
 public class AppInfo {
 
-    private final static String versjon = "BIWEEKLY_13.1";
+    private final static String versjon = "DAILY_13-TORSDAG";
     private final static String git = "https://github.com/MagnusHJK/SemesterOppgaveProgutvikling";
 
     public String getVersjon(){
