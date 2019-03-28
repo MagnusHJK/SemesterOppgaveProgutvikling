@@ -60,6 +60,4 @@ public class ControllerMain {
         System.out.println("Tar det til Bla Gjennom siden.");
     }
 
-
-
 }
