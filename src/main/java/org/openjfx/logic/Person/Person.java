@@ -1,37 +1,51 @@
 package org.openjfx.logic.Person;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Person {
-    private String fornavnavn;
-    private String etternavn;
-    private String telefon;
+    private SimpleStringProperty fornavn;
+    private SimpleStringProperty etternavn;
+    private SimpleStringProperty telefon;
 
-    public Person(String fornavnavn, String etternavn, String telefon) {
-        this.fornavnavn = fornavnavn;
-        this.etternavn = etternavn;
-        this.telefon = telefon;
+    public Person(String fornavn, String etternavn, String telefon) {
+        this.fornavn = new SimpleStringProperty(fornavn);
+        this.etternavn = new SimpleStringProperty(etternavn);
+        this.telefon = new SimpleStringProperty(telefon);
     }
 
-    public String getFornavnavn() {
-        return fornavnavn;
+    public String getFornavn() {
+        return fornavn.get();
     }
 
-    public void setFornavnavn(String fornavnavn) {
-        this.fornavnavn = fornavnavn;
+    public SimpleStringProperty fornavnProperty() {
+        return fornavn;
+    }
+
+    public void setFornavn(String fornavn) {
+        this.fornavn.set(fornavn);
     }
 
     public String getEtternavn() {
+        return etternavn.get();
+    }
+
+    public SimpleStringProperty etternavnProperty() {
         return etternavn;
     }
 
     public void setEtternavn(String etternavn) {
-        this.etternavn = etternavn;
+        this.etternavn.set(etternavn);
     }
 
     public String getTelefon() {
+        return telefon.get();
+    }
+
+    public SimpleStringProperty telefonProperty() {
         return telefon;
     }
 
     public void setTelefon(String telefon) {
-        this.telefon = telefon;
+        this.telefon.set(telefon);
     }
 }
