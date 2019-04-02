@@ -20,7 +20,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#actionLokaleTrykk" prefHeight="309.0" prefWidth="238.0">
                            <children>
-                              <ListView fx:id="listLokale" layoutX="-1.0" layoutY="2.0" onMouseClicked="#actionLokaleTrykk" prefHeight="285.0" prefWidth="240.0" />
+                              <ListView fx:id="listLokale" layoutX="-1.0" layoutY="-6.0" onMouseClicked="#actionLokaleTrykk" prefHeight="293.0" prefWidth="240.0" />
                            </children>
                         </AnchorPane>
                     </items>
@@ -35,10 +35,10 @@
                            <children>
                               <TableView fx:id="tabellArrangement" prefHeight="285.0" prefWidth="514.0">
                                 <columns>
-                                  <TableColumn fx:id="kolonneArrangementNavn" prefWidth="145.0" text="Navn" />
-                                  <TableColumn fx:id="kolonneArrangementType" prefWidth="93.0" text="Type" />
-                                    <TableColumn fx:id="kolonneArrangementKjendis" prefWidth="86.0" text="Kjendis" />
-                                    <TableColumn fx:id="kolonneArrangementPris" prefWidth="73.0" text="Pris" />
+                                  <TableColumn fx:id="kolonneArrangementNavn" prefWidth="154.0" text="Navn" />
+                                  <TableColumn fx:id="kolonneArrangementType" prefWidth="109.0" text="Type" />
+                                    <TableColumn fx:id="kolonneArrangementKjendis" prefWidth="156.0" text="Kjendis" />
+                                    <TableColumn fx:id="kolonneArrangementPris" prefWidth="89.0" text="Pris" />
                                 </columns>
                               </TableView>
                            </children></AnchorPane>

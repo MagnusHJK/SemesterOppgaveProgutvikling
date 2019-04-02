@@ -91,7 +91,10 @@ public class ControllerBlaGjennom {
 
     @FXML
     private void actionKjopSide(ActionEvent event) throws IOException {
-        System.out.println("Du trykket på kjøp knappen");
+        Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
+
+        System.out.println("Du kjøpte " + valg.getNavn());
+
     }
 
 
