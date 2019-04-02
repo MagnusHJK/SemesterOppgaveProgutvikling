@@ -1,24 +1,84 @@
 package org.openjfx.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import org.openjfx.logic.Arrangement.Arrangement;
+import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleCellFactory;
+import org.openjfx.logic.Person.Kontaktperson;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 public class ControllerBlaGjennom {
 
-    public void initialize() throws Exception{
+    public void initialize(){
+
+        //Fyller ListView med lokaler (Bare typen på de)
+        listLokale.setCellFactory(new LokaleCellFactory());
+        listLokale.setItems(Lokale.lagLokaleList());
+
+        //Sier hva hver kolonne i Arrangement valget skal fylles med
+        kolonneArrangementNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
+        kolonneArrangementType.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("type"));
+        kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
+        kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
+
+
 
     }
+
+    @FXML
+    private ListView<Lokale> listLokale;
+
+    @FXML
+    private TableView<Arrangement> tabellArrangement;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementNavn;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementType;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementKjendis;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementPris;
 
     @FXML
     private AnchorPane paneBlaGjennom;
 
     @FXML
     private Button btnKjopSide;
+
+
+    //Click action for valg av lokale
+    @FXML
+    private void actionLokaleTrykk(MouseEvent event) {
+
+        //Finner hvilken man trykker på
+        Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
+
+        //Lager en ny ObservableList fra den gamle, men filtrert etter om den matcher lokale
+        ObservableList<Arrangement> filtrert = Arrangement.lagArrangementListe()
+                .stream()
+                .filter(Arrangement -> Arrangement.getType().equals(lokale.getType()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        //Populerer tabellen
+        tabellArrangement.setItems(filtrert);
+    }
+
 
 
     @FXML
@@ -33,5 +93,7 @@ public class ControllerBlaGjennom {
     private void actionKjopSide(ActionEvent event) throws IOException {
         System.out.println("Du trykket på kjøp knappen");
     }
+
+
 
 }
