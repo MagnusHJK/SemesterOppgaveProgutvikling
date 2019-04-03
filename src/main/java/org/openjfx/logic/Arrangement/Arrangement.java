@@ -121,6 +121,7 @@ public class Arrangement implements Serializable {
 
     //Returnerer en ObservableList utifra Lokalet som er valgt, slik at bare Arrangementer med riktig lokale vises
     public ObservableList<Arrangement> filtrertArrangementListe(Lokale lokale){
+            //TODO: Er denne metoden nødvendig?
 
         return null;
     }
@@ -128,36 +129,13 @@ public class Arrangement implements Serializable {
 
 
     //Lager et array fra innlest serialisert fil, brukes senere til å populere GUI via lagArrangementListe()
-    public ArrayList<Arrangement> lesArrayFraFil() throws IOException, ClassNotFoundException, FileNotFoundException{
 
-        ArrayList<Arrangement> arrangementListe = new ArrayList<>();
-
-        try {
-
-            FileInputStream fis = new FileInputStream("databases/arrangement.txt");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-
-            arrangementListe = (ArrayList<Arrangement>)ois.readObject();
-
-            ois.close();
-            fis.close();
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch(IOException ois){
-            System.err.println("Feil i I/O");
-            ois.printStackTrace();
-        }catch(ClassNotFoundException c){
-            System.err.println("Feil klasse");
-            c.printStackTrace();
-        }
-
-        return arrangementListe;
-    }
 
     //Henter array fra fil og lar deg legge til et Arrangment til det
     public ArrayList<Arrangement> leggTilArrangementArray(Arrangement arrangement)throws IOException, ClassNotFoundException, FileNotFoundException{
-        ArrayList<Arrangement>arrangementListe = lesArrayFraFil();
+        ArrangementSerialiser serialisertArrangement = new ArrangementSerialiser();
+
+        ArrayList<Arrangement>arrangementListe = serialisertArrangement.lesArrayFraFil();
 
         arrangementListe.add(arrangement);
 
@@ -177,14 +155,6 @@ public class Arrangement implements Serializable {
         arrangementObservableListe.addAll(arrangementListe);
 
         return arrangementObservableListe;
-    }
-
-
-
-    //Legger et spesifikt arrangement til
-    public void leggTilArrangement(Arrangement arrangement){
-
-
     }
 
 
