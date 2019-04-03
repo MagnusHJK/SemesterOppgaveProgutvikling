@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -43,7 +44,7 @@
       </MenuBar>
       <TabPane layoutY="29.0" prefHeight="654.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Legg til">
+          <Tab fx:id="tabLeggTil" text="Legg til">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="538.0" prefWidth="900.0">
                      <children>
@@ -52,45 +53,52 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <ListView layoutX="21.0" layoutY="59.0" prefHeight="133.0" prefWidth="303.0" />
-                        <GridPane layoutX="221.0" layoutY="204.0" prefHeight="392.0" prefWidth="457.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                        <ChoiceBox fx:id="choiceLeggTillValg" layoutX="279.0" layoutY="87.0" prefHeight="26.0" prefWidth="254.0" />
+                        <Button fx:id="btnLeggTilValg" layoutX="590.0" layoutY="87.0" mnemonicParsing="false" onAction="#actionLeggTilValg" prefHeight="26.0" prefWidth="60.0" text="Velg" />
+                        <Pane fx:id="paneArrangement" layoutX="206.0" layoutY="135.0" prefHeight="466.0" prefWidth="488.0" visible="false">
                            <children>
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Kontaktperson" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="204.0" text="Type" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="202.0" text="Navn" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="205.0" text="Artist" GridPane.rowIndex="3" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Sted" GridPane.rowIndex="4" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="5" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="7" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="6" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <ChoiceBox prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <ChoiceBox prefHeight="26.0" prefWidth="262.0" GridPane.columnIndex="1" />
+                              <GridPane prefHeight="392.0" prefWidth="457.0">
+                                <columnConstraints>
+                                  <ColumnConstraints fx:id="gridPaneArrangement" hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Kontaktperson" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="204.0" text="Type" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="202.0" text="Navn" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="205.0" text="Artist" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Sted" GridPane.rowIndex="4" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="5" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="7" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="6" />
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <ChoiceBox prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <ChoiceBox prefHeight="26.0" prefWidth="262.0" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <Button layoutX="166.0" layoutY="426.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
                            </children>
-                        </GridPane>
+                        </Pane>
+                        <Button fx:id="btnHjemSide" layoutX="813.0" layoutY="17.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Endre">
+          <Tab fx:id="tabEndre" text="Endre">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -113,7 +121,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Slett">
+            <Tab fx:id="tabSlett" text="Slett">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -136,14 +144,12 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Lagre til fil">
+            <Tab fx:id="tabLagreTilFil" text="Lagre til fil">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="529.0" layoutY="677.0" mnemonicParsing="false" text="Legg til" />
-      <Button fx:id="btnHjemSide" layoutX="349.0" layoutY="677.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
    </children>
 </AnchorPane>

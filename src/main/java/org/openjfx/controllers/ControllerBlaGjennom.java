@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 
 public class ControllerBlaGjennom {
 
-    public void initialize(){
+    public void initialize() throws Exception{
 
         //Fyller ListView med lokaler (Bare typen på de)
         listLokale.setCellFactory(new LokaleCellFactory());
@@ -33,6 +33,8 @@ public class ControllerBlaGjennom {
         kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
         kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
 
+
+        Arrangement test = new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), "Test", "","","","",0,0);
 
 
     }
