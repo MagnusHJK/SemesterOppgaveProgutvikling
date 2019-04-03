@@ -1,15 +1,12 @@
 package org.openjfx;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.openjfx.logic.Lokale.Lokale;
+
 
 
 public class MainApp extends Application {
