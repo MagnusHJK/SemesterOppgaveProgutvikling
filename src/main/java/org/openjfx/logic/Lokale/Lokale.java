@@ -4,6 +4,7 @@ package org.openjfx.logic.Lokale;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.logic.Arrangement.Arrangement;
 
 
 public class Lokale {
@@ -66,6 +67,12 @@ public class Lokale {
 
     public void setAntallPlasser(int antallPlasser) {
         this.antallPlasser.set(antallPlasser);
+    }
+
+
+    @Override
+    public String toString(){
+        return this.getType();
     }
 
 
