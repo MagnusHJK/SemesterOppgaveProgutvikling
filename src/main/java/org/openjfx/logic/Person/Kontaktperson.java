@@ -68,6 +68,7 @@ public class Kontaktperson extends Person {
         this.opplysninger.set(opplysninger);
     }
 
+
     public static ObservableList<Kontaktperson> lagKontaktpersonListe(){
         ObservableList<Kontaktperson> kontaktpersonList = FXCollections.observableArrayList();
 

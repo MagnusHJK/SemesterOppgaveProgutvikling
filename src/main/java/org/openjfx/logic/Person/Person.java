@@ -2,7 +2,7 @@ package org.openjfx.logic.Person;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Person {
+public abstract class Person {
     private SimpleStringProperty fornavn;
     private SimpleStringProperty etternavn;
     private SimpleStringProperty telefon;
