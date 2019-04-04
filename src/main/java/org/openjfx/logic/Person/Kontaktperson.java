@@ -5,10 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Kontaktperson extends Person {
-    private SimpleStringProperty epost;
-    private SimpleStringProperty nettside;
-    private SimpleStringProperty virksomhet;
-    private SimpleStringProperty opplysninger;
+    private transient SimpleStringProperty epost;
+    private transient SimpleStringProperty nettside;
+    private transient SimpleStringProperty virksomhet;
+    private transient SimpleStringProperty opplysninger;
 
     public Kontaktperson(String fornavn, String etternavn, String telefon, String epost, String nettside,
                          String virksomhet, String opplysninger) {

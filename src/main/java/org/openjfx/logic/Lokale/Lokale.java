@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 
 public class Lokale implements Serializable {
-    private SimpleStringProperty lokaleID;  //Key for objekt
-    private SimpleStringProperty navn;  //Navn på stedet
-    private SimpleStringProperty type;  //Kinosal, Konsertsal, etc
-    private SimpleIntegerProperty antallPlasser;
+    private transient SimpleStringProperty lokaleID;  //Key for objekt
+    private transient SimpleStringProperty navn;  //Navn på stedet
+    private transient SimpleStringProperty type;  //Kinosal, Konsertsal, etc
+    private transient SimpleIntegerProperty antallPlasser;
 
 
     public Lokale(String lokaleID, String navn, String type, int antallPlasser) {
