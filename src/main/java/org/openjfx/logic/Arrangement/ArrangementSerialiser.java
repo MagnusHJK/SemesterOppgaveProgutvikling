@@ -41,7 +41,7 @@ public class ArrangementSerialiser implements Serializable {
     public void skrivArrayTilFil(ArrayList<Arrangement> arrangementList) throws IOException, ClassNotFoundException, FileNotFoundException{
 
         try{
-            FileOutputStream fos = new FileOutputStream("Database/arrangement.txt");
+            FileOutputStream fos = new FileOutputStream("databases/arrangement.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(arrangementList);
             oos.close();
