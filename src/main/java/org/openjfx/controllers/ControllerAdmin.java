@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 
 
@@ -132,7 +133,7 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
     @FXML
-    private void actionLeggTilArrangement(ActionEvent event){
+    private void actionLeggTilArrangement(ActionEvent event) {
         System.out.println("Du har trykket på legg til arrangement");
         //Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
         Lokale lokale = choiceTypeArr.getSelectionModel().getSelectedItem();
@@ -155,6 +156,7 @@ public class ControllerAdmin {
 
 
         // Arrangement arrangement = new Arrangement(kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
