@@ -1,26 +1,31 @@
 package org.openjfx.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
+import org.openjfx.logic.Arrangement.Arrangement;
+import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Lokale.Lokale;
 
+
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 public class ControllerAdmin {
 
 
     public void initialize() {
-        choiceLeggTillValg.setItems(Element.lagElementListe());
+        Element elementerListe = new Element();
 
+        choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
     }
 
@@ -32,13 +37,39 @@ public class ControllerAdmin {
     private Tab tabLeggTil;
 
     @FXML
-    private ChoiceBox choiceLeggTillValg;
+    private ChoiceBox<String> choiceLeggTillValg;
 
     @FXML
     private Button btnLeggTilValg;
 
     @FXML
+    private ChoiceBox choiceKontaktpersonArr;
+
+    @FXML
+    private ChoiceBox<Lokale> choiceTypeArr;
+
+    @FXML
+    private TextField textfieldNavnArr;
+
+    @FXML
+    private TextField textfieldArtistArr;
+
+    @FXML
+    private TextField textfieldStedArr;
+
+    @FXML
+    private TextField textfieldBillettpris;
+
+    @FXML
+    private TextField textfieldMaksBilletterArr;
+
+    @FXML
+    private TextArea textfieldBeskrivelseArr;
+
+    @FXML
     private Pane paneArrangement;
+
+
 
     @FXML
     private Tab tabEndre;
@@ -59,7 +90,7 @@ public class ControllerAdmin {
     //Når brukeren velger kategori for elementet
     @FXML
     private void actionLeggTilValg(ActionEvent event){
-        String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem().toString();
+        String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem();
 
         if(valg.equals("Lokale")){
             paneArrangement.setVisible(false);
@@ -69,6 +100,7 @@ public class ControllerAdmin {
 
         }else if(valg.equals("Arrangement")){
             paneArrangement.setVisible(true);
+            choiceTypeArr.setItems(Lokale.lagLokaleList());
         }
 
     }
@@ -76,8 +108,9 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Lokale" knapp
     @FXML
-    private void actionLeggTilLokale(ActionEvent event){
+    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException{
         System.out.println("Du har trykket på legg til lokale");
+
     }
 
 
@@ -93,6 +126,41 @@ public class ControllerAdmin {
     @FXML
     private void actionLeggTilArrangement(ActionEvent event){
         System.out.println("Du har trykket på legg til arrangement");
+        //Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
+        //Lokale lokale = choiceTypeArr.getSelectionModel().getSelectedItem();
+        String navn = textfieldNavnArr.getText();
+        String artist = textfieldArtistArr.getText();
+        String sted = textfieldStedArr.getText();
+        String beskrivelse = textfieldBeskrivelseArr.getText();
+        int billettPris = 0;
+        int billettMaks = 0;
+
+
+
+        //TODO fikse exception
+        try{
+            billettPris = Integer.parseInt(textfieldBillettpris.getText());
+            billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
+        }catch(Exception e){
+
+        }
+
+
+        // Arrangement arrangement = new Arrangement(kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+
+        try{
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            ArrangementSerialiser Arrangement = new ArrangementSerialiser();
+            ArrayList<Arrangement> liste = Arrangement.lesArrayFraFil();
+
+            //liste.add(arrangement);
+
+            Arrangement.skrivArrayTilFil(liste);
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch (ClassNotFoundException c){
+            c.printStackTrace();
+        }
 
     }
 
