@@ -16,7 +16,7 @@ import org.openjfx.logic.Person.Kontaktperson;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 
 public class ControllerBlaGjennom {
@@ -24,7 +24,6 @@ public class ControllerBlaGjennom {
     public void initialize() throws Exception{
 
         //Fyller ListView med lokaler (Bare typen på de)
-        listLokale.setCellFactory(new LokaleCellFactory());
         listLokale.setItems(Lokale.lagLokaleList());
 
         //Sier hva hver kolonne i Arrangement valget skal fylles med
@@ -33,8 +32,6 @@ public class ControllerBlaGjennom {
         kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
         kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
 
-
-        Arrangement test = new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), "Test", "","","","",0,0);
 
 
     }
@@ -74,7 +71,7 @@ public class ControllerBlaGjennom {
         //Lager en ny ObservableList fra den gamle, men filtrert etter om den matcher lokale
         ObservableList<Arrangement> filtrert = Arrangement.lagArrangementListe()
                 .stream()
-                .filter(Arrangement -> Arrangement.getType().equals(lokale.getType()))
+                .filter(Arrangement -> Arrangement.getType().toString().equals(lokale.toString()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         //Populerer tabellen
