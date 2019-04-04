@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.logic.Arrangement.Arrangement;
+import org.openjfx.logic.Arrangement.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Person.Kontaktperson;
@@ -82,20 +83,22 @@ public class ControllerBlaGjennom {
 
     @FXML
     private void actionHjemSide(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneMain.fxml"));
-        paneBlaGjennom.getChildren().setAll(pane);
-        System.out.println("Tar deg til Hjem siden.");
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneMain.fxml"));
+            paneBlaGjennom.getChildren().setAll(pane);
+            System.out.println("Tar deg til Hjem siden.");
+        } catch (IOException e) {
+            alertbox.display("Feil","En feil oppstod");
+        }
     }
 
 
     @FXML
     private void actionKjopSide(ActionEvent event) throws IOException {
-        Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
+            Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
 
-        System.out.println("Du kjøpte " + valg.getNavn());
+            System.out.println("Du kjøpte " + valg.getNavn());
 
     }
-
-
 
 }
