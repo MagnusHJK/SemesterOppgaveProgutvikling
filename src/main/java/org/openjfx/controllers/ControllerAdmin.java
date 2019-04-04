@@ -1,13 +1,10 @@
 package org.openjfx.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
@@ -16,7 +13,6 @@ import org.openjfx.logic.Lokale.Lokale;
 
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ControllerAdmin {
@@ -24,7 +20,6 @@ public class ControllerAdmin {
 
     public void initialize() {
         Element elementerListe = new Element();
-
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
     }
@@ -70,6 +65,11 @@ public class ControllerAdmin {
     private Pane paneArrangement;
 
 
+    @FXML
+    private Pane paneLokale;
+
+    @FXML
+    private Pane paneKontaktperson;
 
     @FXML
     private Tab tabEndre;
@@ -92,14 +92,24 @@ public class ControllerAdmin {
     private void actionLeggTilValg(ActionEvent event){
         String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem();
 
+        //TODO Bytte til switch??
         if(valg.equals("Lokale")){
+            paneLokale.setVisible(true);
+            paneKontaktperson.setVisible(false);
             paneArrangement.setVisible(false);
 
         }else if(valg.equals("Kontaktperson")){
+            paneLokale.setVisible(false);
+            paneKontaktperson.setVisible(true);
             paneArrangement.setVisible(false);
 
+
         }else if(valg.equals("Arrangement")){
+            paneLokale.setVisible(false);
+            paneKontaktperson.setVisible(false);
             paneArrangement.setVisible(true);
+
+
             choiceTypeArr.setItems(Lokale.lagLokaleList());
         }
 
@@ -141,8 +151,8 @@ public class ControllerAdmin {
         try{
             billettPris = Integer.parseInt(textfieldBillettpris.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-        }catch(Exception e){
-
+        }catch(NumberFormatException nfe){
+            nfe.printStackTrace();
         }
 
 
@@ -158,8 +168,8 @@ public class ControllerAdmin {
             Arrangement.skrivArrayTilFil(liste);
         } catch(IOException ioe){
             ioe.printStackTrace();
-        }catch (ClassNotFoundException c){
-            c.printStackTrace();
+        }catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
         }
 
     }

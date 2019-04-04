@@ -53,7 +53,7 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="159.0" prefHeight="448.0" prefWidth="457.0" visible="false">
+                        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
                            <children>
                               <GridPane prefHeight="392.0" prefWidth="457.0">
                                 <columnConstraints>
@@ -94,6 +94,59 @@
                         </Pane>
                         <ChoiceBox fx:id="choiceLeggTillValg" layoutX="300.0" layoutY="86.0" prefWidth="150.0" />
                         <Button fx:id="btnLeggTilValg" layoutX="566.0" layoutY="86.0" mnemonicParsing="false" onAction="#actionLeggTilValg" text="Velg" />
+                        <Pane fx:id="paneLokale" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
+                           <children>
+                              <GridPane layoutX="-1.0" layoutY="-1.0" prefHeight="359.0" prefWidth="462.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="268.0" text="LokaleID" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="278.0" text="Navn" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="285.0" text="Type" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="301.0" text="Antall plasser" GridPane.rowIndex="3" />
+                                 </children>
+                              </GridPane>
+                              <Button layoutX="174.0" layoutY="374.0" mnemonicParsing="false" text="Legg til Lokale" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0">
+                           <children>
+                              <GridPane prefHeight="373.0" prefWidth="460.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="242.0" text="Fornavn" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="236.0" text="Etternavn" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="257.0" text="Telefon nummer" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="312.0" text="Epost" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="300.0" text="Nettside" GridPane.rowIndex="4" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="267.0" text="Virksomhet" GridPane.rowIndex="5" />
+                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="291.0" text="Opplysninger" GridPane.rowIndex="6" />
+                                 </children>
+                              </GridPane>
+                              <Button layoutX="147.0" layoutY="392.0" mnemonicParsing="false" text="Legg til Kontaktperson" />
+                           </children>
+                        </Pane>
                      </children></AnchorPane>
             </content>
           </Tab>
