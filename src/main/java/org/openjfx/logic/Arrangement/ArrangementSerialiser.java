@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ArrangementSerialiser implements Serializable {
 
 
-    //Leser Arrangement array fra databasefilen
+    //Leser Arrangement array fra databasefilen TODO legg til trådprogrammering
     public ArrayList<Arrangement> lesArrayFraFil() throws IOException, ClassNotFoundException, FileNotFoundException {
         ArrayList<Arrangement> arrangementListe = new ArrayList<>();
 
@@ -37,9 +37,9 @@ public class ArrangementSerialiser implements Serializable {
     }
 
 
-
+    //TODO: Skriv metode for å serialisere array og trådprogrammering
     public void skrivArrayTilFil(ArrayList<Arrangement> arrangementList) throws IOException, ClassNotFoundException, FileNotFoundException{
-        //TODO: Skriv metode for å serialisere array
+
         try{
             FileOutputStream fos = new FileOutputStream("Database/arrangement.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
