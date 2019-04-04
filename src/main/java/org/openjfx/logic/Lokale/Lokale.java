@@ -6,8 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Arrangement.Arrangement;
 
+import java.io.Serializable;
 
-public class Lokale {
+
+public class Lokale implements Serializable {
     private SimpleStringProperty lokaleID;  //Key for objekt
     private SimpleStringProperty navn;  //Navn på stedet
     private SimpleStringProperty type;  //Kinosal, Konsertsal, etc
