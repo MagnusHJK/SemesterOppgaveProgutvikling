@@ -44,7 +44,7 @@
       </MenuBar>
       <TabPane layoutY="29.0" prefHeight="654.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabLeggTil" text="Legg til">
+          <Tab text="Legg til">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="538.0" prefWidth="900.0">
                      <children>
@@ -53,13 +53,11 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="choiceLeggTillValg" layoutX="279.0" layoutY="87.0" prefHeight="26.0" prefWidth="254.0" />
-                        <Button fx:id="btnLeggTilValg" layoutX="590.0" layoutY="87.0" mnemonicParsing="false" onAction="#actionLeggTilValg" prefHeight="26.0" prefWidth="60.0" text="Velg" />
-                        <Pane fx:id="paneArrangement" layoutX="206.0" layoutY="135.0" prefHeight="466.0" prefWidth="488.0" visible="false">
+                        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="159.0" prefHeight="448.0" prefWidth="457.0" visible="false">
                            <children>
                               <GridPane prefHeight="392.0" prefWidth="457.0">
                                 <columnConstraints>
-                                  <ColumnConstraints fx:id="gridPaneArrangement" hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
                                 </columnConstraints>
                                 <rowConstraints>
@@ -81,24 +79,25 @@
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="5" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="7" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="6" />
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <ChoiceBox prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <ChoiceBox prefHeight="26.0" prefWidth="262.0" GridPane.columnIndex="1" />
+                                    <TextArea fx:id="textfieldBeskrivelseArr" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <ChoiceBox fx:id="choiceTypeArr" prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="textfieldNavnArr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="textfieldArtistArr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="textfieldStedArr" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="textfieldBillettprisArr" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="textfieldMaksBilletterArr" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <ChoiceBox fx:id="choiceKontaktpersonArr" prefHeight="26.0" prefWidth="262.0" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
-                              <Button layoutX="166.0" layoutY="426.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
+                              <Button layoutX="150.0" layoutY="408.0" mnemonicParsing="false" text="Legg til Arrangement" />
                            </children>
                         </Pane>
-                        <Button fx:id="btnHjemSide" layoutX="813.0" layoutY="17.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
+                        <ChoiceBox fx:id="choiceLeggTillValg" layoutX="300.0" layoutY="86.0" prefWidth="150.0" />
+                        <Button fx:id="btnLeggTilValg" layoutX="566.0" layoutY="86.0" mnemonicParsing="false" onAction="#actionLeggTilValg" text="Velg" />
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tabEndre" text="Endre">
+          <Tab text="Endre">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -121,7 +120,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tabSlett" text="Slett">
+            <Tab text="Slett">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -144,12 +143,13 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLagreTilFil" text="Lagre til fil">
+            <Tab text="Lagre til fil">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
         </tabs>
       </TabPane>
+      <Button fx:id="btnHjemSide" layoutX="349.0" layoutY="677.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
    </children>
 </AnchorPane>
