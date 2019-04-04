@@ -5,8 +5,9 @@ import javafx.collections.ObservableList;
 
 public class Element {
 
+
     //Liste over forskjellige elementer som kan lages/endre/etc...
-    public static ObservableList<String> lagElementListe() {
+    public ObservableList<String> lagElementListe() {
         ObservableList<String> ElementList = FXCollections.observableArrayList();
 
         ElementList.addAll("Lokale","Kontaktperson","Arrangement");
