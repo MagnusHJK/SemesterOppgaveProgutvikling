@@ -11,14 +11,14 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Arrangement implements Serializable {
-    private Kontaktperson kontaktperson;            //Kontaktperson
-    private Lokale type;                            //Type feks Kinosal, teater, etx
-    private SimpleStringProperty navn;              //Navn på hendelse
-    private SimpleStringProperty artist;            //Headliner
-    private SimpleStringProperty sted;              //Lokasjon feks Uttestad
-    private SimpleStringProperty beskrivelse;       //Tekst beskrivelse av arrangement
-    private SimpleIntegerProperty billettPris;      //Billett pris
-    private SimpleIntegerProperty billettMaks;      //Maks antall biletter
+    private transient Kontaktperson kontaktperson;            //Kontaktperson
+    private transient Lokale type;                            //Type feks Kinosal, teater, etx
+    private transient SimpleStringProperty navn;              //Navn på hendelse
+    private transient SimpleStringProperty artist;            //Headliner
+    private transient SimpleStringProperty sted;              //Lokasjon feks Uttestad
+    private transient SimpleStringProperty beskrivelse;       //Tekst beskrivelse av arrangement
+    private transient SimpleIntegerProperty billettPris;      //Billett pris
+    private transient SimpleIntegerProperty billettMaks;      //Maks antall biletter
 
 
 
@@ -117,8 +117,6 @@ public class Arrangement implements Serializable {
 
 
 
-
-
     //Returnerer en ObservableList utifra Lokalet som er valgt, slik at bare Arrangementer med riktig lokale vises
     public ObservableList<Arrangement> filtrertArrangementListe(Lokale lokale){
             //TODO: Er denne metoden nødvendig?
@@ -126,17 +124,6 @@ public class Arrangement implements Serializable {
         return null;
     }
 
-
-
-
-    //Lager en ObservableList som JavaFX kan bruke i sine komponenter
-    public ObservableList<Arrangement> lagObservableList(ArrayList<Arrangement> arrangementListe) throws Exception{
-
-        ObservableList<Arrangement> arrangementObservableListe = FXCollections.observableArrayList();
-        arrangementObservableListe.addAll(arrangementListe);
-
-        return arrangementObservableListe;
-    }
 
 
 

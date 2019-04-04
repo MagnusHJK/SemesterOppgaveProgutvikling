@@ -21,6 +21,7 @@ public class ControllerAdmin {
     public void initialize() {
         Element elementerListe = new Element();
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
+        choiceTypeArr.setItems(Lokale.lagLokaleList());
 
     }
 
@@ -108,9 +109,6 @@ public class ControllerAdmin {
             paneLokale.setVisible(false);
             paneKontaktperson.setVisible(false);
             paneArrangement.setVisible(true);
-
-
-            choiceTypeArr.setItems(Lokale.lagLokaleList());
         }
 
     }
@@ -137,7 +135,7 @@ public class ControllerAdmin {
     private void actionLeggTilArrangement(ActionEvent event){
         System.out.println("Du har trykket på legg til arrangement");
         //Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
-        //Lokale lokale = choiceTypeArr.getSelectionModel().getSelectedItem();
+        Lokale lokale = choiceTypeArr.getSelectionModel().getSelectedItem();
         String navn = textfieldNavnArr.getText();
         String artist = textfieldArtistArr.getText();
         String sted = textfieldStedArr.getText();
