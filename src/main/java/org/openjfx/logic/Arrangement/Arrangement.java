@@ -11,21 +11,21 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Arrangement implements Serializable {
-    private Kontaktperson kontaktperson;
-    private SimpleStringProperty type;
-    private SimpleStringProperty navn;
-    private SimpleStringProperty artist;
-    private SimpleStringProperty sted;
+    private Kontaktperson kontaktperson;            //Kontaktperson
+    private Lokale type;                            //Type feks Kinosal, teater, etx
+    private SimpleStringProperty navn;              //Navn på hendelse
+    private SimpleStringProperty artist;            //Headliner
+    private SimpleStringProperty sted;              //Lokasjon feks Uttestad
     private SimpleStringProperty beskrivelse;       //Tekst beskrivelse av arrangement
     private SimpleIntegerProperty billettPris;      //Billett pris
     private SimpleIntegerProperty billettMaks;      //Maks antall biletter
 
 
 
-    public Arrangement(Kontaktperson kontaktperson, String type, String navn, String artist, String sted,
+    public Arrangement(Kontaktperson kontaktperson, Lokale type, String navn, String artist, String sted,
                        String beskrivelse, int billettPris, int billettMaks) {
         this.kontaktperson = kontaktperson;
-        this.type = new SimpleStringProperty(type);
+        this.type = type;
         this.navn = new SimpleStringProperty(navn);
         this.artist = new SimpleStringProperty(artist);
         this.sted = new SimpleStringProperty(sted);
@@ -42,12 +42,12 @@ public class Arrangement implements Serializable {
         this.kontaktperson = kontaktperson;
     }
 
-    public String getType() {
-        return type.get();
+    public Lokale getType() {
+        return this.type;
     }
 
-    public void setType(String type) {
-        this.type.set(type);
+    public void setType(Lokale type) {
+        this.type = type;
     }
 
     public String getNavn() {
@@ -99,16 +99,16 @@ public class Arrangement implements Serializable {
     }
 
 
-    //Lager ObservableList med Arrangementer som brukes til å populere GUI  -  SKRIV OM SENERE TIL Å LESE ARRAY FRA lagArrayFraFil()
+    //Lager ObservableList med Arrangementer som brukes til å populere GUI  -  TODO SKRIV OM SENERE TIL Å LESE ARRAY FRA lagArrayFraFil()
     public static ObservableList<Arrangement> lagArrangementListe(){
         ObservableList<Arrangement>ArrangementList = FXCollections.observableArrayList();
 
 
-        ArrangementList.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), "Kinosal",
+        ArrangementList.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
                 "La La Land", "Emma Stone", "Ottestad", "Sykt bra film.", 100, 69));
 
 
-        ArrangementList.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(1), "Konsertsal",
+        ArrangementList.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
                 "Cats", "Gunnar", "Ottestad", "Sykt kule katter", 250, 100));
 
 
@@ -128,25 +128,6 @@ public class Arrangement implements Serializable {
 
 
 
-    //Lager et array fra innlest serialisert fil, brukes senere til å populere GUI via lagArrangementListe()
-
-
-    //Henter array fra fil og lar deg legge til et Arrangment til det
-    public ArrayList<Arrangement> leggTilArrangementArray(Arrangement arrangement)throws IOException, ClassNotFoundException, FileNotFoundException{
-        ArrangementSerialiser serialisertArrangement = new ArrangementSerialiser();
-
-        ArrayList<Arrangement>arrangementListe = serialisertArrangement.lesArrayFraFil();
-
-        arrangementListe.add(arrangement);
-
-
-        //TODO: Legg til så man skriver til fil igjen.
-
-
-        return arrangementListe;
-    }
-
-
 
     //Lager en ObservableList som JavaFX kan bruke i sine komponenter
     public ObservableList<Arrangement> lagObservableList(ArrayList<Arrangement> arrangementListe) throws Exception{
@@ -158,9 +139,5 @@ public class Arrangement implements Serializable {
     }
 
 
-    //Endrer et spesifikt arrangement
-    public boolean endreArrangement(Arrangement arrangement){
-        return true;
-    }
 
 }
