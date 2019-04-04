@@ -5,7 +5,7 @@ package org.openjfx.logic.AppInfo;
 
 public class AppInfo {
 
-    private final static String versjon = "DAILY_14-ONSDAG";
+    private final static String versjon = "DAILY_14-TORSDAG";
     private final static String git = "https://github.com/MagnusHJK/SemesterOppgaveProgutvikling";
     private final static String gruppe = "gruppe 40";
 
