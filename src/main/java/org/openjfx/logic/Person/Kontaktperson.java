@@ -4,9 +4,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Kontaktperson extends Person {
+public class Kontaktperson extends Person implements Serializable {
     private String epost;
     private String nettside;
     private String virksomhet;
@@ -51,6 +52,10 @@ public class Kontaktperson extends Person {
 
     public void setOpplysninger(String opplysninger) {
         this.opplysninger = opplysninger;
+    }
+
+    public String toString(){
+        return this.getFornavn() + " " + this.getEtternavn();
     }
 
     public static ArrayList<Kontaktperson> lagKontaktpersonListe(){
