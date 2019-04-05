@@ -11,6 +11,7 @@ import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleHåndtering;
 
 
 import java.io.IOException;
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 public class ControllerAdmin {
 
 
-    public void initialize() {
+    public void initialize() throws Exception {
         Element elementerListe = new Element();
+        LokaleHåndtering lokaler = new LokaleHåndtering();
+
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
-        choiceTypeArr.setItems(Lokale.lagLokaleList());
+        choiceTypeArr.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
 
     }
 

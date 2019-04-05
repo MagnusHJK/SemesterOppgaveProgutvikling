@@ -10,10 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.logic.Arrangement.Arrangement;
+import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
-import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Lokale.LokaleHåndtering;
+
 
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -23,9 +25,11 @@ import java.util.stream.Collectors;
 public class ControllerBlaGjennom {
 
     public void initialize() throws Exception{
+        LokaleHåndtering lokaler = new LokaleHåndtering();
 
         //Fyller ListView med lokaler (Bare typen på de)
-        listLokale.setItems(Lokale.lagLokaleList());
+        listLokale.setCellFactory(new LokaleCellFactory());
+        listLokale.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
 
         //Sier hva hver kolonne i Arrangement valget skal fylles med
         kolonneArrangementNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
@@ -66,17 +70,18 @@ public class ControllerBlaGjennom {
     @FXML
     private void actionLokaleTrykk(MouseEvent event) {
 
-        //Finner hvilken man trykker på
+        //Finner hvilket lokale man trykker på
         Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
 
-        //Lager en ny ObservableList fra den gamle, men filtrert etter om den matcher lokale
-        ObservableList<Arrangement> filtrert = Arrangement.lagArrangementListe()
-                .stream()
-                .filter(Arrangement -> Arrangement.getType().toString().equals(lokale.toString()))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        ArrangementHåndtering filter = new ArrangementHåndtering();
 
-        //Populerer tabellen
-        tabellArrangement.setItems(filtrert);
+        //Lager filtrert liste over Arrangement som matcher Lokaler
+        filter.filtrerArrangementer(Arrangement.lagArrangementListe(),lokale);
+
+
+        //Populerer tabellen TODO del opp
+        tabellArrangement.setItems(filter.filtrerArrangementer(Arrangement.lagArrangementListe(),lokale));
+
     }
 
 
