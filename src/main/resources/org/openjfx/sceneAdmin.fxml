@@ -113,6 +113,10 @@
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="278.0" text="Navn" GridPane.rowIndex="1" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="285.0" text="Type" GridPane.rowIndex="2" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="301.0" text="Antall plasser" GridPane.rowIndex="3" />
+                                    <TextField GridPane.columnIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                               <Button layoutX="174.0" layoutY="374.0" mnemonicParsing="false" text="Legg til Lokale" />
@@ -142,6 +146,13 @@
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="300.0" text="Nettside" GridPane.rowIndex="4" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="267.0" text="Virksomhet" GridPane.rowIndex="5" />
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="291.0" text="Opplysninger" GridPane.rowIndex="6" />
+                                    <TextField GridPane.columnIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                               <Button layoutX="147.0" layoutY="392.0" mnemonicParsing="false" text="Legg til Kontaktperson" />
