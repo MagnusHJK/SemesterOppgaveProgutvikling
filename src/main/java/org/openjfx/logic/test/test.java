@@ -27,20 +27,9 @@ public class test {
         ArrangementSerialiser test = new ArrangementSerialiser();
 
 
-        ArrayList<Arrangement> liste = new ArrayList<>();
+        test.skrivArrayTilFil(Arrangement.lagArrangementListe());
 
-
-        liste.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
-                "La La Land", "Emma Stone", "Ottestad", "Sykt bra film.", 100, 69));
-
-
-        liste.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
-                "Cats", "Gunnar", "Ottestad", "Sykt kule katter", 250, 100));
-
-
-        ArrangementHåndtering ob = new ArrangementHåndtering();
-        System.out.println(ob.lagObservableList(Arrangement.lagArrangementListe()));
-        System.out.println(Arrangement.lagArrangementListe());
+        System.out.println(test.lesArrayFraFil());
 
 
 
