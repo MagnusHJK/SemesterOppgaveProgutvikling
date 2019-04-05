@@ -49,14 +49,14 @@ public class ArrangementSerialiser implements Serializable {
             ois.close();
             fis.close();
         }catch(FileNotFoundException e){
-            e.printStackTrace();
+            alertbox.display("Feil","En feil oppstod");
         }
         catch(IOException ois){
             System.err.println("Feil i I/O");
-            ois.printStackTrace();
+            alertbox.display("Feil","En feil oppstod");
         }catch(ClassNotFoundException c){
             System.err.println("Feil klasse");
-            c.printStackTrace();
+            alertbox.display("Feil","En feil oppstod");
         }
 
         return arrangementListe;
@@ -73,7 +73,7 @@ public class ArrangementSerialiser implements Serializable {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            alertbox.display("Feil","En feil oppstod");
         }
 
     }
