@@ -7,80 +7,64 @@ import javafx.collections.ObservableList;
 import org.openjfx.logic.Arrangement.Arrangement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Lokale implements Serializable {
-    private transient SimpleStringProperty lokaleID;  //Key for objekt
-    private transient SimpleStringProperty navn;  //Navn på stedet
-    private transient SimpleStringProperty type;  //Kinosal, Konsertsal, etc
-    private transient SimpleIntegerProperty antallPlasser;
+    private String lokaleID;  //Key for objekt
+    private String navn;  //Navn på stedet
+    private String type;  //Kinosal, Konsertsal, etc
+    private int antallPlasser;
 
 
     public Lokale(String lokaleID, String navn, String type, int antallPlasser) {
-        this.lokaleID = new SimpleStringProperty(lokaleID);
-        this.navn = new SimpleStringProperty(navn);
-        this.type = new SimpleStringProperty(type);
-        this.antallPlasser = new SimpleIntegerProperty(antallPlasser);
+        this.lokaleID = lokaleID;
+        this.navn = navn;
+        this.type = type;
+        this.antallPlasser = antallPlasser;
     }
 
     public String getLokaleID() {
-        return lokaleID.get();
-    }
-
-    public SimpleStringProperty lokaleIDProperty() {
         return lokaleID;
     }
 
     public void setLokaleID(String lokaleID) {
-        this.lokaleID.set(lokaleID);
+        this.lokaleID = lokaleID;
     }
 
     public String getNavn() {
-        return navn.get();
-    }
-
-    public SimpleStringProperty navnProperty() {
         return navn;
     }
 
     public void setNavn(String navn) {
-        this.navn.set(navn);
+        this.navn = navn;
     }
 
     public String getType() {
-        return type.get();
-    }
-
-    public SimpleStringProperty typeProperty() {
         return type;
     }
 
     public void setType(String type) {
-        this.type.set(type);
+        this.type = type;
     }
 
     public int getAntallPlasser() {
-        return antallPlasser.get();
-    }
-
-    public SimpleIntegerProperty antallPlasserProperty() {
         return antallPlasser;
     }
 
     public void setAntallPlasser(int antallPlasser) {
-        this.antallPlasser.set(antallPlasser);
+        this.antallPlasser = antallPlasser;
     }
-
 
     @Override
     public String toString(){
-        return this.getType();
+        return this.getLokaleID() + " - " + this.getType();
     }
 
 
     //Lager ObservableList med lokaler som brukes til å populere GUI  -  SKRIV OM SENERE TIL Å LESE FIL
-    public static ObservableList<Lokale> lagLokaleList(){
-        ObservableList<Lokale> lokaleList = FXCollections.observableArrayList();
+    public static ArrayList<Lokale> lagLokaleList(){
+        ArrayList<Lokale> lokaleList = new ArrayList<>();
         lokaleList.add(new Lokale("lokale1", "Ottestad Kino", "Kinosal", 100));
         lokaleList.add(new Lokale("lokale2", "Ottestad Konsert", "Konsertsal", 500));
 
