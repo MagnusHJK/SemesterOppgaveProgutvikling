@@ -13,29 +13,6 @@ import java.util.ArrayList;
 public class ArrangementSerialiser implements Serializable {
 
 
-
-
-    //Selv laget serialiser metode
-    public void writeObject(ObjectOutputStream s, Arrangement arrangement) throws IOException{
-        s.defaultWriteObject();
-        s.writeObject(arrangement.getKontaktperson());
-        s.writeObject(arrangement.getType());
-        s.writeObject(arrangement.getNavn());
-        s.writeObject(arrangement.getArtist());
-        s.writeObject(arrangement.getSted());
-        s.writeObject(arrangement.getBeskrivelse());
-        s.writeObject(arrangement.getBillettPris());
-        s.writeObject(arrangement.getBillettMaks());
-    }
-
-
-    //Selv laget deserialiser metode TODO FIKS
-    public void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException{
-        s.defaultReadObject();
-        //Arrangement arrangement = new Arrangement(s.readObject(), s.readObject(), s.(), )
-    }
-
-
     //Leser Arrangement array fra databasefilen TODO legg til trådprogrammering
     public ArrayList<Arrangement> lesArrayFraFil() throws IOException, ClassNotFoundException, FileNotFoundException {
         ArrayList<Arrangement> arrangementListe = new ArrayList<>();
@@ -49,14 +26,16 @@ public class ArrangementSerialiser implements Serializable {
             ois.close();
             fis.close();
         }catch(FileNotFoundException e){
-            alertbox.display("Feil","En feil oppstod");
+            e.printStackTrace();
+            //alertbox.display("Feil","En feil oppstod");
         }
         catch(IOException ois){
             System.err.println("Feil i I/O");
-            alertbox.display("Feil","En feil oppstod");
+            ois.printStackTrace();
+            //alertbox.display("Feil","En feil oppstod");
         }catch(ClassNotFoundException c){
             System.err.println("Feil klasse");
-            alertbox.display("Feil","En feil oppstod");
+            //alertbox.display("Feil","En feil oppstod");
         }
 
         return arrangementListe;
@@ -73,7 +52,7 @@ public class ArrangementSerialiser implements Serializable {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            alertbox.display("Feil","En feil oppstod");
+            //alertbox.display("Feil","En feil oppstod");
         }
 
     }
