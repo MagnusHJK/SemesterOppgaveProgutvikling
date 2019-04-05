@@ -9,12 +9,20 @@ import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Person.Kontaktperson;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static javafx.scene.input.KeyCode.T;
+
 
 public class test {
+
+    public ObservableList<Arrangement> lagObservableList(ArrayList<Arrangement> ArrayListe){
+
+        ObservableList<Arrangement> observListe = FXCollections.observableArrayList();
+        observListe.addAll(ArrayListe);
+
+        return observListe;
+    }
+
+
     public static void main(String[] args) throws Exception{
         ArrangementSerialiser test = new ArrangementSerialiser();
 
@@ -30,7 +38,11 @@ public class test {
                 "Cats", "Gunnar", "Ottestad", "Sykt kule katter", 250, 100));
 
 
-        test.skrivArrayTilFil(liste);
+        ArrangementHåndtering ob = new ArrangementHåndtering();
+        System.out.println(ob.lagObservableList(Arrangement.lagArrangementListe()));
+        System.out.println(Arrangement.lagArrangementListe());
+
+
 
     }
 }
