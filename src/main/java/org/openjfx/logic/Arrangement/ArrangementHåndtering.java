@@ -40,6 +40,7 @@ public class ArrangementHåndtering {
         return ArrangementList;
     }
 
+
     //Ser gjennom Arrangement listen om noen av de hører til Lokalet basert på typen deres
     //returnerer en ObservableList som JavaFX kan bruke
     public ObservableList<Arrangement> filtrerArrangementer(ArrayList<Arrangement> liste, Lokale lokale){

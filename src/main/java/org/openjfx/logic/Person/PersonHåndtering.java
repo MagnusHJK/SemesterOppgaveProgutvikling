@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class PersonHåndtering {
 
     //Lager observable liste som JavaFX kan bruke
-    public ObservableList<Person> lagObservableList(ArrayList<Person> ArrayListe){
+    public static ObservableList lagObservableList(ArrayList ArrayListe){
 
-        ObservableList<Person> observListe = FXCollections.observableArrayList();
+        ObservableList observListe = FXCollections.observableArrayList();
         observListe.addAll(ArrayListe);
 
         return observListe;

@@ -12,6 +12,8 @@ import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.PersonHåndtering;
 
 
 import java.io.IOException;
@@ -23,9 +25,13 @@ public class ControllerAdmin {
     public void initialize() throws Exception {
         Element elementerListe = new Element();
         LokaleHåndtering lokaler = new LokaleHåndtering();
+        PersonHåndtering personer = new PersonHåndtering();
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
+
+
         choiceTypeArr.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
+        choiceKontaktpersonArr.setItems(PersonHåndtering.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
 
     }
 
@@ -95,7 +101,11 @@ public class ControllerAdmin {
     //Når brukeren velger kategori for elementet
     @FXML
     private void actionLeggTilValg(ActionEvent event){
+        //Element elemValg = new Element();
         String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem();
+
+        //elemValg.elementValg(valg);
+
 
         //TODO Bytte til switch??
         if(valg.equals("Lokale")){
@@ -159,7 +169,6 @@ public class ControllerAdmin {
 
 
         // Arrangement arrangement = new Arrangement(kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
-
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn

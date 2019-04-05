@@ -14,4 +14,10 @@ public class Element {
 
         return ElementList;
     }
+
+
+    //Sjekker hvilket element brukeren velger og viser dermet riktige inputfelter
+    public void elementValg(String valg){
+
+    }
 }
