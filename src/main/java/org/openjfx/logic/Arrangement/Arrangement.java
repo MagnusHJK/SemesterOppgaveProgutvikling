@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Arrangement implements Serializable {
+    private String arrangementID;
     private Kontaktperson kontaktperson;            //Kontaktperson
     private Lokale type;                            //Type feks Kinosal, teater, etx
     private String navn;              //Navn på hendelse
@@ -16,7 +17,8 @@ public class Arrangement implements Serializable {
     private int billettPris;      //Billett pris
     private int billettMaks;      //Maks antall biletter
 
-    public Arrangement(Kontaktperson kontaktperson, Lokale type, String navn, String artist, String sted, String beskrivelse, int billettPris, int billettMaks) {
+    public Arrangement(String arrangementID, Kontaktperson kontaktperson, Lokale type, String navn, String artist, String sted, String beskrivelse, int billettPris, int billettMaks) {
+        this.arrangementID = arrangementID;
         this.kontaktperson = kontaktperson;
         this.type = type;
         this.navn = navn;
@@ -27,6 +29,13 @@ public class Arrangement implements Serializable {
         this.billettMaks = billettMaks;
     }
 
+    public String getArrangementID() {
+        return arrangementID;
+    }
+
+    public void setArrangementID(String arrangementID) {
+        this.arrangementID = arrangementID;
+    }
 
     public Kontaktperson getKontaktperson() {
         return kontaktperson;
@@ -107,10 +116,10 @@ public class Arrangement implements Serializable {
     public static ArrayList<Arrangement> lagArrangementListe(){
         ArrayList<Arrangement>arrangementListe = new ArrayList<>();
 
-        arrangementListe.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
+        arrangementListe.add(new Arrangement("adaw2", Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
                 "La La Land", "Emma Stone", "Ottestad", "Sykt bra film.", 100, 69));
 
-        arrangementListe.add(new Arrangement(Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
+        arrangementListe.add(new Arrangement("Dwad3", Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
                 "Cats", "Gunnar", "Ottestad", "Sykt kule katter", 250, 100));
 
 
