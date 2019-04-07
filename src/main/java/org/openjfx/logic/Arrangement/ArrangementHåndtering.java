@@ -5,9 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Lokale.Lokale;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 //Klasse for håndtering av Arrangement fra GUI, lages, endres eller slettes
@@ -53,5 +55,22 @@ public class ArrangementHåndtering {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         return filtrertListe;
+    }
+
+    //Finner info om det arrangementet du trykker på
+    public String filtrerArrangementDetaljer(ArrayList<Arrangement> liste, Arrangement arrangement){
+        for(Arrangement index : liste){
+            if(index.getArrangementID().equals(arrangement.getArrangementID())){
+                return "Tittel: " + arrangement.getNavn() + "\n" +
+                       "Artist: " + arrangement.getArtist() + "\n" +
+                       "Sted: " + arrangement.getSted() + " " + arrangement.getType() +"\n" +
+                       "Pris: " + arrangement.getBillettPris() + "\n" +
+                       "Antall Billetter: " + arrangement.getBillettMaks() + "\n" +
+                       "Kontaktperson: " + arrangement.getKontaktperson() + "\n" +
+                       "Beskrivelse: " + arrangement.getBeskrivelse() + "\n";
+            }
+        }
+
+        return "";
     }
 }
