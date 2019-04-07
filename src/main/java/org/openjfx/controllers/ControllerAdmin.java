@@ -27,11 +27,12 @@ public class ControllerAdmin {
         LokaleHåndtering lokaler = new LokaleHåndtering();
         PersonHåndtering personer = new PersonHåndtering();
 
+
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
 
         choiceTypeArr.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
-        choiceKontaktpersonArr.setItems(PersonHåndtering.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
+        choiceKontaktpersonArr.setItems(personer.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
 
     }
 
@@ -49,7 +50,10 @@ public class ControllerAdmin {
     private Button btnLeggTilValg;
 
     @FXML
-    private ChoiceBox choiceKontaktpersonArr;
+    private TextField textfieldArrangementID;
+
+    @FXML
+    private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
 
     @FXML
     private ChoiceBox<Lokale> choiceTypeArr;
@@ -64,7 +68,7 @@ public class ControllerAdmin {
     private TextField textfieldStedArr;
 
     @FXML
-    private TextField textfieldBillettpris;
+    private TextField textfieldBillettprisArr;
 
     @FXML
     private TextField textfieldMaksBilletterArr;
@@ -148,7 +152,8 @@ public class ControllerAdmin {
     @FXML
     private void actionLeggTilArrangement(ActionEvent event) {
         System.out.println("Du har trykket på legg til arrangement");
-        //Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
+        String arrangementID = textfieldArrangementID.getText();
+        Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
         Lokale lokale = choiceTypeArr.getSelectionModel().getSelectedItem();
         String navn = textfieldNavnArr.getText();
         String artist = textfieldArtistArr.getText();
@@ -161,21 +166,22 @@ public class ControllerAdmin {
 
         //TODO fikse exception
         try{
-            billettPris = Integer.parseInt(textfieldBillettpris.getText());
+            billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
         }catch(NumberFormatException nfe){
             nfe.printStackTrace();
         }
 
 
-        // Arrangement arrangement = new Arrangement(kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+         Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
             ArrangementSerialiser Arrangement = new ArrangementSerialiser();
             ArrayList<Arrangement> liste = Arrangement.lesArrayFraFil();
 
-            //liste.add(arrangement);
+            liste.add(arrangement);
+            System.out.println(liste);
 
             Arrangement.skrivArrayTilFil(liste);
         } catch(IOException ioe){
