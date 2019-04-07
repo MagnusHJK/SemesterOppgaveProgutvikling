@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.TextFlow;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.alertbox;
@@ -60,6 +61,9 @@ public class ControllerBlaGjennom {
     private TableColumn<Arrangement, String> kolonneArrangementPris;
 
     @FXML
+    private Label lblArrangementDetaljer;
+
+    @FXML
     private AnchorPane paneBlaGjennom;
 
     @FXML
@@ -81,6 +85,17 @@ public class ControllerBlaGjennom {
 
         //Populerer tabellen TODO del opp
         tabellArrangement.setItems(filter.filtrerArrangementer(Arrangement.lagArrangementListe(),lokale));
+
+    }
+
+    @FXML
+    private void actionArrangementTrykk(MouseEvent event){
+        Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
+        ArrangementHåndtering filter = new ArrangementHåndtering();
+
+
+
+        lblArrangementDetaljer.setText(filter.filtrerArrangementDetaljer(Arrangement.lagArrangementListe(), arrangement));
 
     }
 
