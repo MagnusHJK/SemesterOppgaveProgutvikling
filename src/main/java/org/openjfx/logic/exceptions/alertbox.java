@@ -1,4 +1,4 @@
-package org.openjfx.logic.Arrangement;
+package org.openjfx.logic.exceptions;
 
 import javafx.event.Event;
 import javafx.stage.*;
