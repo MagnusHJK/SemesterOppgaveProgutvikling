@@ -164,6 +164,8 @@ public class ControllerAdmin {
 
 
 
+
+
         //TODO fikse exception
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
