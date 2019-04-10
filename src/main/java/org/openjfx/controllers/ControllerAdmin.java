@@ -16,6 +16,7 @@ import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.exceptions.idException;
 import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
 
 
 import java.io.IOException;
@@ -152,7 +153,7 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
     @FXML
-    private void actionLeggTilArrangement(ActionEvent event) throws idException{
+    private void actionLeggTilArrangement(ActionEvent event) throws idException, inputException{
         System.out.println("Du har trykket på legg til arrangement");
         String arrangementID = textfieldArrangementID.getText();
         Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
@@ -174,8 +175,6 @@ public class ControllerAdmin {
             throw new idException();
         } catch(NumberFormatException nfe){
             nfe.printStackTrace();
-        } catch (idException e) {
-            alertbox.display("Feilmelding", idException.myException(arrangementID));
         }
 
 
