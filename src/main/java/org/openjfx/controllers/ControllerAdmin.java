@@ -52,6 +52,8 @@ public class ControllerAdmin {
     @FXML
     private Button btnLeggTilValg;
 
+
+
     @FXML
     private TextField textfieldArrangementID;
 
@@ -96,6 +98,11 @@ public class ControllerAdmin {
     private TextField textfieldPlasserLok;
 
     @FXML
+    private Pane paneLokale;
+
+
+
+    @FXML
     private TextField textfieldFornavnKontakt;
 
     @FXML
@@ -116,13 +123,10 @@ public class ControllerAdmin {
     @FXML
     private TextField textareaOpplysningerKontakt;
 
-
-
-    @FXML
-    private Pane paneLokale;
-
     @FXML
     private Pane paneKontaktperson;
+
+
 
     @FXML
     private Tab tabEndre;
