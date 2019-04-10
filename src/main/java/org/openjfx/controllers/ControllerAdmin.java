@@ -14,6 +14,7 @@ import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
+import org.openjfx.logic.exceptions.plasserException;
 
 
 import java.io.IOException;

@@ -13,9 +13,11 @@ import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.exceptions.valgException;
 
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 
 public class ControllerBlaGjennom {
@@ -110,10 +112,12 @@ public class ControllerBlaGjennom {
 
     @FXML
     private void actionKjopSide(ActionEvent event) throws IOException {
-            Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
-
-            System.out.println("Du kjøpte " + valg.getNavn());
-
+            try {
+                Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
+                alertbox.display("Fullført","Du kjøpte:" + valg.getNavn());
+            } catch (RuntimeException e) {
+                alertbox.display("test",valgException.valgException());
+            }
     }
 
 }

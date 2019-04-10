@@ -17,11 +17,13 @@ public class alertbox {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setWidth(300);
+        window.setHeight(250);
         // Oppretter et nytt label for å vise message parameteren
         Label label = new Label();
         label.setText(message);
         // Oppretter en knapp for vinduet slik at det kan lukkes
         Button closeButton = new Button("lukk");
+        closeButton.setAlignment(Pos.BOTTOM_CENTER);
         closeButton.setOnAction(e-> window.close());
 
         // Vboks objektet legger alle sine 'barn' vertikalt ovenfor hverandre
