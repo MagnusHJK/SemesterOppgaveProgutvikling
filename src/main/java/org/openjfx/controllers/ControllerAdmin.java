@@ -149,7 +149,7 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Lokale" knapp
     @FXML
-    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException{
+    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException{
         System.out.println("Du har trykket på legg til lokale");
 
         String lokaleID = textfieldLokaleID.getText();
@@ -157,8 +157,15 @@ public class ControllerAdmin {
         String type = textfieldTypeLok.getText();
         String plasser = textfieldPlasserLok.getText();
 
-
-
+        // Sjekker om input feltene er tomme
+        try {
+            if(lokaleID.isEmpty() || navn.isEmpty() ||
+            type.isEmpty() || plasser.isEmpty()) {
+                throw new inputException();
+            }
+        } catch (inputException ie) {
+            alertbox.display("Feilmelding","Alle input-feltene er nødt til å bli fyllt inn");
+        }
     }
 
 
@@ -193,7 +200,7 @@ public class ControllerAdmin {
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
                 throw new inputException();
             }
-        } catch (inputException e) {
+        } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
 
