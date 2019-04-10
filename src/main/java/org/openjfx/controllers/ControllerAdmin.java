@@ -96,6 +96,29 @@ public class ControllerAdmin {
     private TextField textfieldPlasserLok;
 
     @FXML
+    private TextField textfieldFornavnKontakt;
+
+    @FXML
+    private TextField textfieldEtternavnKontakt;
+
+    @FXML
+    private TextField textfieldTlfKontakt;
+
+    @FXML
+    private TextField textfieldEpostKontakt;
+
+    @FXML
+    private TextField textfieldNettsideKontakt;
+
+    @FXML
+    private TextField textfieldVirksomhetKontak;
+
+    @FXML
+    private TextField textareaOpplysningerKontakt;
+
+
+
+    @FXML
     private Pane paneLokale;
 
     @FXML
@@ -157,6 +180,8 @@ public class ControllerAdmin {
         String type = textfieldTypeLok.getText();
         String plasser = textfieldPlasserLok.getText();
 
+
+
         // Sjekker om input feltene er tomme
         try {
             if(lokaleID.isEmpty() || navn.isEmpty() ||
@@ -164,15 +189,37 @@ public class ControllerAdmin {
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.display("Feilmelding","Alle input-feltene er nødt til å bli fyllt inn");
+            alertbox.display("Feilmelding",inputException.emptyException());
         }
     }
 
 
     //Når brukeren trykker på "Legg til Kontakt person" knapp
     @FXML
-    private void actionLeggTilKontaktperson(ActionEvent event){
+    private void actionLeggTilKontaktperson(ActionEvent event) throws inputException{
         System.out.println("Du har trykket på legg til kontaktperson");
+
+        String fornavn = textfieldFornavnKontakt.getText();
+        String etternavn = textfieldEtternavnKontakt.getText();
+        String tlf = textfieldTlfKontakt.getText();
+        String Epost = textfieldEpostKontakt.getText();
+        String nettside = textfieldNettsideKontakt.getText();
+        String virksomhet = textfieldVirksomhetKontak.getText();
+        String opplysninger = textareaOpplysningerKontakt.getText();
+
+        // Sjekk om feltene er tomme
+        try {
+            if(fornavn.isEmpty() || etternavn.isEmpty() ||
+            tlf.isEmpty() || Epost.isEmpty() ||
+            nettside.isEmpty() || virksomhet.isEmpty() ||
+            opplysninger.isEmpty()) {
+                throw new inputException();
+            }
+        } catch (inputException ie) {
+            alertbox.display("Feilmelding",inputException.emptyException());
+        }
+
+
 
     }
 
