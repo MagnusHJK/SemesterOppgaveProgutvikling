@@ -167,6 +167,18 @@ public class ControllerAdmin {
 
 
 
+        // Sjekk om feltene er tomme
+        //TODO catche NumberFormatException
+        try {
+            if(arrangementID.isEmpty() || navn.isEmpty() ||
+                    artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
+                throw new inputException();
+            }
+        } catch (inputException e) {
+            alertbox.display("Feilmelding",inputException.emptyException());
+        }
+
+
 
 
         //TODO fikse exception
@@ -174,7 +186,6 @@ public class ControllerAdmin {
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
 
-            throw new idException();
         } catch(NumberFormatException nfe){
             nfe.printStackTrace();
         }

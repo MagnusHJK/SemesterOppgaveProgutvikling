@@ -35,4 +35,10 @@ public class ArrangementValidering {
         return false;
     }
 
+  /*  public static String txtvalid(String tekst) {
+        Pattern patternNavn = Pattern.compile("^[A-ZÆØÅa-zæøå ]{2,30}$");
+        Matcher match = patternNavn.matcher(tekst);
+        return match + " er gyldig";
+    }
+*/
 }
