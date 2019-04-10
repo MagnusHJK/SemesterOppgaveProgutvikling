@@ -84,6 +84,18 @@ public class ControllerAdmin {
 
 
     @FXML
+    private TextField textfieldLokaleID;
+
+    @FXML
+    private TextField textfieldNavnLok;
+
+    @FXML
+    private TextField textfieldTypeLok;
+
+    @FXML
+    private TextField textfieldPlasserLok;
+
+    @FXML
     private Pane paneLokale;
 
     @FXML
@@ -139,6 +151,13 @@ public class ControllerAdmin {
     @FXML
     private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException{
         System.out.println("Du har trykket på legg til lokale");
+
+        String lokaleID = textfieldLokaleID.getText();
+        String navn = textfieldNavnLok.getText();
+        String type = textfieldTypeLok.getText();
+        String plasser = textfieldPlasserLok.getText();
+
+
 
     }
 
