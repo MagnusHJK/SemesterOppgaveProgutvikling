@@ -179,15 +179,13 @@ public class ControllerAdmin {
         }
 
 
-
-
         //TODO fikse exception
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
 
         } catch(NumberFormatException nfe){
-            nfe.printStackTrace();
+            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
         }
 
 
