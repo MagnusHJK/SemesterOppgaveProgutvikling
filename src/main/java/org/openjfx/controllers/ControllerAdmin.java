@@ -14,7 +14,8 @@ import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
-import org.openjfx.logic.exceptions.plasserException;
+import org.openjfx.logic.exceptions.idException;
+import org.openjfx.logic.exceptions.alertbox;
 
 
 import java.io.IOException;
@@ -151,7 +152,7 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
     @FXML
-    private void actionLeggTilArrangement(ActionEvent event) {
+    private void actionLeggTilArrangement(ActionEvent event) throws idException{
         System.out.println("Du har trykket på legg til arrangement");
         String arrangementID = textfieldArrangementID.getText();
         Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
@@ -169,8 +170,12 @@ public class ControllerAdmin {
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-        }catch(NumberFormatException nfe){
+
+            throw new idException();
+        } catch(NumberFormatException nfe){
             nfe.printStackTrace();
+        } catch (idException e) {
+            alertbox.display("Feilmelding", idException.myException(arrangementID));
         }
 
 

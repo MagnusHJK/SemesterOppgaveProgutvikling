@@ -116,7 +116,7 @@ public class ControllerBlaGjennom {
                 Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
                 alertbox.display("Fullført","Du kjøpte:" + valg.getNavn());
             } catch (RuntimeException e) {
-                alertbox.display("test",valgException.valgException());
+                alertbox.display("En feil oppstod!",valgException.valgException());
             }
     }
 
