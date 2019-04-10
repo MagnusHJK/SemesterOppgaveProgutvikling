@@ -6,12 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.openjfx.logic.Arrangement.alertbox;
+import org.openjfx.logic.exceptions.alertbox;
 
 import java.io.IOException;
 

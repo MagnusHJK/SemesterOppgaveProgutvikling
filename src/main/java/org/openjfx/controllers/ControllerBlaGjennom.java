@@ -1,7 +1,5 @@
 package org.openjfx.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,18 +7,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextFlow;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
-import org.openjfx.logic.Arrangement.alertbox;
+import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.exceptions.valgException;
 
 
 import java.io.IOException;
-import java.util.stream.Collectors;
-
+import java.lang.reflect.InvocationTargetException;
 
 
 public class ControllerBlaGjennom {
@@ -115,10 +112,12 @@ public class ControllerBlaGjennom {
 
     @FXML
     private void actionKjopSide(ActionEvent event) throws IOException {
-            Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
-
-            System.out.println("Du kjøpte " + valg.getNavn());
-
+            try {
+                Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
+                alertbox.display("Fullført","Du kjøpte:" + valg.getNavn());
+            } catch (RuntimeException e) {
+                alertbox.display("En feil oppstod!",valgException.valgException());
+            }
     }
 
 }
