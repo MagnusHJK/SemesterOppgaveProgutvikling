@@ -17,9 +17,11 @@ import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.exceptions.idException;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
+import java.lang.reflect.InvocationTargetException;
 
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class ControllerAdmin {
@@ -176,7 +178,7 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Lokale" knapp
     @FXML
-    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException{
+    private void actionLeggTilLokale(ActionEvent event) throws InvocationTargetException, inputException{
         System.out.println("Du har trykket på legg til lokale");
 
         String lokaleID = textfieldLokaleID.getText();
@@ -222,9 +224,6 @@ public class ControllerAdmin {
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
-
-
-
     }
 
 
@@ -245,7 +244,7 @@ public class ControllerAdmin {
 
 
         // Sjekk om feltene er tomme
-        //TODO catche NumberFormatException
+
         try {
             if(arrangementID.isEmpty() || navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
@@ -256,13 +255,15 @@ public class ControllerAdmin {
         }
 
 
-        //TODO fikse exception
+
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
 
-        } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
+            throw new inputException();
+
+        } catch(inputException ie){
+            alertbox.display("Feilmelding",inputException.intException());
         }
 
 
