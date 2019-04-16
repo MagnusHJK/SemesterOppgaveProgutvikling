@@ -19,9 +19,9 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
+        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0">
             <children>
-                <GridPane prefHeight="392.0" prefWidth="457.0">
+                <GridPane prefHeight="411.0" prefWidth="457.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
@@ -34,8 +34,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="79.0" minHeight="50.0" prefHeight="79.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Kontaktperson" GridPane.rowIndex="1" />
@@ -46,7 +46,7 @@
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="6" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="8" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="7" />
-                        <TextArea fx:id="textfieldBeskrivelseArr" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextArea fx:id="textfieldBeskrivelseArr" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <ChoiceBox fx:id="choiceTypeArr" prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="textfieldNavnArr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="textfieldArtistArr" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -58,7 +58,7 @@
                         <TextField fx:id="textfieldArrangementID" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
-                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="408.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
+                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="418.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
             </children>
         </Pane>
         <ChoiceBox fx:id="choiceLeggTillValg" layoutX="300.0" layoutY="86.0" prefWidth="150.0" />
@@ -93,7 +93,7 @@
         </Pane>
         <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
             <children>
-                <GridPane prefHeight="373.0" prefWidth="460.0">
+                <GridPane prefHeight="392.0" prefWidth="460.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -105,8 +105,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="288.0" text="Kontaktperson ID (unik)" />
@@ -124,10 +124,10 @@
                         <TextField fx:id="textfieldEpostKontakt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="textfieldNettsideKontakt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <TextField fx:id="textfieldVirksomhetKontakt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextArea fx:id="textareaOpplysningerKontakt" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextArea fx:id="textareaOpplysningerKontakt" prefHeight="63.0" prefWidth="230.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Button layoutX="147.0" layoutY="392.0" mnemonicParsing="false" onAction="#actionLeggTilKontaktperson" text="Legg til Kontaktperson" />
+                <Button layoutX="147.0" layoutY="406.0" mnemonicParsing="false" onAction="#actionLeggTilKontaktperson" text="Legg til Kontaktperson" />
             </children>
         </Pane>
     </children>
