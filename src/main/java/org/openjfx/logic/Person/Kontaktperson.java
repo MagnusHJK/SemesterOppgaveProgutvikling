@@ -23,6 +23,13 @@ public class Kontaktperson extends Person implements Serializable {
         this.opplysninger = opplysninger;
     }
 
+    public String getKontaktpersonID(){
+        return kontaktpersonID;
+    }
+
+    public void setKontaktpersonID(String kontaktpersonID){
+        this.kontaktpersonID = kontaktpersonID;
+    }
 
     public String getEpost() {
         return epost;
