@@ -11,8 +11,10 @@ import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
+import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
@@ -26,16 +28,19 @@ public class ControllerAdminLeggTil {
 
     public void initialize() throws Exception {
         Element elementerListe = new Element();
+
         LokaleHåndtering lokaler = new LokaleHåndtering();
+        LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+
         PersonHåndtering personer = new PersonHåndtering();
+        PersonSerialiser personSerialiser = new PersonSerialiser();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
 
-        choiceTypeArr.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
-        choiceKontaktpersonArr.setItems(personer.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
-
+        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
     }
 
 
@@ -172,20 +177,50 @@ public class ControllerAdminLeggTil {
         String lokaleID = textfieldLokaleID.getText();
         String navn = textfieldNavnLokale.getText();
         String type = textfieldTypeLokale.getText();
-        String plasser = textfieldPlasserLokale.getText();
+        int plasser = 0;
 
 
 
         // Sjekker om input feltene er tomme
         try {
             if(lokaleID.isEmpty() || navn.isEmpty() ||
-            type.isEmpty() || plasser.isEmpty()) {
+            type.isEmpty()) {
                 throw new inputException();
             }
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
+
+        //Prøver å konvertere plasser til int
+        try{
+            plasser = Integer.parseInt(textfieldPlasserLokale.getText());
+
+        } catch(NumberFormatException nfe){
+            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
+        }
+
+
+        Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+
+        try{
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            LokaleSerialiser serialiser = new LokaleSerialiser();
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+            liste.add(lokale);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
+
     }
+
+
 
 
     //Når brukeren trykker på "Legg til Kontakt person" knapp
@@ -197,7 +232,7 @@ public class ControllerAdminLeggTil {
         String fornavn = textfieldFornavnKontakt.getText();
         String etternavn = textfieldEtternavnKontakt.getText();
         String tlf = textfieldTelefonKontakt.getText();
-        String Epost = textfieldEpostKontakt.getText();
+        String epost = textfieldEpostKontakt.getText();
         String nettside = textfieldNettsideKontakt.getText();
         String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
@@ -205,7 +240,7 @@ public class ControllerAdminLeggTil {
         // Sjekk om feltene er tomme
         try {
             if(fornavn.isEmpty() || etternavn.isEmpty() ||
-            tlf.isEmpty() || Epost.isEmpty() ||
+            tlf.isEmpty() || epost.isEmpty() ||
             nettside.isEmpty() || virksomhet.isEmpty() ||
             opplysninger.isEmpty()) {
                 throw new inputException();
@@ -214,9 +249,27 @@ public class ControllerAdminLeggTil {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
 
+        Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
 
+        try {
+            PersonSerialiser serialiser = new PersonSerialiser();
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+
+            liste.add(kontaktperson);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
 
     }
+
+
+
 
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
@@ -261,16 +314,17 @@ public class ControllerAdminLeggTil {
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-            ArrangementSerialiser Arrangement = new ArrangementSerialiser();
-            ArrayList<Arrangement> liste = Arrangement.lesArrayFraFil();
+            ArrangementSerialiser serialiser = new ArrangementSerialiser();
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
             liste.add(arrangement);
             System.out.println(liste);
 
-            Arrangement.skrivArrayTilFil(liste);
+            serialiser.skrivArrayTilFil(liste);
+
         } catch(IOException ioe){
             ioe.printStackTrace();
-        }catch (ClassNotFoundException cnf){
+        } catch (ClassNotFoundException cnf){
             cnf.printStackTrace();
         }
 
