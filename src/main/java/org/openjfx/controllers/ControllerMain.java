@@ -51,7 +51,7 @@ public class ControllerMain {
     @FXML
     private void actionAdminSide(ActionEvent event) throws IOException {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneAdmin.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneAdminLeggTil.fxml"));
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {

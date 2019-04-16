@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
-import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Person.Kontaktperson;
@@ -22,7 +21,7 @@ import org.openjfx.logic.exceptions.inputException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerAdmin {
+public class ControllerAdminLeggTil {
 
 
     public void initialize() throws Exception {
@@ -39,10 +38,50 @@ public class ControllerAdmin {
 
     }
 
-
+    //Hoved pane og Tabs
     @FXML
     private AnchorPane paneAdmin;
 
+    @FXML
+    private TabPane tabpaneAdmin;
+
+    @FXML
+    private Tab tabEndre;
+
+    @FXML
+    private ControllerAdminEndre controllerAdminEndre;
+
+    @FXML
+    private AnchorPane paneAdminEndre;
+
+    @FXML
+    private Tab tabSlett;
+
+    @FXML
+    private AnchorPane paneAdminSlett;
+
+    @FXML
+    private ControllerAdminSlett controllerAdminSlett;
+
+    @FXML
+    private Tab tabSerialiser;
+
+    @FXML
+    private AnchorPane paneAdminSerialiser;
+
+    @FXML
+    private ControllerAdminSerialiser controllerAdminSerialiser;
+
+    @FXML
+    private Button btnHjemSide;
+
+    @FXML
+    private Button btnTest;
+
+
+
+
+    //Legg til
     @FXML
     private Tab tabLeggTil;
 
@@ -53,6 +92,9 @@ public class ControllerAdmin {
     private Button btnLeggTilValg;
 
 
+
+
+    //Arrangement
 
     @FXML
     private TextField textfieldArrangementID;
@@ -84,23 +126,19 @@ public class ControllerAdmin {
     @FXML
     private Pane paneArrangement;
 
-
-    @FXML
-    private TextField textfieldLokaleID;
-
-    @FXML
-    private TextField textfieldNavnLok;
-
-    @FXML
-    private TextField textfieldTypeLok;
-
-    @FXML
-    private TextField textfieldPlasserLok;
-
+    //Lokale
     @FXML
     private Pane paneLokale;
 
 
+    //Kontaktperson
+    @FXML
+    private Pane paneKontaktperson;
+
+
+
+    @FXML
+    private TextField textfieldKontaktpersonID;
 
     @FXML
     private TextField textfieldFornavnKontakt;
@@ -109,7 +147,7 @@ public class ControllerAdmin {
     private TextField textfieldEtternavnKontakt;
 
     @FXML
-    private TextField textfieldTlfKontakt;
+    private TextField textfieldTelefonKontakt;
 
     @FXML
     private TextField textfieldEpostKontakt;
@@ -118,30 +156,10 @@ public class ControllerAdmin {
     private TextField textfieldNettsideKontakt;
 
     @FXML
-    private TextField textfieldVirksomhetKontak;
+    private TextField textfieldVirksomhetKontakt;
 
     @FXML
-    private TextField textareaOpplysningerKontakt;
-
-    @FXML
-    private Pane paneKontaktperson;
-
-
-
-    @FXML
-    private Tab tabEndre;
-
-    @FXML
-    private Tab tabSlett;
-
-    @FXML
-    private Tab tabLagreTilFil;
-
-    @FXML
-    private Button btnHjemSide;
-
-    @FXML
-    private Button btnTest;
+    private TextArea textfieldOpplysningerKontakt;
 
 
     //Når brukeren velger kategori for elementet
