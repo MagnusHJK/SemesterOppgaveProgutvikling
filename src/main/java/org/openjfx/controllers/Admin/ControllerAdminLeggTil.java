@@ -58,7 +58,6 @@ public class ControllerAdminLeggTil {
 
 
     //Arrangement
-
     @FXML
     private TextField textfieldArrangementID;
 
@@ -196,7 +195,7 @@ public class ControllerAdminLeggTil {
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
 
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
+            alertbox.display("Feilmelding","Antall plasser er nødt til å være heltall.");
         }
 
 
