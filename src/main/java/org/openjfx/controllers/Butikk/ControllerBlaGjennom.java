@@ -1,4 +1,4 @@
-package org.openjfx.controllers;
+package org.openjfx.controllers.Butikk;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

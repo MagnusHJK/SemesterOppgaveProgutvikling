@@ -1,4 +1,4 @@
-package org.openjfx.controllers;
+package org.openjfx.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,48 +37,6 @@ public class ControllerAdminLeggTil {
         choiceKontaktpersonArr.setItems(personer.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
 
     }
-
-    //Hoved pane og Tabs
-    @FXML
-    private AnchorPane paneAdmin;
-
-    @FXML
-    private TabPane tabpaneAdmin;
-
-    @FXML
-    private Tab tabEndre;
-
-    @FXML
-    private ControllerAdminEndre controllerAdminEndre;
-
-    @FXML
-    private AnchorPane paneAdminEndre;
-
-    @FXML
-    private Tab tabSlett;
-
-    @FXML
-    private AnchorPane paneAdminSlett;
-
-    @FXML
-    private ControllerAdminSlett controllerAdminSlett;
-
-    @FXML
-    private Tab tabSerialiser;
-
-    @FXML
-    private AnchorPane paneAdminSerialiser;
-
-    @FXML
-    private ControllerAdminSerialiser controllerAdminSerialiser;
-
-    @FXML
-    private Button btnHjemSide;
-
-    @FXML
-    private Button btnTest;
-
-
 
 
     //Legg til
@@ -126,9 +84,23 @@ public class ControllerAdminLeggTil {
     @FXML
     private Pane paneArrangement;
 
+
+
     //Lokale
     @FXML
     private Pane paneLokale;
+
+    @FXML
+    private TextField textfieldLokaleID;
+
+    @FXML
+    private TextField textfieldNavnLokale;
+
+    @FXML
+    private TextField textfieldTypeLokale;
+
+    @FXML
+    private TextField textfieldPlasserLokale;
 
 
     //Kontaktperson
@@ -159,7 +131,7 @@ public class ControllerAdminLeggTil {
     private TextField textfieldVirksomhetKontakt;
 
     @FXML
-    private TextArea textfieldOpplysningerKontakt;
+    private TextArea textareaOpplysningerKontakt;
 
 
     //Når brukeren velger kategori for elementet
@@ -198,9 +170,9 @@ public class ControllerAdminLeggTil {
         System.out.println("Du har trykket på legg til lokale");
 
         String lokaleID = textfieldLokaleID.getText();
-        String navn = textfieldNavnLok.getText();
-        String type = textfieldTypeLok.getText();
-        String plasser = textfieldPlasserLok.getText();
+        String navn = textfieldNavnLokale.getText();
+        String type = textfieldTypeLokale.getText();
+        String plasser = textfieldPlasserLokale.getText();
 
 
 
@@ -221,12 +193,13 @@ public class ControllerAdminLeggTil {
     private void actionLeggTilKontaktperson(ActionEvent event) throws inputException{
         System.out.println("Du har trykket på legg til kontaktperson");
 
+        String kontaktpersonID = textfieldKontaktpersonID.getText();
         String fornavn = textfieldFornavnKontakt.getText();
         String etternavn = textfieldEtternavnKontakt.getText();
-        String tlf = textfieldTlfKontakt.getText();
+        String tlf = textfieldTelefonKontakt.getText();
         String Epost = textfieldEpostKontakt.getText();
         String nettside = textfieldNettsideKontakt.getText();
-        String virksomhet = textfieldVirksomhetKontak.getText();
+        String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
 
         // Sjekk om feltene er tomme
@@ -301,15 +274,6 @@ public class ControllerAdminLeggTil {
             cnf.printStackTrace();
         }
 
-    }
-
-
-
-    @FXML
-    private void actionHjemSide(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneMain.fxml"));
-        paneAdmin.getChildren().setAll(pane);
-        System.out.println("Tar deg til Hjem siden.");
     }
 
 }
