@@ -88,10 +88,10 @@
                         <TextField fx:id="textfieldPlasserLokale" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
                 </GridPane>
-                <Button layoutX="174.0" layoutY="374.0" mnemonicParsing="false" text="Legg til Lokale" />
+                <Button layoutX="174.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLeggTilLokale" text="Legg til Lokale" />
             </children>
         </Pane>
-        <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0">
+        <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
             <children>
                 <GridPane prefHeight="373.0" prefWidth="460.0">
                     <columnConstraints>
@@ -127,7 +127,7 @@
                         <TextArea fx:id="textareaOpplysningerKontakt" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Button layoutX="147.0" layoutY="392.0" mnemonicParsing="false" text="Legg til Kontaktperson" />
+                <Button layoutX="147.0" layoutY="392.0" mnemonicParsing="false" onAction="#actionLeggTilKontaktperson" text="Legg til Kontaktperson" />
             </children>
         </Pane>
     </children>
