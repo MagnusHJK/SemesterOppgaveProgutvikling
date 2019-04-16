@@ -5,7 +5,7 @@ package org.openjfx.logic.AppInfo;
 
 public class AppInfo {
 
-    private final static String versjon = "DAILY_14-TORSDAG";
+    private final static String versjon = "DAILY_16-TIRSDAG";
     private final static String git = "https://github.com/MagnusHJK/SemesterOppgaveProgutvikling";
     private final static String gruppe = "gruppe 40";
 
@@ -25,7 +25,7 @@ public class AppInfo {
     public String toString(){
 
         return "Versjon: " + getVersjon() + "\n" +
-               "Laget av " + getGruppe() +
+               "Laget av " + getGruppe() + "\n" +
                "GitHub: " + getGit();
     }
 }
