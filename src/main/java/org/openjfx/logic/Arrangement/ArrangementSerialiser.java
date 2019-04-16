@@ -53,6 +53,5 @@ public class ArrangementSerialiser implements Serializable {
         }catch(IOException ioe){
             //alertbox.display("Feil","En feil oppstod");
         }
-
     }
 }
