@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
@@ -24,10 +25,11 @@ public class ControllerBlaGjennom {
 
     public void initialize() throws Exception{
         LokaleHåndtering lokaler = new LokaleHåndtering();
+        LokaleSerialiser serialiser = new LokaleSerialiser();
 
         //Fyller ListView med lokaler (Bare typen på de)
         listLokale.setCellFactory(new LokaleCellFactory());
-        listLokale.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
+        listLokale.setItems(lokaler.lagObservableList(serialiser.lesArrayFraFil()));
 
         //Sier hva hver kolonne i Arrangement valget skal fylles med
         kolonneArrangementNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
