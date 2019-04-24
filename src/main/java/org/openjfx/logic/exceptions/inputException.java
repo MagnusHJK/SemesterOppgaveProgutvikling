@@ -10,4 +10,6 @@ public class inputException extends Exception{
     public static String intException() {
         return "input-feltet må bestå av heltall";
     }
+
+    public static String nullexception() { return "Nedtrekksmenyene er nødt til å være fyllt ut"; }
 }

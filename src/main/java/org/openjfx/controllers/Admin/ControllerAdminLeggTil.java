@@ -273,7 +273,7 @@ public class ControllerAdminLeggTil {
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
     @FXML
-    private void actionLeggTilArrangement(ActionEvent event) throws idException, inputException{
+    private void actionLeggTilArrangement(ActionEvent event) throws idException, inputException, NullPointerException{
         System.out.println("Du har trykket på legg til arrangement");
         String arrangementID = textfieldArrangementID.getText();
         Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
@@ -284,11 +284,11 @@ public class ControllerAdminLeggTil {
         String beskrivelse = textfieldBeskrivelseArr.getText();
         int billettPris = 0;
         int billettMaks = 0;
+        boolean ok = false;
 
 
 
         // Sjekk om feltene er tomme
-        //TODO catche NumberFormatException
         try {
             if(arrangementID.isEmpty() || navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
@@ -296,6 +296,15 @@ public class ControllerAdminLeggTil {
             }
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
+        }
+
+        // Sjekk om menyene er lik NULL
+        try {
+            if(kontaktperson == null || lokale == null) {
+                throw new NullPointerException();
+            }
+        } catch(NullPointerException npe) {
+            alertbox.display("Feilmeldng", inputException.nullexception());
         }
 
 
