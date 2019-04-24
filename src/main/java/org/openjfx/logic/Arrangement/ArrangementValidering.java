@@ -2,6 +2,8 @@ package org.openjfx.logic.Arrangement;
 
 //import java.util.Scanner;
 
+import javafx.css.Match;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +32,13 @@ public class ArrangementValidering {
         Pattern patternBeskrivelse = Pattern.compile("^[A-ZÆØÅa-zæøå0-9 ./-]");
         Matcher matchBeskrivelse = patternBeskrivelse.matcher(beskrivelse);
         if(matchBeskrivelse.matches()) {
+            return true;
+        }
+        int billettPris = arrangement.getBillettPris();
+        String prisSomString = Integer.toString(billettPris);
+        Pattern patternBillettPris = Pattern.compile("^[0-9.]");
+        Matcher matchBillettPris = patternBillettPris.matcher(prisSomString);
+        if(matchBillettPris.matches()) {
             return true;
         }
         return false;

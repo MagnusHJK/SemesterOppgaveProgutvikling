@@ -10,7 +10,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+<<<<<<< HEAD
       <module name="SemesterOppgaveProgutvikling" target="1.11.02" />
+=======
+      <module name="SemesterOppgaveProgutvikling" target="11.02" />
+>>>>>>> origin/master
     </bytecodeTargetLevel>
   </component>
 </project>

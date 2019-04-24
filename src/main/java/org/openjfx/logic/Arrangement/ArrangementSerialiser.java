@@ -42,9 +42,8 @@ public class ArrangementSerialiser implements Serializable {
     }
 
 
-    //TODO: Skriv metode for å serialisere array og trådprogrammering
+    //TODO: trådprogrammering
     public void skrivArrayTilFil(ArrayList<Arrangement> arrangementList) throws IOException, ClassNotFoundException, FileNotFoundException{
-
         try{
             FileOutputStream fos = new FileOutputStream("databases/arrangement.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -54,6 +53,5 @@ public class ArrangementSerialiser implements Serializable {
         }catch(IOException ioe){
             //alertbox.display("Feil","En feil oppstod");
         }
-
     }
 }

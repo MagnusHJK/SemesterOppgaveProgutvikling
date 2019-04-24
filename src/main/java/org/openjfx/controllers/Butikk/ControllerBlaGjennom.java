@@ -1,4 +1,4 @@
-package org.openjfx.controllers;
+package org.openjfx.controllers.Butikk;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
+import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.PersonHåndtering;
+import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
@@ -24,10 +29,11 @@ public class ControllerBlaGjennom {
 
     public void initialize() throws Exception{
         LokaleHåndtering lokaler = new LokaleHåndtering();
+        LokaleSerialiser serialiser = new LokaleSerialiser();
 
         //Fyller ListView med lokaler (Bare typen på de)
         listLokale.setCellFactory(new LokaleCellFactory());
-        listLokale.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
+        listLokale.setItems(lokaler.lagObservableList(serialiser.lesArrayFraFil()));
 
         //Sier hva hver kolonne i Arrangement valget skal fylles med
         kolonneArrangementNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
@@ -61,6 +67,9 @@ public class ControllerBlaGjennom {
     private Label lblArrangementDetaljer;
 
     @FXML
+    private Label lblKontaktpersonDetaljer;
+
+    @FXML
     private AnchorPane paneBlaGjennom;
 
     @FXML
@@ -74,25 +83,40 @@ public class ControllerBlaGjennom {
         //Finner hvilket lokale man trykker på
         Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
 
-        ArrangementHåndtering filter = new ArrangementHåndtering();
-
-        //Lager filtrert liste over Arrangement som matcher Lokaler
-        filter.filtrerArrangementer(Arrangement.lagArrangementListe(),lokale);
+        ArrangementHåndtering filterArr = new ArrangementHåndtering();
+        ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
 
         //Populerer tabellen TODO del opp
-        tabellArrangement.setItems(filter.filtrerArrangementer(Arrangement.lagArrangementListe(),lokale));
+        try{
+            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(),lokale));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch(ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
 
     }
+
 
     @FXML
     private void actionArrangementTrykk(MouseEvent event){
         Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
-        ArrangementHåndtering filter = new ArrangementHåndtering();
+        ArrangementHåndtering filterArr = new ArrangementHåndtering();
+        ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
 
+        //Filtrerer riktig arrangement og setter teksten på labelen til å være informasjon om arrangementet
+        //Velger kontaktperson fra samme arrangement og setter labelen til informasjon om han/henne
+        try{
+            lblArrangementDetaljer.setText(filterArr.filtrerArrangementDetaljer(serialiserArr.lesArrayFraFil(), arrangement));
+            lblKontaktpersonDetaljer.setText(arrangement.getKontaktperson().toString());
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch(ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
 
-        lblArrangementDetaljer.setText(filter.filtrerArrangementDetaljer(Arrangement.lagArrangementListe(), arrangement));
 
     }
 

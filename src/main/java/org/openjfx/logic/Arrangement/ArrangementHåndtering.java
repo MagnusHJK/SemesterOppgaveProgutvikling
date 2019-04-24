@@ -66,7 +66,6 @@ public class ArrangementHåndtering {
                        "Sted: " + arrangement.getSted() + " " + arrangement.getType() +"\n" +
                        "Pris: " + arrangement.getBillettPris() + "\n" +
                        "Antall Billetter: " + arrangement.getBillettMaks() + "\n" +
-                       "Kontaktperson: " + arrangement.getKontaktperson() + "\n" +
                        "Beskrivelse: " + arrangement.getBeskrivelse() + "\n";
             }
         }

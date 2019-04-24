@@ -68,6 +68,7 @@ public class ControllerMain {
             System.out.println("Tar det til Bla Gjennom siden.");
         } catch (IOException e) {
             alertbox.display("Feil","En feil oppstod");
+            e.printStackTrace();
         }
     }
 

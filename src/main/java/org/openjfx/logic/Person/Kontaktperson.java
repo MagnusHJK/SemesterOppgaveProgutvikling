@@ -8,19 +8,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Kontaktperson extends Person implements Serializable {
+    private String kontaktpersonID;
     private String epost;
     private String nettside;
     private String virksomhet;
     private String opplysninger;
 
-    public Kontaktperson(String fornavn, String etternavn, String telefon, String epost, String nettside, String virksomhet, String opplysninger) {
+    public Kontaktperson(String fornavn, String etternavn, String telefon,String kontaktpersonID, String epost, String nettside, String virksomhet, String opplysninger) {
         super(fornavn, etternavn, telefon);
+        this.kontaktpersonID = kontaktpersonID;
         this.epost = epost;
         this.nettside = nettside;
         this.virksomhet = virksomhet;
         this.opplysninger = opplysninger;
     }
 
+    public String getKontaktpersonID(){
+        return kontaktpersonID;
+    }
+
+    public void setKontaktpersonID(String kontaktpersonID){
+        this.kontaktpersonID = kontaktpersonID;
+    }
 
     public String getEpost() {
         return epost;
@@ -61,10 +70,10 @@ public class Kontaktperson extends Person implements Serializable {
     public static ArrayList<Kontaktperson> lagKontaktpersonListe(){
         ArrayList<Kontaktperson>kontaktpersonListe = new ArrayList<>();
 
-        kontaktpersonListe.add(new Kontaktperson("Magnus", "Hjelmen", "91994468",
+        kontaktpersonListe.add(new Kontaktperson("Magnus", "Hjelmen", "91994468", "Dest23",
                 "Magnus@email.com", "example.com", "Google", "I am very cool"));
 
-        kontaktpersonListe.add(new Kontaktperson("Tonje", "Pettersen", "12345678",
+        kontaktpersonListe.add(new Kontaktperson("Tonje", "Pettersen", "12345678", "LDKFG445",
                 "Tonje@email.com", "example.com", "Microsoft", "Jag är från sverige"));
 
 

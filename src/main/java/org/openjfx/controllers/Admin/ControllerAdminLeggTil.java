@@ -1,4 +1,4 @@
-package org.openjfx.controllers;
+package org.openjfx.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,42 +9,42 @@ import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
-import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
+import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
-import java.lang.reflect.InvocationTargetException;
 
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-public class ControllerAdmin {
+public class ControllerAdminLeggTil {
 
 
     public void initialize() throws Exception {
         Element elementerListe = new Element();
+
         LokaleHåndtering lokaler = new LokaleHåndtering();
+        LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+
         PersonHåndtering personer = new PersonHåndtering();
+        PersonSerialiser personSerialiser = new PersonSerialiser();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
 
-        choiceTypeArr.setItems(lokaler.lagObservableList(Lokale.lagLokaleList()));
-        choiceKontaktpersonArr.setItems(personer.lagObservableList(Kontaktperson.lagKontaktpersonListe()));
-
+        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
     }
 
 
-    @FXML
-    private AnchorPane paneAdmin;
-
+    //Legg til
     @FXML
     private Tab tabLeggTil;
 
@@ -56,6 +56,8 @@ public class ControllerAdmin {
 
 
 
+
+    //Arrangement
     @FXML
     private TextField textfieldArrangementID;
 
@@ -87,22 +89,32 @@ public class ControllerAdmin {
     private Pane paneArrangement;
 
 
+
+    //Lokale
+    @FXML
+    private Pane paneLokale;
+
     @FXML
     private TextField textfieldLokaleID;
 
     @FXML
-    private TextField textfieldNavnLok;
+    private TextField textfieldNavnLokale;
 
     @FXML
-    private TextField textfieldTypeLok;
+    private TextField textfieldTypeLokale;
 
     @FXML
-    private TextField textfieldPlasserLok;
+    private TextField textfieldPlasserLokale;
+
+
+    //Kontaktperson
+    @FXML
+    private Pane paneKontaktperson;
+
+
 
     @FXML
-    private Pane paneLokale;
-
-
+    private TextField textfieldKontaktpersonID;
 
     @FXML
     private TextField textfieldFornavnKontakt;
@@ -111,7 +123,7 @@ public class ControllerAdmin {
     private TextField textfieldEtternavnKontakt;
 
     @FXML
-    private TextField textfieldTlfKontakt;
+    private TextField textfieldTelefonKontakt;
 
     @FXML
     private TextField textfieldEpostKontakt;
@@ -120,30 +132,10 @@ public class ControllerAdmin {
     private TextField textfieldNettsideKontakt;
 
     @FXML
-    private TextField textfieldVirksomhetKontak;
+    private TextField textfieldVirksomhetKontakt;
 
     @FXML
-    private TextField textareaOpplysningerKontakt;
-
-    @FXML
-    private Pane paneKontaktperson;
-
-
-
-    @FXML
-    private Tab tabEndre;
-
-    @FXML
-    private Tab tabSlett;
-
-    @FXML
-    private Tab tabLagreTilFil;
-
-    @FXML
-    private Button btnHjemSide;
-
-    @FXML
-    private Button btnTest;
+    private TextArea textareaOpplysningerKontakt;
 
 
     //Når brukeren velger kategori for elementet
@@ -178,26 +170,56 @@ public class ControllerAdmin {
 
     //Når brukeren trykker på "Legg til Lokale" knapp
     @FXML
-    private void actionLeggTilLokale(ActionEvent event) throws InvocationTargetException, inputException{
+    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException{
         System.out.println("Du har trykket på legg til lokale");
 
         String lokaleID = textfieldLokaleID.getText();
-        String navn = textfieldNavnLok.getText();
-        String type = textfieldTypeLok.getText();
-        String plasser = textfieldPlasserLok.getText();
+        String navn = textfieldNavnLokale.getText();
+        String type = textfieldTypeLokale.getText();
+        int plasser = 0;
 
 
 
         // Sjekker om input feltene er tomme
         try {
             if(lokaleID.isEmpty() || navn.isEmpty() ||
-            type.isEmpty() || plasser.isEmpty()) {
+            type.isEmpty()) {
                 throw new inputException();
             }
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
+
+        //Prøver å konvertere plasser til int
+        try{
+            plasser = Integer.parseInt(textfieldPlasserLokale.getText());
+
+        } catch(NumberFormatException nfe){
+            alertbox.display("Feilmelding","Antall plasser er nødt til å være heltall.");
+        }
+
+
+        Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+
+        try{
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            LokaleSerialiser serialiser = new LokaleSerialiser();
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+            liste.add(lokale);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
+
     }
+
+
 
 
     //Når brukeren trykker på "Legg til Kontakt person" knapp
@@ -205,18 +227,19 @@ public class ControllerAdmin {
     private void actionLeggTilKontaktperson(ActionEvent event) throws inputException{
         System.out.println("Du har trykket på legg til kontaktperson");
 
+        String kontaktpersonID = textfieldKontaktpersonID.getText();
         String fornavn = textfieldFornavnKontakt.getText();
         String etternavn = textfieldEtternavnKontakt.getText();
-        String tlf = textfieldTlfKontakt.getText();
-        String Epost = textfieldEpostKontakt.getText();
+        String tlf = textfieldTelefonKontakt.getText();
+        String epost = textfieldEpostKontakt.getText();
         String nettside = textfieldNettsideKontakt.getText();
-        String virksomhet = textfieldVirksomhetKontak.getText();
+        String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
 
         // Sjekk om feltene er tomme
         try {
             if(fornavn.isEmpty() || etternavn.isEmpty() ||
-            tlf.isEmpty() || Epost.isEmpty() ||
+            tlf.isEmpty() || epost.isEmpty() ||
             nettside.isEmpty() || virksomhet.isEmpty() ||
             opplysninger.isEmpty()) {
                 throw new inputException();
@@ -224,7 +247,28 @@ public class ControllerAdmin {
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
         }
+
+        Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
+
+        try {
+            PersonSerialiser serialiser = new PersonSerialiser();
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+
+            liste.add(kontaktperson);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
+
     }
+
+
+
 
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
@@ -244,7 +288,7 @@ public class ControllerAdmin {
 
 
         // Sjekk om feltene er tomme
-
+        //TODO catche NumberFormatException
         try {
             if(arrangementID.isEmpty() || navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
@@ -255,15 +299,13 @@ public class ControllerAdmin {
         }
 
 
-
+        //TODO fikse exception
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
 
-            throw new inputException();
-
-        } catch(inputException ie){
-            alertbox.display("Feilmelding",inputException.intException());
+        } catch(NumberFormatException nfe){
+            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
         }
 
 
@@ -271,28 +313,20 @@ public class ControllerAdmin {
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-            ArrangementSerialiser Arrangement = new ArrangementSerialiser();
-            ArrayList<Arrangement> liste = Arrangement.lesArrayFraFil();
+            ArrangementSerialiser serialiser = new ArrangementSerialiser();
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
             liste.add(arrangement);
             System.out.println(liste);
 
-            Arrangement.skrivArrayTilFil(liste);
+            serialiser.skrivArrayTilFil(liste);
+
         } catch(IOException ioe){
             ioe.printStackTrace();
-        }catch (ClassNotFoundException cnf){
+        } catch (ClassNotFoundException cnf){
             cnf.printStackTrace();
         }
 
-    }
-
-
-
-    @FXML
-    private void actionHjemSide(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneMain.fxml"));
-        paneAdmin.getChildren().setAll(pane);
-        System.out.println("Tar deg til Hjem siden.");
     }
 
 }
