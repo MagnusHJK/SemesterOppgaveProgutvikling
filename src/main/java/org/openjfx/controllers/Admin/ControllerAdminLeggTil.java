@@ -284,7 +284,7 @@ public class ControllerAdminLeggTil {
         String beskrivelse = textfieldBeskrivelseArr.getText();
         int billettPris = 0;
         int billettMaks = 0;
-        boolean ok = false;
+        boolean ok = true;
 
 
 
@@ -292,50 +292,59 @@ public class ControllerAdminLeggTil {
         try {
             if(arrangementID.isEmpty() || navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
+                ok = false;
                 throw new inputException();
+
             }
+
         } catch (inputException ie) {
             alertbox.display("Feilmelding",inputException.emptyException());
+
         }
 
         // Sjekk om menyene er lik NULL
         try {
             if(kontaktperson == null || lokale == null) {
+                ok = false;
                 throw new NullPointerException();
             }
         } catch(NullPointerException npe) {
             alertbox.display("Feilmeldng", inputException.nullexception());
+
         }
 
-
-        //TODO fikse exception
+        // Sjekker om input feltene inneholder tall der det trengs
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-
+            ok = false;
+            throw new inputException();
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
+            alertbox.display("Feilmelding",inputException.intException());
+
         }
 
+        if(!ok) {
 
-         Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+        } else {
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
 
-        try{
-            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-            ArrangementSerialiser serialiser = new ArrangementSerialiser();
-            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+            try {
+                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
-            liste.add(arrangement);
-            System.out.println(liste);
+                liste.add(arrangement);
+                System.out.println(liste);
 
-            serialiser.skrivArrayTilFil(liste);
+                serialiser.skrivArrayTilFil(liste);
 
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException cnf) {
+                cnf.printStackTrace();
+            }
         }
-
     }
 
 }
