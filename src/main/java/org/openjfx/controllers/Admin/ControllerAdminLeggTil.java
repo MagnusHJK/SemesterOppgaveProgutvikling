@@ -184,45 +184,51 @@ public class ControllerAdminLeggTil {
         String navn = textfieldNavnLokale.getText();
         String type = textfieldTypeLokale.getText();
         int plasser = 0;
+        boolean ok = true;
 
-
+        //TODO Legge til mer inputvalidering
 
         // Sjekker om input feltene er tomme
         try {
             if(lokaleID.isEmpty() || navn.isEmpty() ||
             type.isEmpty()) {
+                ok = false;
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.feil(inputException.emptyException());
+           // alertbox.feil(inputException.emptyException());
         }
 
         //Prøver å konvertere plasser til int
         try{
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
-
         } catch(NumberFormatException nfe){
-            alertbox.feil("Antall plasser er nødt til å være heltall.");
+            ok = false;
+            //alertbox.feil("Antall plasser er nødt til å være heltall.");
+        }
+
+        if(!ok) {
+            alertbox.feil("Noe gikk galt, prøv på nytt!");
+        } else {
+            Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+
+            try{
+                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+                LokaleSerialiser serialiser = new LokaleSerialiser();
+                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+                liste.add(lokale);
+                System.out.println(liste);
+
+                serialiser.skrivArrayTilFil(liste);
+
+            } catch(IOException | ClassNotFoundException cnf){
+                cnf.printStackTrace();
+            }
         }
 
 
-        Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
 
-        try{
-            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-            LokaleSerialiser serialiser = new LokaleSerialiser();
-            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
-
-            liste.add(lokale);
-            System.out.println(liste);
-
-            serialiser.skrivArrayTilFil(liste);
-
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
-        }
 
     }
 
@@ -242,6 +248,8 @@ public class ControllerAdminLeggTil {
         String nettside = textfieldNettsideKontakt.getText();
         String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
+        boolean ok = true;
+
 
         // Sjekk om feltene er tomme
         try {
@@ -249,27 +257,30 @@ public class ControllerAdminLeggTil {
             tlf.isEmpty() || epost.isEmpty() ||
             nettside.isEmpty() || virksomhet.isEmpty() ||
             opplysninger.isEmpty()) {
+                ok = false;
                 throw new inputException();
             }
         } catch (inputException ie) {
             alertbox.feil(inputException.emptyException());
         }
 
-        Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
+        if(!ok) {
+            alertbox.feil("Noe gikk galt, prøv på nytt!");
+        } else {
+            Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
 
-        try {
-            PersonSerialiser serialiser = new PersonSerialiser();
-            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+            try {
+                PersonSerialiser serialiser = new PersonSerialiser();
+                ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
 
-            liste.add(kontaktperson);
-            System.out.println(liste);
+                liste.add(kontaktperson);
+                System.out.println(liste);
 
-            serialiser.skrivArrayTilFil(liste);
+                serialiser.skrivArrayTilFil(liste);
 
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+            } catch (IOException | ClassNotFoundException cnf) {
+                cnf.printStackTrace();
+            }
         }
 
     }
@@ -305,7 +316,7 @@ public class ControllerAdminLeggTil {
             }
 
         } catch (inputException ie) {
-            alertbox.feil(inputException.emptyException());
+           // alertbox.feil(inputException.emptyException());
 
         }
 
@@ -316,7 +327,7 @@ public class ControllerAdminLeggTil {
                 throw new NullPointerException();
             }
         } catch(NullPointerException npe) {
-            alertbox.feil(inputException.nullexception());
+           // alertbox.feil(inputException.nullexception());
 
         }
 
@@ -327,12 +338,12 @@ public class ControllerAdminLeggTil {
             ok = false;
             throw new inputException();
         } catch(NumberFormatException nfe){
-            alertbox.feil(inputException.intException());
+           // alertbox.feil(inputException.intException());
 
         }
 
         if(!ok) {
-
+            alertbox.feil("Noe gikk galt, prøv på nytt");
         } else {
             Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
 

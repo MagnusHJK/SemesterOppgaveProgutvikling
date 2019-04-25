@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneAdminEndre" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="paneAdminEndre" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.Admin.ControllerAdminEndre">
     <children>
         <HBox layoutX="20.0" layoutY="70.0" prefHeight="133.0" prefWidth="848.0" spacing="20.0">
             <children>
-                <ListView prefHeight="133.0" prefWidth="318.0" />
-                <TableView disable="true" prefHeight="133.0" prefWidth="438.0">
+                <ListView fx:id="EndreTabell"   prefHeight="133.0" prefWidth="318.0" />
+                <TableView  prefHeight="133.0" prefWidth="438.0">
                     <columns>
                         <TableColumn prefWidth="75.0" text="C1" />
                         <TableColumn prefWidth="75.0" text="C2" />
