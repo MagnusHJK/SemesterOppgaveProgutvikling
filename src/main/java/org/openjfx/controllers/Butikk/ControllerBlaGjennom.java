@@ -23,6 +23,7 @@ import org.openjfx.logic.exceptions.nullException;
 import org.openjfx.logic.exceptions.arrangementException;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
@@ -107,7 +108,7 @@ public class ControllerBlaGjennom {
 
 
     @FXML
-    private void actionArrangementTrykk(MouseEvent event) throws arrangementException, ClassNotFoundException{
+    private void actionArrangementTrykk(MouseEvent event) throws arrangementException{
         Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
@@ -116,11 +117,11 @@ public class ControllerBlaGjennom {
         //Filtrerer riktig arrangement og setter teksten på labelen til å være informasjon om arrangementet
         //Velger kontaktperson fra samme arrangement og setter labelen til informasjon om han/henne
         try{
-            lblArrangementDetaljer.setText(arrangement.getBeskrivelse());
-            //lblArrangementDetaljer.setText(filterArr.filtrerArrangementDetaljer(serialiserArr.lesArrayFraFil(), arrangement));
+            //lblArrangementDetaljer.setText(arrangement.getBeskrivelse().toString());
+            lblArrangementDetaljer.setText(filterArr.filtrerArrangementDetaljer(serialiserArr.lesArrayFraFil(), arrangement));
             lblKontaktpersonDetaljer.setText(arrangement.getKontaktperson().toString());
-            throw new arrangementException();
-        }catch(arrangementException io){
+
+        }catch(ClassNotFoundException | IOException io){
             alertbox.feil(arrangementException.arrangementException());
         }
     }

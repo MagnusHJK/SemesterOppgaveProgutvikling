@@ -17,7 +17,7 @@ public class alertbox {
         window.initModality(Modality.APPLICATION_MODAL);
         String tittel = "Feilmelding";
         window.setTitle(tittel);
-        window.setWidth(300);
+        window.setWidth(400);
         window.setHeight(250);
         // Oppretter et nytt label for å vise message parameteren
         Label label = new Label();
