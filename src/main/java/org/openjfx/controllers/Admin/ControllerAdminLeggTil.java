@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
@@ -33,14 +34,22 @@ public class ControllerAdminLeggTil {
         LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
         PersonHåndtering personer = new PersonHåndtering();
+        // midlertidig
+        Kontaktperson.lagKontaktpersonListe();
         PersonSerialiser personSerialiser = new PersonSerialiser();
+        Kontaktperson.lagKontaktpersonListe();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
 
-        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
-        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+
+         choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+
+        //TODO fikse serialisering
+       // choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+
+
     }
 
 
