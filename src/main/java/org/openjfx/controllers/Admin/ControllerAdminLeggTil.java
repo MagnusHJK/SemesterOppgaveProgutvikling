@@ -194,7 +194,7 @@ public class ControllerAdminLeggTil {
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
         }
 
         //Prøver å konvertere plasser til int
@@ -202,7 +202,7 @@ public class ControllerAdminLeggTil {
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
 
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Antall plasser er nødt til å være heltall.");
+            alertbox.feil("Antall plasser er nødt til å være heltall.");
         }
 
 
@@ -252,7 +252,7 @@ public class ControllerAdminLeggTil {
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
         }
 
         Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
@@ -305,7 +305,7 @@ public class ControllerAdminLeggTil {
             }
 
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
 
         }
 
@@ -316,7 +316,7 @@ public class ControllerAdminLeggTil {
                 throw new NullPointerException();
             }
         } catch(NullPointerException npe) {
-            alertbox.display("Feilmeldng", inputException.nullexception());
+            alertbox.feil(inputException.nullexception());
 
         }
 
@@ -327,7 +327,7 @@ public class ControllerAdminLeggTil {
             ok = false;
             throw new inputException();
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding",inputException.intException());
+            alertbox.feil(inputException.intException());
 
         }
 
@@ -346,12 +346,9 @@ public class ControllerAdminLeggTil {
 
                 serialiser.skrivArrayTilFil(liste);
 
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException cnf) {
+            } catch (IOException | ClassNotFoundException cnf) {
                 cnf.printStackTrace();
             }
         }
     }
-
 }

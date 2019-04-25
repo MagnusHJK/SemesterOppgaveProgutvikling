@@ -14,7 +14,7 @@ public class ControllerAdminEndre{
     public void initialize() throws Exception{
         System.out.println("Du er på endre siden");
 
-        alertbox.display("t","t");
+        alertbox.feil("t");
 
 
     }
