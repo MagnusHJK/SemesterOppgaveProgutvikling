@@ -26,18 +26,18 @@ public class test {
 
 
     public static void main(String[] args) throws Exception{
-        ArrangementSerialiser testArrangement = new ArrangementSerialiser();
-        testArrangement.skrivArrayTilFil(Arrangement.lagArrangementListe());
-        System.out.println(testArrangement.lesArrayFraFil());
+        //ArrangementSerialiser testArrangement = new ArrangementSerialiser();
+        //testArrangement.skrivArrayTilFil(Arrangement.lagArrangementListe());
+        //System.out.println(testArrangement.lesArrayFraFil());
 
         //LokaleSerialiser testLokale = new LokaleSerialiser();
         //testLokale.skrivArrayTilFil(Lokale.lagLokaleList());
         //System.out.println(testLokale.lesArrayFraFil());
 
 
-        //PersonSerialiser testPerson = new PersonSerialiser();
-        //testPerson.skrivArrayTilFil(Kontaktperson.lagKontaktpersonListe());
-        //System.out.println(testPerson.lesArrayFraFil());
+        PersonSerialiser testPerson = new PersonSerialiser();
+        testPerson.skrivArrayTilFil(Kontaktperson.lagKontaktpersonListe());
+        System.out.println(testPerson.lesArrayFraFil());
 
 
 

@@ -43,7 +43,7 @@ public class ControllerMain {
             scene.setScene(new Scene(root, 400, 400));
             scene.show();
         } catch(IOException e) {
-            alertbox.display("Feil","En feil oppstod");
+            alertbox.feil("En feil oppstod");
         }
     }
 
@@ -55,7 +55,7 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {
-            alertbox.display("Feil","En feil oppstod");
+            alertbox.feil("En feil oppstod");
         }
     }
 
@@ -67,7 +67,7 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar det til Bla Gjennom siden.");
         } catch (IOException e) {
-            alertbox.display("Feil","En feil oppstod");
+            alertbox.feil("En feil oppstod");
             e.printStackTrace();
         }
     }

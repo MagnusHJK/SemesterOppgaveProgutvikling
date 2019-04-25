@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
@@ -33,14 +34,20 @@ public class ControllerAdminLeggTil {
         LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
         PersonHåndtering personer = new PersonHåndtering();
+        // midlertidig
+        Kontaktperson.lagKontaktpersonListe();
         PersonSerialiser personSerialiser = new PersonSerialiser();
+        Kontaktperson.lagKontaktpersonListe();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
+         choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
 
-        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
-        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+        //TODO fikse serialisering
+       // choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+
+
     }
 
 
@@ -187,7 +194,7 @@ public class ControllerAdminLeggTil {
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
         }
 
         //Prøver å konvertere plasser til int
@@ -195,7 +202,7 @@ public class ControllerAdminLeggTil {
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
 
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Antall plasser er nødt til å være heltall.");
+            alertbox.feil("Antall plasser er nødt til å være heltall.");
         }
 
 
@@ -245,7 +252,7 @@ public class ControllerAdminLeggTil {
                 throw new inputException();
             }
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
         }
 
         Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
@@ -273,7 +280,7 @@ public class ControllerAdminLeggTil {
 
     //Når brukeren trykker på "Legg til Arrangement" knapp
     @FXML
-    private void actionLeggTilArrangement(ActionEvent event) throws idException, inputException{
+    private void actionLeggTilArrangement(ActionEvent event) throws idException, inputException, NullPointerException{
         System.out.println("Du har trykket på legg til arrangement");
         String arrangementID = textfieldArrangementID.getText();
         Kontaktperson kontaktperson = choiceKontaktpersonArr.getSelectionModel().getSelectedItem();
@@ -284,49 +291,64 @@ public class ControllerAdminLeggTil {
         String beskrivelse = textfieldBeskrivelseArr.getText();
         int billettPris = 0;
         int billettMaks = 0;
+        boolean ok = true;
 
 
 
         // Sjekk om feltene er tomme
-        //TODO catche NumberFormatException
         try {
             if(arrangementID.isEmpty() || navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
+                ok = false;
                 throw new inputException();
+
             }
+
         } catch (inputException ie) {
-            alertbox.display("Feilmelding",inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
+
         }
 
+        // Sjekk om menyene er lik NULL
+        try {
+            if(kontaktperson == null || lokale == null) {
+                ok = false;
+                throw new NullPointerException();
+            }
+        } catch(NullPointerException npe) {
+            alertbox.feil(inputException.nullexception());
 
-        //TODO fikse exception
+        }
+
+        // Sjekker om input feltene inneholder tall der det trengs
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-
+            ok = false;
+            throw new inputException();
         } catch(NumberFormatException nfe){
-            alertbox.display("Feilmelding","Prisen og/eller antall biletter er nødt til å være heltall.");
+            alertbox.feil(inputException.intException());
+
         }
 
+        if(!ok) {
 
-         Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+        } else {
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
 
-        try{
-            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-            ArrangementSerialiser serialiser = new ArrangementSerialiser();
-            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+            try {
+                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
-            liste.add(arrangement);
-            System.out.println(liste);
+                liste.add(arrangement);
+                System.out.println(liste);
 
-            serialiser.skrivArrayTilFil(liste);
+                serialiser.skrivArrayTilFil(liste);
 
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+            } catch (IOException | ClassNotFoundException cnf) {
+                cnf.printStackTrace();
+            }
         }
-
     }
-
 }

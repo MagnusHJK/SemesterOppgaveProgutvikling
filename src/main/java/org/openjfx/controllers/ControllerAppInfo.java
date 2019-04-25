@@ -13,6 +13,7 @@ public class ControllerAppInfo {
 
 
     public void initialize(){
+
         lblAppInfo.setText(info.toString());
     }
 
