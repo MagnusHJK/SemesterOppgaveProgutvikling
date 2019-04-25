@@ -44,6 +44,27 @@ public class KontaktpersonValidering {
             return false;
         }
 
+        String nettside = kontaktperson.getNettside();
+        Pattern patternNettside = Pattern.compile("^[A-Za-z0-9.-/]{4,30}");
+        Matcher matchNettside = patternNettside.matcher(nettside);
+        if(!matchNettside.matches()) {
+            return false;
+        }
+
+        String virksomhet = kontaktperson.getVirksomhet();
+        Pattern patternVirksomhet = Pattern.compile("^[A-Za-z ]{4,30}");
+        Matcher matchVirksomhet = patternVirksomhet.matcher(virksomhet);
+        if(!matchVirksomhet.matches()) {
+            return false;
+        }
+
+        String opplysninger = kontaktperson.getOpplysninger();
+        Pattern patternOpplysninger = Pattern.compile("^[A-Za-z0-9. ]{4,30}");
+        Matcher matchOpplysninger = patternOpplysninger.matcher(opplysninger);
+        if(!matchOpplysninger.matches()) {
+            return false;
+        }
+
 
         return true;
     }
