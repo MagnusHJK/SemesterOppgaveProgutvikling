@@ -42,8 +42,6 @@ public class ControllerAdminLeggTil {
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
-
-
          choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
 
         //TODO fikse serialisering

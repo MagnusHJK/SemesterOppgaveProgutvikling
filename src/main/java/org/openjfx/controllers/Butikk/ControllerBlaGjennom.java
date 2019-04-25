@@ -83,24 +83,16 @@ public class ControllerBlaGjennom {
         //Finner hvilket lokale man trykker på
         Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
 
+
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
-
-        //Populerer tabellen TODO del opp
-        try{
-            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(),lokale));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }catch(ClassNotFoundException cnf){
-            cnf.printStackTrace();
-        }
-
+        tabellArrangement.setItems(Arrangement.lagArrangementListe());
     }
 
 
     @FXML
-    private void actionArrangementTrykk(MouseEvent event){
+    private void actionArrangementTrykk(MouseEvent event) throws IOException, ClassNotFoundException{
         Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
