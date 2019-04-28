@@ -44,8 +44,6 @@ public class ControllerBlaGjennom {
         kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
         kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
 
-
-
     }
 
     @FXML
@@ -91,19 +89,16 @@ public class ControllerBlaGjennom {
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
         //TODO fikse exceptions etter serialiserings id-ene er fikset
-        /*
+
+        //Sjekker om det valgte lokalet har noen arrangementer som bruker dette lokalet.
         try {
-            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(),lokale));
-            throw new nullException();
+            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(), lokale));
         } catch (NullPointerException npe) {
-            alertbox.display(nullException.nullException());
+            //alertbox.display(nullException.nullException());
         } catch (IOException  | ClassNotFoundException cnf) {
             cnf.printStackTrace();
         }
-        */
 
-        // midletidig
-        tabellArrangement.setItems(Arrangement.lagArrangementListe());
     }
 
 
@@ -142,12 +137,11 @@ public class ControllerBlaGjennom {
 
     @FXML
     private void actionKjopSide(ActionEvent event) throws IOException {
-            try {
-                Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
-                alertbox.godkjent("Du kjøpte:" + valg.getNavn());
-            } catch (RuntimeException e) {
-                alertbox.feil(valgException.valgException());
-            }
+        try {
+            Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
+            alertbox.godkjent("Du kjøpte:" + valg.getNavn());
+        } catch (RuntimeException e) {
+            alertbox.feil(valgException.valgException());
+        }
     }
-
 }
