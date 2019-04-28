@@ -114,7 +114,7 @@ public class Arrangement implements Serializable {
 
 
 
-   /* //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
+    //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
     public static ArrayList<Arrangement> lagArrangementListe(){
         ArrayList<Arrangement>arrangementListe = new ArrayList<>();
 
@@ -127,9 +127,11 @@ public class Arrangement implements Serializable {
 
         return arrangementListe;
     }
-    */
 
-    public static ObservableList<Arrangement> lagArrangementListe() {
+
+
+   /*
+   public static ObservableList<Arrangement> lagArrangementListe() {
         ObservableList<Arrangement> arrangementListe = FXCollections.observableArrayList();
 
         arrangementListe.add(new Arrangement("adaw2", Kontaktperson.lagKontaktpersonListe().get(0),
@@ -142,5 +144,5 @@ public class Arrangement implements Serializable {
 
         return arrangementListe;
     }
-
+    */
 }
