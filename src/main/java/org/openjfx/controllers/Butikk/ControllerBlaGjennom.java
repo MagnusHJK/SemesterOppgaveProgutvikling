@@ -108,6 +108,9 @@ public class ControllerBlaGjennom {
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
+        btnKjopSide.setDisable(false);
+
+
 
         //Filtrerer riktig arrangement og setter teksten på labelen til å være informasjon om arrangementet
         //Velger kontaktperson fra samme arrangement og setter labelen til informasjon om han/henne
@@ -135,11 +138,12 @@ public class ControllerBlaGjennom {
     }
 
 
+    //TODO Legg til overføring av objekter
     @FXML
-    private void actionKjopSide(ActionEvent event) throws IOException {
+    private void actionKjøpSide(ActionEvent event) throws IOException {
         try {
-            Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
-            alertbox.godkjent("Du kjøpte:" + valg.getNavn());
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneKjøp.fxml"));
+            paneBlaGjennom.getChildren().setAll(pane);
         } catch (RuntimeException e) {
             alertbox.feil(valgException.valgException());
         }
