@@ -19,7 +19,7 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0">
+        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
             <children>
                 <GridPane prefHeight="411.0" prefWidth="457.0">
                     <columnConstraints>
