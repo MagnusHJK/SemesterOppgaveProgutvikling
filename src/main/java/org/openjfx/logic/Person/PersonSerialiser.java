@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class PersonSerialiser {
 
-    //Leser Lokale array fra databasefilen TODO legg til trådprogrammering
+    //Leser Lokale array fra databasefilen TODO legg til trådprogrammering, exceptions
     public ArrayList<Kontaktperson> lesArrayFraFil() throws IOException, ClassNotFoundException, FileNotFoundException {
         ArrayList<Kontaktperson> personListe = new ArrayList<>();
 
@@ -33,12 +33,12 @@ public class PersonSerialiser {
         return personListe;
     }
 
-    //TODO: trådprogrammering
-    public void skrivArrayTilFil(ArrayList<Kontaktperson> lokaleList) throws IOException, ClassNotFoundException, FileNotFoundException{
+    //TODO: trådprogrammering, exceptions
+    public void skrivArrayTilFil(ArrayList<Kontaktperson> personList) throws IOException, ClassNotFoundException, FileNotFoundException{
         try{
             FileOutputStream fos = new FileOutputStream("databases/person.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(lokaleList);
+            oos.writeObject(personList);
             oos.close();
             fos.close();
         }catch(IOException ioe){
