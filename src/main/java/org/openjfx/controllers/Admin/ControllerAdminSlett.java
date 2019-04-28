@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
@@ -44,6 +45,9 @@ public class ControllerAdminSlett {
 
     @FXML
     private ListView<Arrangement> listArrangement;
+
+    @FXML
+    private Button btnSlettElement;
 
 
 
@@ -105,10 +109,30 @@ public class ControllerAdminSlett {
     }
 
 
+    @FXML
+    private void actionLokaleTrykk(MouseEvent event){
+        btnSlettElement.setDisable(false);
+    }
+
+    @FXML
+    private void actionKontaktpersonTrykk(MouseEvent event){
+        btnSlettElement.setDisable(false);
+    }
+
+    @FXML
+    private void actionArrangementTrykk(MouseEvent event){
+        btnSlettElement.setDisable(false);
+    }
+
+
+
+
+
     //Sjekker typen brukeren har valgt, henter ut objektet de har valgt og sletter det spesifikke objektet
     @FXML
     private void actionSlettElement(ActionEvent event){
         String valg = choiceSlettValg.getSelectionModel().getSelectedItem();
+
 
         if(valg.equals("Lokale")){
             LokaleHåndtering håndtering = new LokaleHåndtering();
@@ -126,6 +150,9 @@ public class ControllerAdminSlett {
 
         }else if(valg.equals("Arrangement")){
             Arrangement arrangement = listArrangement.getSelectionModel().getSelectedItem();
+        }
+        else{
+            System.out.println("Du må velge noe");
         }
 
     }
