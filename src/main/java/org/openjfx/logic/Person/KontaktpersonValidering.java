@@ -9,7 +9,7 @@ public class KontaktpersonValidering {
 
     public static boolean validerKontaktperson(Kontaktperson kontaktperson) {
 
-        String kontaktPersonID = kontaktperson.getKontaktpersonID();
+        String kontaktPersonID = kontaktperson.getPersonID();
         Pattern patternPersonID = Pattern.compile("^[0-9]$");
         Matcher matchPersonID = patternPersonID.matcher(kontaktPersonID);
         if(!matchPersonID.matches()) {
