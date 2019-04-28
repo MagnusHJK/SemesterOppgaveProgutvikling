@@ -48,10 +48,17 @@ public class ControllerAdmin {
     private ControllerAdminSerialiser controllerAdminSerialiser;
 
     @FXML
-    private Button btnHjemSide;
+    private Tab tabFilbehandling;
 
     @FXML
-    private Button btnTest;
+    private AnchorPane paneAdminFilbehandling;
+
+    @FXML
+    private ControllerAdminFilbehandling controllerAdminFilbehandling;
+
+    @FXML
+    private Button btnHjemSide;
+
 
 
     @FXML

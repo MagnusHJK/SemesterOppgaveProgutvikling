@@ -39,7 +39,7 @@
                     </rowConstraints>
                     <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Kontaktperson" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="204.0" text="Type" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="204.0" text="Lokale" GridPane.rowIndex="2" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="202.0" text="Navn" GridPane.rowIndex="3" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="205.0" text="Artist" GridPane.rowIndex="4" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Sted" GridPane.rowIndex="5" />
