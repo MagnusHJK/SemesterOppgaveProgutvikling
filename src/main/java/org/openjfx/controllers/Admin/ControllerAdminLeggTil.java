@@ -42,10 +42,9 @@ public class ControllerAdminLeggTil {
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
-         choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
 
-        //TODO fikse serialisering
-       // choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
 
 
     }
@@ -148,10 +147,8 @@ public class ControllerAdminLeggTil {
     //Når brukeren velger kategori for elementet
     @FXML
     private void actionLeggTilValg(ActionEvent event){
-        //Element elemValg = new Element();
         String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem();
 
-        //elemValg.elementValg(valg);
 
 
         //TODO Bytte til switch??
@@ -230,11 +227,12 @@ public class ControllerAdminLeggTil {
 
 
     //Når brukeren trykker på "Legg til Kontakt person" knapp
+    //TODO Exceptions
     @FXML
     private void actionLeggTilKontaktperson(ActionEvent event) throws inputException{
         System.out.println("Du har trykket på legg til kontaktperson");
 
-        String kontaktpersonID = textfieldKontaktpersonID.getText();
+        String personID = textfieldKontaktpersonID.getText();
         String fornavn = textfieldFornavnKontakt.getText();
         String etternavn = textfieldEtternavnKontakt.getText();
         String tlf = textfieldTelefonKontakt.getText();
@@ -255,7 +253,7 @@ public class ControllerAdminLeggTil {
             alertbox.feil(inputException.emptyException());
         }
 
-        Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
+        Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
 
         try {
             PersonSerialiser serialiser = new PersonSerialiser();
