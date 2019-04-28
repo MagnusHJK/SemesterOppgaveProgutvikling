@@ -58,6 +58,8 @@ public class Kontaktperson extends Person implements Serializable {
         return this.getFornavn() + " " + this.getEtternavn();
     }
 
+
+
     public static ArrayList<Kontaktperson> lagKontaktpersonListe(){
         ArrayList<Kontaktperson>kontaktpersonListe = new ArrayList<>();
 
