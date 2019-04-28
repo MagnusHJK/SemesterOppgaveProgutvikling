@@ -54,6 +54,7 @@ nbdist/
 
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/libraries
 
 .idea/modules.xml
 .idea/*.iml
