@@ -14,6 +14,7 @@ import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.Lokale.LokaleValidering;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.KontaktpersonValidering;
 import org.openjfx.logic.Person.PersonHåndtering;
@@ -356,7 +357,7 @@ public class ControllerAdminLeggTil {
             String type = lokale.getType();
             int plasser = lokale.getAntallPlasser();
             Lokale etLokale = new Lokale(lokaleID, lokaleNavn, type, plasser);
-            if(KontaktpersonValidering.validerKontaktperson(kontaktperson)) {
+            if(LokaleValidering.validerLokale(etLokale)) {
                 // TODO legg til css hvis vi har tid
             }
         } catch(Exception e) {
