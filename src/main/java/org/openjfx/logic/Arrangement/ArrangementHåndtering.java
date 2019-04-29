@@ -57,7 +57,7 @@ public class ArrangementHåndtering {
         return filtrertListe;
     }
 
-    //Finner info om det arrangementet du trykker på
+    //Finner all info om det arrangementet du trykker på
     public String filtrerArrangementDetaljer(ArrayList<Arrangement> liste, Arrangement arrangement){
         for(Arrangement index : liste){
             if(index.getArrangementID().equals(arrangement.getArrangementID())){

@@ -44,8 +44,6 @@ public class ControllerBlaGjennom {
         kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
         kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
 
-
-
     }
 
     @FXML
@@ -91,19 +89,16 @@ public class ControllerBlaGjennom {
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
         //TODO fikse exceptions etter serialiserings id-ene er fikset
-        /*
+
+        //Sjekker om det valgte lokalet har noen arrangementer som bruker dette lokalet.
         try {
-            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(),lokale));
-            throw new nullException();
+            tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(), lokale));
         } catch (NullPointerException npe) {
-            alertbox.display(nullException.nullException());
+            //alertbox.display(nullException.nullException());
         } catch (IOException  | ClassNotFoundException cnf) {
             cnf.printStackTrace();
         }
-        */
 
-        // midletidig
-        tabellArrangement.setItems(Arrangement.lagArrangementListe());
     }
 
 
@@ -112,6 +107,9 @@ public class ControllerBlaGjennom {
         Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
+
+        btnKjopSide.setDisable(false);
+
 
 
         //Filtrerer riktig arrangement og setter teksten på labelen til å være informasjon om arrangementet
@@ -140,14 +138,14 @@ public class ControllerBlaGjennom {
     }
 
 
+    //TODO Legg til overføring av objekter
     @FXML
-    private void actionKjopSide(ActionEvent event) throws IOException {
-            try {
-                Arrangement valg = tabellArrangement.getSelectionModel().getSelectedItem();
-                alertbox.godkjent("Du kjøpte:" + valg.getNavn());
-            } catch (RuntimeException e) {
-                alertbox.feil(valgException.valgException());
-            }
+    private void actionKjøpSide(ActionEvent event) throws IOException {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneKjøp.fxml"));
+            paneBlaGjennom.getChildren().setAll(pane);
+        } catch (RuntimeException e) {
+            alertbox.feil(valgException.valgException());
+        }
     }
-
 }

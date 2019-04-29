@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="paneAdmin" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.Admin.ControllerAdmin">
     <children>
-        <MenuBar prefHeight="29.0" prefWidth="900.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
         <TabPane fx:id="tabpaneAdmin" layoutY="29.0" prefHeight="654.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="tabLeggTil" text="Legg til">
@@ -55,9 +24,12 @@
                 <Tab fx:id="tabSerialiser" text="Serialiser">
                     <fx:include fx:id="paneAdminSerialiser" source="sceneAdminSerialiser.fxml" />
                 </Tab>
+            <Tab fx:id="tabFilbehandling" text="Filbehandling">
+                <fx:include fx:id="paneAdminFilbehandling" source="sceneAdminFilbehandling.fxml" />
+            </Tab>
 
             </tabs>
         </TabPane>
-        <Button fx:id="btnHjemSide" layoutX="349.0" layoutY="677.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
+        <Button fx:id="btnHjemSide" layoutX="424.0" layoutY="683.0" mnemonicParsing="false" onAction="#actionHjemSide" text="Hjem" />
     </children>
 </AnchorPane>
