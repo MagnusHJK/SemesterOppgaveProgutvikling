@@ -45,7 +45,7 @@ public class KontaktpersonValidering {
         }
 
         String nettside = kontaktperson.getNettside();
-        Pattern patternNettside = Pattern.compile("^[A-Za-z0-9.-/]{4,30}");
+        Pattern patternNettside = Pattern.compile("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}");
         Matcher matchNettside = patternNettside.matcher(nettside);
         if(!matchNettside.matches()) {
             return false;

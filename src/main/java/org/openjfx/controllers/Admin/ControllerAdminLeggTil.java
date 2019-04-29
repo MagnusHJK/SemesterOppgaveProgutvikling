@@ -10,10 +10,12 @@ import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.KontaktpersonValidering;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
@@ -319,6 +321,48 @@ public class ControllerAdminLeggTil {
 
         }
 
+        // Sjekker om feltene i kontaktperson inneholder gyldige tegn
+        try {
+            String personID = kontaktperson.getPersonID();
+            String fornavn = kontaktperson.getFornavn();
+            String etternavn = kontaktperson.getEtternavn();
+            String tlf = kontaktperson.getTelefon();
+            String epost = kontaktperson.getEpost();
+            String nettside = kontaktperson.getNettside();
+            String virksomhet = kontaktperson.getVirksomhet();
+            String opplysninger = kontaktperson.getOpplysninger();
+            Kontaktperson enKontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
+            if(KontaktpersonValidering.validerKontaktperson(enKontaktperson)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
+        // Sjekker om feltene i arrangement inneholder gyldige tegn
+        try {
+            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            if(ArrangementValidering.valider(etArrangement)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
+        // Sjekker om feltene i lokale inneholder gyldige tegn
+        try {
+            String lokaleID = lokale.getLokaleID();
+            String lokaleNavn = lokale.getNavn();
+            String type = lokale.getType();
+            int plasser = lokale.getAntallPlasser();
+            Lokale etLokale = new Lokale(lokaleID, lokaleNavn, type, plasser);
+            if(KontaktpersonValidering.validerKontaktperson(kontaktperson)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
         // Sjekk om menyene er lik NULL
         try {
             if(kontaktperson == null || lokale == null) {
@@ -366,6 +410,10 @@ public class ControllerAdminLeggTil {
             } catch (IOException | ClassNotFoundException cnf) {
                 cnf.printStackTrace();
             }
+
+
         }
+
+
     }
 }
