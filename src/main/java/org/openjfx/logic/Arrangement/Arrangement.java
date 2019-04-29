@@ -6,7 +6,9 @@ import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Person.Kontaktperson;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Arrangement implements Serializable {
     private String arrangementID;
@@ -15,17 +17,23 @@ public class Arrangement implements Serializable {
     private String navn;              //Navn på hendelse
     private String artist;            //Headliner
     private String sted;              //Lokasjon feks Uttestad
+    private LocalDate dato;
+    private String tidspunkt;
     private String beskrivelse;       //Tekst beskrivelse av arrangement
     private int billettPris;      //Billett pris
     private int billettMaks;      //Maks antall biletter
 
-    public Arrangement(String arrangementID, Kontaktperson kontaktperson, Lokale type, String navn, String artist, String sted, String beskrivelse, int billettPris, int billettMaks) {
+    public Arrangement(String arrangementID, Kontaktperson kontaktperson, Lokale type, String navn, String artist,
+                       String sted, LocalDate dato, String tidspunkt, String beskrivelse, int billettPris, int billettMaks) {
+
         this.arrangementID = arrangementID;
         this.kontaktperson = kontaktperson;
         this.type = type;
         this.navn = navn;
         this.artist = artist;
         this.sted = sted;
+        this.dato = dato;
+        this.tidspunkt = tidspunkt;
         this.beskrivelse = beskrivelse;
         this.billettPris = billettPris;
         this.billettMaks = billettMaks;
@@ -83,6 +91,22 @@ public class Arrangement implements Serializable {
         this.sted = sted;
     }
 
+    public LocalDate getDato() {
+        return dato;
+    }
+
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
+    }
+
+    public String getTidspunkt() {
+        return tidspunkt;
+    }
+
+    public void setTidspunkt(String tidspunkt) {
+        this.tidspunkt = tidspunkt;
+    }
+
     public String getBeskrivelse() {
         return beskrivelse;
     }
@@ -118,11 +142,14 @@ public class Arrangement implements Serializable {
     public static ArrayList<Arrangement> lagArrangementListe(){
         ArrayList<Arrangement>arrangementListe = new ArrayList<>();
 
+        LocalDate dato1 = LocalDate.of(2019,4,20);
+
+
         arrangementListe.add(new Arrangement("adaw2", Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
-                "La La Land", "Emma Stone", "Ottestad", "Sykt bra film.", 100, 69));
+                "La La Land", "Emma Stone", "Ottestad", dato1, "19:00", "Sykt bra film.", 100, 69));
 
         arrangementListe.add(new Arrangement("Dwad3", Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
-                "Cats", "Gunnar", "Ottestad", "Sykt kule katter", 250, 100));
+                "Cats", "Gunnar", "Ottestad", dato1,"20:00", "Sykt kule katter", 250, 100));
 
 
         return arrangementListe;

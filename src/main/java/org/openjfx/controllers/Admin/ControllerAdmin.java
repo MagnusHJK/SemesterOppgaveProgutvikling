@@ -21,6 +21,24 @@ public class ControllerAdmin {
     private TabPane tabpaneAdmin;
 
     @FXML
+    private Tab tabOversikt;
+
+    @FXML
+    private ControllerAdminOversikt controllerAdminOversikt;
+
+    @FXML
+    private AnchorPane paneAdminOversikt;
+
+    @FXML
+    private Tab tabLeggTil;
+
+    @FXML
+    private ControllerAdminLeggTil controllerAdminLeggTil;
+
+    @FXML
+    private AnchorPane paneAdminLeggTil;
+
+    @FXML
     private Tab tabEndre;
 
     @FXML

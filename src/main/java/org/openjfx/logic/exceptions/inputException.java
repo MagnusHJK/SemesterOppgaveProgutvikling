@@ -12,4 +12,6 @@ public class inputException extends Exception{
     }
 
     public static String nullexception() { return "Nedtrekksmenyene er nødt til å være fyllt ut"; }
+
+    public static String validException() { return "Input-feltene må inneholde gyldige tegn"; }
 }
