@@ -17,7 +17,7 @@
                 <Font size="19.0" />
             </font>
         </Label>
-      <Button fx:id="btnSlettElement" alignment="CENTER" disable="true" layoutX="369.0" layoutY="524.0" mnemonicParsing="false" onAction="#actionSlettElement" text="Slett!" />
+      <Button fx:id="btnSlettElement" alignment="CENTER" disable="true" layoutX="423.0" layoutY="524.0" mnemonicParsing="false" onAction="#actionSlettElement" text="Slett!" />
       <ListView fx:id="listLokale" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionLokaleTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
       <ListView fx:id="listKontaktperson" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionKontaktpersonTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
       <ListView fx:id="listArrangement" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionArrangementTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
