@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -19,9 +20,9 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
+        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="140.0" prefHeight="503.0" prefWidth="460.0">
             <children>
-                <GridPane prefHeight="411.0" prefWidth="457.0">
+                <GridPane prefHeight="420.0" prefWidth="457.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="138.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
@@ -33,9 +34,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="79.0" minHeight="50.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="79.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Kontaktperson" GridPane.rowIndex="1" />
@@ -43,27 +46,31 @@
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="202.0" text="Navn" GridPane.rowIndex="3" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="205.0" text="Artist" GridPane.rowIndex="4" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Sted" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="8" />
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="7" />
-                        <TextArea fx:id="textfieldBeskrivelseArr" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="210.0" text="Billettpris" GridPane.rowIndex="8" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="209.0" text="Beskrivelse" GridPane.rowIndex="10" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Maks billetter" GridPane.rowIndex="9" />
+                        <TextArea fx:id="textfieldBeskrivelseArr" prefHeight="48.0" prefWidth="259.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                         <ChoiceBox fx:id="choiceTypeArr" prefHeight="26.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="textfieldNavnArr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="textfieldArtistArr" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="textfieldStedArr" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField fx:id="textfieldBillettprisArr" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextField fx:id="textfieldMaksBilletterArr" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="textfieldStedArr" promptText="Ottestad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="textfieldBillettprisArr" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="textfieldMaksBilletterArr" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <ChoiceBox fx:id="choiceKontaktpersonArr" prefHeight="26.0" prefWidth="262.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="241.0" text="ArrangementID (unik)" />
                         <TextField fx:id="textfieldArrangementID" GridPane.columnIndex="1" />
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="225.0" text="Dato" GridPane.rowIndex="6" />
+                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="208.0" text="Tidspunkt" GridPane.rowIndex="7" />
+                  <DatePicker fx:id="dateDatoArr" prefHeight="26.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="textfieldTidspunktArr" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="418.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
+                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="452.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
             </children>
         </Pane>
         <ChoiceBox fx:id="choiceLeggTillValg" layoutX="300.0" layoutY="86.0" prefWidth="150.0" />
         <Button fx:id="btnLeggTilValg" layoutX="566.0" layoutY="86.0" mnemonicParsing="false" onAction="#actionLeggTilValg" text="Velg" />
-        <Pane fx:id="paneLokale" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
+        <Pane fx:id="paneLokale" layoutX="230.0" layoutY="140.0" prefHeight="450.0" prefWidth="460.0" visible="false">
             <children>
                 <GridPane layoutX="-1.0" layoutY="-1.0" prefHeight="359.0" prefWidth="462.0">
                     <columnConstraints>
@@ -88,10 +95,10 @@
                         <TextField fx:id="textfieldPlasserLokale" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
                 </GridPane>
-                <Button layoutX="174.0" layoutY="374.0" mnemonicParsing="false" onAction="#actionLeggTilLokale" text="Legg til Lokale" />
+                <Button layoutX="174.0" layoutY="386.0" mnemonicParsing="false" onAction="#actionLeggTilLokale" text="Legg til Lokale" />
             </children>
         </Pane>
-        <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="160.0" prefHeight="450.0" prefWidth="460.0" visible="false">
+        <Pane fx:id="paneKontaktperson" layoutX="230.0" layoutY="140.0" prefHeight="450.0" prefWidth="460.0" visible="false">
             <children>
                 <GridPane prefHeight="392.0" prefWidth="460.0">
                     <columnConstraints>

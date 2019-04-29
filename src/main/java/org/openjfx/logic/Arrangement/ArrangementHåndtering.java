@@ -65,8 +65,9 @@ public class ArrangementHåndtering {
                 return "Tittel: " + arrangement.getNavn() + "\n" +
                        "Artist: " + arrangement.getArtist() + "\n" +
                        "Sted: " + arrangement.getSted() + " " + arrangement.getType() +"\n" +
+                       "Dato/Tid: " + arrangement.getDato() + " - " + arrangement.getTidspunkt() + "\n" +
                        "Pris: " + arrangement.getBillettPris() + "\n" +
-                       "Antall Billetter: " + arrangement.getBillettMaks() + "\n" +
+                       "Maks Billetter: " + arrangement.getBillettMaks() + "\n" +
                        "Beskrivelse: " + arrangement.getBeskrivelse() + "\n";
             }
         }
