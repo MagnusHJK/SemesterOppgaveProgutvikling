@@ -10,10 +10,13 @@ import javafx.scene.layout.Pane;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.Lokale.LokaleValidering;
 import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.KontaktpersonValidering;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
@@ -202,6 +205,16 @@ public class ControllerAdminLeggTil {
             alertbox.feil(inputException.emptyException());
         }
 
+        try {
+            String plasserString = Integer.toString(plasser);
+            if(lokaleID.matches("^[0-9]{1,30}$") || navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$")
+                    || type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$") || plasserString.matches("^[0-9]$")){
+
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
         //Prøver å konvertere plasser til int
         try{
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
@@ -329,6 +342,48 @@ public class ControllerAdminLeggTil {
 
         }
 
+        // Sjekker om feltene i kontaktperson inneholder gyldige tegn
+        try {
+            String personID = kontaktperson.getPersonID();
+            String fornavn = kontaktperson.getFornavn();
+            String etternavn = kontaktperson.getEtternavn();
+            String tlf = kontaktperson.getTelefon();
+            String epost = kontaktperson.getEpost();
+            String nettside = kontaktperson.getNettside();
+            String virksomhet = kontaktperson.getVirksomhet();
+            String opplysninger = kontaktperson.getOpplysninger();
+            Kontaktperson enKontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
+            if(KontaktpersonValidering.validerKontaktperson(enKontaktperson)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
+        // Sjekker om feltene i arrangement inneholder gyldige tegn
+        try {
+            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            if(ArrangementValidering.valider(etArrangement)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
+        // Sjekker om feltene i lokale inneholder gyldige tegn
+        try {
+            String lokaleID = lokale.getLokaleID();
+            String lokaleNavn = lokale.getNavn();
+            String type = lokale.getType();
+            int plasser = lokale.getAntallPlasser();
+            Lokale etLokale = new Lokale(lokaleID, lokaleNavn, type, plasser);
+            if(LokaleValidering.validerLokale(etLokale)) {
+                // TODO legg til css hvis vi har tid
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
         // Sjekk om menyene er lik NULL
         try {
             if(kontaktperson == null || lokale == null) {
@@ -377,6 +432,10 @@ public class ControllerAdminLeggTil {
             } catch (IOException | ClassNotFoundException cnf) {
                 cnf.printStackTrace();
             }
+
+
         }
+
+
     }
 }
