@@ -55,7 +55,8 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {
-            alertbox.feil("En feil oppstod");
+            alertbox.feil("En feil oppstod t");
+            e.printStackTrace();
         }
     }
 

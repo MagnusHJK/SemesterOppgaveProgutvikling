@@ -48,7 +48,7 @@ public class ControllerAdminEndre{
     @FXML
     private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
 
-    private void endreInnhold (ActionEvent event) throws Exception {
+    public void endreInnhold (ActionEvent event) throws Exception {
 
         LokaleHåndtering lokaler = new LokaleHåndtering();
         LokaleSerialiser serialiser = new LokaleSerialiser();
