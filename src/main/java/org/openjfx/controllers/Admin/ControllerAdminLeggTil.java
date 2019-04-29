@@ -22,7 +22,9 @@ import org.openjfx.logic.exceptions.inputException;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ControllerAdminLeggTil {
 
@@ -81,6 +83,12 @@ public class ControllerAdminLeggTil {
 
     @FXML
     private TextField textfieldStedArr;
+
+    @FXML
+    private DatePicker dateDatoArr;
+
+    @FXML
+    private TextField textfieldTidspunktArr;
 
     @FXML
     private TextField textfieldBillettprisArr;
@@ -298,6 +306,8 @@ public class ControllerAdminLeggTil {
         String navn = textfieldNavnArr.getText();
         String artist = textfieldArtistArr.getText();
         String sted = textfieldStedArr.getText();
+        LocalDate dato = dateDatoArr.getValue();
+        String tidspunkt = textfieldTidspunktArr.getText();
         String beskrivelse = textfieldBeskrivelseArr.getText();
         int billettPris = 0;
         int billettMaks = 0;
@@ -344,11 +354,12 @@ public class ControllerAdminLeggTil {
         if(!ok) {
 
         } else {
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks);
             textfieldArrangementID.clear();
             textfieldNavnArr.clear();
             textfieldArtistArr.clear();
             textfieldStedArr.clear();
+            textfieldTidspunktArr.clear();
             textfieldBillettprisArr.clear();
             textfieldMaksBilletterArr.clear();
             textfieldBeskrivelseArr.clear();
