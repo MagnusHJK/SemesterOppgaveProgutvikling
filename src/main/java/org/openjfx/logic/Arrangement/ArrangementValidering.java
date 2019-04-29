@@ -19,35 +19,35 @@ public class ArrangementValidering {
         String navn = arrangement.getNavn();
         Pattern patternNavn = Pattern.compile("^[A-ZÆØÅa-zæøå ]{2,30}$");
         Matcher matchNavn = patternNavn.matcher(navn);
-        if(!matchNavn.matches()) {
-            return false;
+        if(matchNavn.matches()) {
+            return true;
 
         }
         String artist = arrangement.getArtist();
         Matcher matchArtist = patternNavn.matcher(artist);
-        if(!matchArtist.matches()) {
-            return false;
+        if(matchArtist.matches()) {
+            return true;
         }
         String sted = arrangement.getSted();
         Pattern patternSted = Pattern.compile("^[A-ZÆØÅa-zæøå ]{2,30}$");
         Matcher matchSted = patternSted.matcher(sted);
-        if(!matchSted.matches()) {
-            return false;
+        if(matchSted.matches()) {
+            return true;
         }
         String beskrivelse = arrangement.getBeskrivelse();
         Pattern patternBeskrivelse = Pattern.compile("^[A-ZÆØÅa-zæøå0-9 ./-]");
         Matcher matchBeskrivelse = patternBeskrivelse.matcher(beskrivelse);
-        if(!matchBeskrivelse.matches()) {
-            return false;
+        if(matchBeskrivelse.matches()) {
+            return true;
         }
         int billettPris = arrangement.getBillettPris();
         String prisSomString = Integer.toString(billettPris);
         Pattern patternBillettPris = Pattern.compile("^[0-9.]");
         Matcher matchBillettPris = patternBillettPris.matcher(prisSomString);
-        if(!matchBillettPris.matches()) {
-            return false;
+        if(matchBillettPris.matches()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 
