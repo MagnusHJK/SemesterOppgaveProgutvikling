@@ -197,6 +197,16 @@ public class ControllerAdminLeggTil {
             alertbox.feil(inputException.emptyException());
         }
 
+        try {
+            String plasserString = Integer.toString(plasser);
+            if(lokaleID.matches("^[0-9]{1,30}$") || navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$")
+                    || type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$") || plasserString.matches("^[0-9]$")){
+
+            }
+        } catch(Exception e) {
+            alertbox.feil(inputException.validException());
+        }
+
         //Prøver å konvertere plasser til int
         try{
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
