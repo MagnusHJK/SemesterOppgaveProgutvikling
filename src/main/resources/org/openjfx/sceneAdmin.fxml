@@ -9,6 +9,9 @@
     <children>
         <TabPane fx:id="tabpaneAdmin" layoutY="29.0" prefHeight="654.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
+            <Tab fx:id="tabOversikt" text="Adminastriv Oversikt">
+                <fx:include fx:id="paneAdminOversikt" source="sceneAdminOversikt.fxml" />
+            </Tab>
                 <Tab fx:id="tabLeggTil" text="Legg til">
                     <fx:include fx:id="paneAdminLeggTil" source="sceneAdminLeggTil.fxml" />
                 </Tab>
