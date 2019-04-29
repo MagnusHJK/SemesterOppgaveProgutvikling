@@ -204,6 +204,10 @@ public class ControllerAdminLeggTil {
 
 
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+        textfieldLokaleID.clear();
+        textfieldNavnLokale.clear();
+        textfieldTypeLokale.clear();
+        textfieldPlasserLokale.clear();
 
         try{
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
@@ -254,6 +258,14 @@ public class ControllerAdminLeggTil {
         }
 
         Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
+        textfieldKontaktpersonID.clear();
+        textfieldFornavnKontakt.clear();
+        textfieldEtternavnKontakt.clear();
+        textfieldTelefonKontakt.clear();
+        textfieldEpostKontakt.clear();
+        textfieldNettsideKontakt.clear();
+        textfieldVirksomhetKontakt.clear();
+        textareaOpplysningerKontakt.clear();
 
         try {
             PersonSerialiser serialiser = new PersonSerialiser();
@@ -322,8 +334,8 @@ public class ControllerAdminLeggTil {
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-            ok = false;
-            throw new inputException();
+            //ok = false;
+           // throw new inputException();
         } catch(NumberFormatException nfe){
             alertbox.feil(inputException.intException());
 
@@ -333,6 +345,13 @@ public class ControllerAdminLeggTil {
 
         } else {
             Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            textfieldArrangementID.clear();
+            textfieldNavnArr.clear();
+            textfieldArtistArr.clear();
+            textfieldStedArr.clear();
+            textfieldBillettprisArr.clear();
+            textfieldMaksBilletterArr.clear();
+            textfieldBeskrivelseArr.clear();
 
             try {
                 //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
