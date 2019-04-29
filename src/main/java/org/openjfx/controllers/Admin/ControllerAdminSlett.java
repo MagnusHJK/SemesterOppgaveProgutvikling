@@ -149,7 +149,11 @@ public class ControllerAdminSlett {
             håndtering.slettPerson(kontaktperson);
 
         }else if(valg.equals("Arrangement")){
+            ArrangementHåndtering håndtering = new ArrangementHåndtering();
+
             Arrangement arrangement = listArrangement.getSelectionModel().getSelectedItem();
+
+            håndtering.slettArrangement(arrangement);
         }
         else{
             System.out.println("Du må velge noe");
