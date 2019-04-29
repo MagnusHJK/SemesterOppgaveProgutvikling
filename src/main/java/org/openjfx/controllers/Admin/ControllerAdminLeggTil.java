@@ -362,7 +362,7 @@ public class ControllerAdminLeggTil {
 
         // Sjekker om feltene i arrangement inneholder gyldige tegn
         try {
-            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks);
             if(ArrangementValidering.valider(etArrangement)) {
                 // TODO legg til css hvis vi har tid
             }
