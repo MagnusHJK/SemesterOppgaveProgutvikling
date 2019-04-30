@@ -205,14 +205,20 @@ public class ControllerAdminLeggTil {
             alertbox.feil(inputException.emptyException());
         }
 
+        // Validerer input-feltene til lokale
         try {
-            String plasserString = Integer.toString(plasser);
-            if(lokaleID.matches("^[0-9]{1,30}$") || navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$")
-                    || type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$") || plasserString.matches("^[0-9]$")){
-
+            if (!(lokaleID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("LokaleID må bestå av kun tall");
+                return;
+            } else if (!(navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Navn har ugyldige tegn. Gyldige tegn er: A-Å, a-å, -");
+                return;
+            } else if (!(type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$"))) {
+                alertbox.feil("Type har ugyldige tegn. Gyldige tegn er: A-Å, a-å, 0-9, -");
+                return;
             }
-        } catch(Exception e) {
-            alertbox.feil(inputException.validException());
+        } catch (Exception e) {
+
         }
 
         //Prøver å konvertere plasser til int
@@ -276,6 +282,37 @@ public class ControllerAdminLeggTil {
             }
         } catch (inputException ie) {
             alertbox.feil(inputException.emptyException());
+        }
+
+        // Validerer input-feltene til kontaktperson
+        try {
+            if (!(personID.matches("^[0-9]{1,10}$"))) {
+                alertbox.feil("Person ID inneholder ugyldige tegn.");
+                return;
+            } else if (!(fornavn.matches("^[A-ZÆØÅa-zæøå -]{2,20}$"))) {
+                alertbox.feil("Fornavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(etternavn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Etternavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(tlf.matches("^[0-9]{8}$"))) {
+                alertbox.feil("Telefon inneholder ugyldige tegn.");
+                return;
+            } else if (!(epost.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"))) {
+                alertbox.feil("Epost inneholder ugyldige tegn.");
+                return;
+            } else if (!(nettside.matches("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}"))) {
+                alertbox.feil("Nettside inneholder ugyldige tegn.");
+                return;
+            } else if (!(virksomhet.matches("^[A-Za-z ]{4,30}"))) {
+                alertbox.feil("Virksomhet inneholder ugyldige tegn.");
+                return;
+            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,30}"))) {
+                alertbox.feil("Opplysninger inneholder ugyldige tegn.");
+                return;
+            }
+        } catch (Exception e) {
+
         }
 
         Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
@@ -342,46 +379,26 @@ public class ControllerAdminLeggTil {
 
         }
 
-        // Sjekker om feltene i kontaktperson inneholder gyldige tegn
+        // Validerer input-feltene til arrangement
         try {
-            String personID = kontaktperson.getPersonID();
-            String fornavn = kontaktperson.getFornavn();
-            String etternavn = kontaktperson.getEtternavn();
-            String tlf = kontaktperson.getTelefon();
-            String epost = kontaktperson.getEpost();
-            String nettside = kontaktperson.getNettside();
-            String virksomhet = kontaktperson.getVirksomhet();
-            String opplysninger = kontaktperson.getOpplysninger();
-            Kontaktperson enKontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
-            if(KontaktpersonValidering.validerKontaktperson(enKontaktperson)) {
-                // TODO legg til css hvis vi har tid
+            if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("ArrangementID inneholder ugyldige tegn.");
+                return;
+            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(sted.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9 ./-]"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
             }
-        } catch(Exception e) {
-            alertbox.feil(inputException.validException());
-        }
-
-        // Sjekker om feltene i arrangement inneholder gyldige tegn
-        try {
-            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
-            if(ArrangementValidering.valider(etArrangement)) {
-                // TODO legg til css hvis vi har tid
-            }
-        } catch(Exception e) {
-            alertbox.feil(inputException.validException());
-        }
-
-        // Sjekker om feltene i lokale inneholder gyldige tegn
-        try {
-            String lokaleID = lokale.getLokaleID();
-            String lokaleNavn = lokale.getNavn();
-            String type = lokale.getType();
-            int plasser = lokale.getAntallPlasser();
-            Lokale etLokale = new Lokale(lokaleID, lokaleNavn, type, plasser);
-            if(LokaleValidering.validerLokale(etLokale)) {
-                // TODO legg til css hvis vi har tid
-            }
-        } catch(Exception e) {
-            alertbox.feil(inputException.validException());
+        } catch (Exception e) {
+            
         }
 
         // Sjekk om menyene er lik NULL
