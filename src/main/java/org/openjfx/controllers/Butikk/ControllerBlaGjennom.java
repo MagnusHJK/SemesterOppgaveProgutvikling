@@ -40,9 +40,11 @@ public class ControllerBlaGjennom {
 
         //Sier hva hver kolonne i Arrangement valget skal fylles med
         kolonneArrangementNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
-        kolonneArrangementType.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("type"));
-        kolonneArrangementKjendis.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("artist"));
+        kolonneArrangementBillettMaks.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettMaks"));
         kolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
+        kolonneArrangementDato.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("dato"));
+        kolonneArrangementTidspunkt.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("tidspunkt"));
+
 
     }
 
@@ -56,13 +58,16 @@ public class ControllerBlaGjennom {
     private TableColumn<Arrangement, String> kolonneArrangementNavn;
 
     @FXML
-    private TableColumn<Arrangement, String> kolonneArrangementType;
-
-    @FXML
-    private TableColumn<Arrangement, String> kolonneArrangementKjendis;
+    private TableColumn<Arrangement, String> kolonneArrangementBillettMaks;
 
     @FXML
     private TableColumn<Arrangement, String> kolonneArrangementPris;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementDato;
+
+    @FXML
+    private TableColumn<Arrangement, String> kolonneArrangementTidspunkt;
 
     @FXML
     private Label lblArrangementDetaljer;
@@ -138,14 +143,24 @@ public class ControllerBlaGjennom {
     }
 
 
-    //TODO Legg til overføring av objekter
+    //Sjekker om et Arrangement er valgt, så henter den Controller fra neste side og kjører metode for å overføre-
+    //Arrangement objekt til neste Scene
     @FXML
     private void actionKjøpSide(ActionEvent event) throws IOException {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/openjfx/sceneKjøp.fxml"));
-            paneBlaGjennom.getChildren().setAll(pane);
-        } catch (RuntimeException e) {
-            alertbox.feil(valgException.valgException());
+        if(tabellArrangement.getSelectionModel().getSelectedItem() != null){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/org/openjfx/sceneKjøp.fxml"));
+                AnchorPane pane = loader.load();
+
+                Arrangement arrangement = tabellArrangement.getSelectionModel().getSelectedItem();
+                ControllerKjøp controllerKjøp = loader.getController();
+                controllerKjøp.arrangementHenter(arrangement);
+
+                paneBlaGjennom.getChildren().setAll(pane);
+            } catch (RuntimeException e) {
+                alertbox.feil(valgException.valgException());
+            }
         }
     }
 }
