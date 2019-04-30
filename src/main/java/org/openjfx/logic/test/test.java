@@ -35,9 +35,9 @@ public class test {
         System.out.println(testLokale.lesArrayFraFil());
 
 
-        PersonSerialiser testPerson = new PersonSerialiser();
-        testPerson.skrivArrayTilFil(Kontaktperson.lagKontaktpersonListe());
-        System.out.println(testPerson.lesArrayFraFil());
+       // PersonSerialiser testPerson = new PersonSerialiser();
+       // testPerson.skrivArrayTilFil(Kontaktperson.lagKontaktpersonListe());
+       // System.out.println(testPerson.lesArrayFraFil());
 
 
 
