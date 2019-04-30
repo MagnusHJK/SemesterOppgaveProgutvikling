@@ -7,18 +7,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
-import org.openjfx.logic.Filhåndtering.csvFil;
-import org.openjfx.logic.Filhåndtering.skrivTilCsv;
-import org.openjfx.logic.Filhåndtering.skrivTilFil;
+import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.Lokale.LokaleValidering;
 import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.KontaktpersonValidering;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
@@ -26,10 +24,10 @@ import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ControllerAdminLeggTil {
 
@@ -49,10 +47,9 @@ public class ControllerAdminLeggTil {
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
 
-         choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+        choiceTypeArr.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
 
-        //TODO fikse serialisering
-       // choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+        choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
 
 
     }
@@ -89,6 +86,12 @@ public class ControllerAdminLeggTil {
 
     @FXML
     private TextField textfieldStedArr;
+
+    @FXML
+    private DatePicker dateDatoArr;
+
+    @FXML
+    private TextField textfieldTidspunktArr;
 
     @FXML
     private TextField textfieldBillettprisArr;
@@ -155,10 +158,8 @@ public class ControllerAdminLeggTil {
     //Når brukeren velger kategori for elementet
     @FXML
     private void actionLeggTilValg(ActionEvent event){
-        //Element elemValg = new Element();
         String valg = choiceLeggTillValg.getSelectionModel().getSelectedItem();
 
-        //elemValg.elementValg(valg);
 
 
         //TODO Bytte til switch??
@@ -191,65 +192,65 @@ public class ControllerAdminLeggTil {
         String navn = textfieldNavnLokale.getText();
         String type = textfieldTypeLokale.getText();
         int plasser = 0;
-        boolean ok = true;
 
-        //TODO Legge til mer inputvalidering
+
 
         // Sjekker om input feltene er tomme
         try {
             if(lokaleID.isEmpty() || navn.isEmpty() ||
             type.isEmpty()) {
-                ok = false;
                 throw new inputException();
             }
         } catch (inputException ie) {
-           // alertbox.feil(inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
+        }
+
+        // Validerer input-feltene til lokale
+        try {
+            if (!(lokaleID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("LokaleID må bestå av kun tall");
+                return;
+            } else if (!(navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Navn har ugyldige tegn. Gyldige tegn er: A-Å, a-å, -");
+                return;
+            } else if (!(type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$"))) {
+                alertbox.feil("Type har ugyldige tegn. Gyldige tegn er: A-Å, a-å, 0-9, -");
+                return;
+            }
+        } catch (Exception e) {
+
         }
 
         //Prøver å konvertere plasser til int
         try{
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
+
         } catch(NumberFormatException nfe){
-            ok = false;
-            //alertbox.feil("Antall plasser er nødt til å være heltall.");
-        }
-
-        if(!ok) {
-            alertbox.feil("Noe gikk galt, prøv på nytt!");
-        } else {
-            Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
-
-
-
-            try{
-                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-                LokaleSerialiser serialiser = new LokaleSerialiser();
-                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
-
-                liste.add(lokale);
-                System.out.println(liste);
-
-                serialiser.skrivArrayTilFil(liste);
-
-                //TODO fikse lagring til fil
-                // Lagre på fil
-                Stage stage = new Stage();
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-                File selectedFile = fileChooser.showOpenDialog(stage);
-                String path = selectedFile.getPath();
-
-                skrivTilFil skriv = new skrivTilCsv();
-                skriv.LokaleTilCsv(lokale.lagLokaleList(), path);
-                // Lagre på fil slutt
-
-            } catch(IOException | ClassNotFoundException cnf){
-                cnf.printStackTrace();
-            }
+            alertbox.feil("Antall plasser er nødt til å være heltall.");
         }
 
 
+        Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+        textfieldLokaleID.clear();
+        textfieldNavnLokale.clear();
+        textfieldTypeLokale.clear();
+        textfieldPlasserLokale.clear();
 
+        try{
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            LokaleSerialiser serialiser = new LokaleSerialiser();
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+            liste.add(lokale);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
 
     }
 
@@ -257,11 +258,12 @@ public class ControllerAdminLeggTil {
 
 
     //Når brukeren trykker på "Legg til Kontakt person" knapp
+    //TODO Exceptions
     @FXML
     private void actionLeggTilKontaktperson(ActionEvent event) throws inputException{
         System.out.println("Du har trykket på legg til kontaktperson");
 
-        String kontaktpersonID = textfieldKontaktpersonID.getText();
+        String personID = textfieldKontaktpersonID.getText();
         String fornavn = textfieldFornavnKontakt.getText();
         String etternavn = textfieldEtternavnKontakt.getText();
         String tlf = textfieldTelefonKontakt.getText();
@@ -269,8 +271,6 @@ public class ControllerAdminLeggTil {
         String nettside = textfieldNettsideKontakt.getText();
         String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
-        boolean ok = true;
-
 
         // Sjekk om feltene er tomme
         try {
@@ -278,30 +278,66 @@ public class ControllerAdminLeggTil {
             tlf.isEmpty() || epost.isEmpty() ||
             nettside.isEmpty() || virksomhet.isEmpty() ||
             opplysninger.isEmpty()) {
-                ok = false;
                 throw new inputException();
             }
         } catch (inputException ie) {
             alertbox.feil(inputException.emptyException());
         }
 
-        if(!ok) {
-            alertbox.feil("Noe gikk galt, prøv på nytt!");
-        } else {
-            Kontaktperson kontaktperson = new Kontaktperson(fornavn, etternavn, tlf, kontaktpersonID, epost, nettside, virksomhet, opplysninger);
-
-            try {
-                PersonSerialiser serialiser = new PersonSerialiser();
-                ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
-
-                liste.add(kontaktperson);
-                System.out.println(liste);
-
-                serialiser.skrivArrayTilFil(liste);
-
-            } catch (IOException | ClassNotFoundException cnf) {
-                cnf.printStackTrace();
+        // Validerer input-feltene til kontaktperson
+        try {
+            if (!(personID.matches("^[0-9]{1,10}$"))) {
+                alertbox.feil("Person ID inneholder ugyldige tegn.");
+                return;
+            } else if (!(fornavn.matches("^[A-ZÆØÅa-zæøå -]{2,20}$"))) {
+                alertbox.feil("Fornavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(etternavn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Etternavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(tlf.matches("^[0-9]{8}$"))) {
+                alertbox.feil("Telefon inneholder ugyldige tegn.");
+                return;
+            } else if (!(epost.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"))) {
+                alertbox.feil("Epost inneholder ugyldige tegn.");
+                return;
+            } else if (!(nettside.matches("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}"))) {
+                alertbox.feil("Nettside inneholder ugyldige tegn.");
+                return;
+            } else if (!(virksomhet.matches("^[A-Za-z ]{4,30}"))) {
+                alertbox.feil("Virksomhet inneholder ugyldige tegn.");
+                return;
+            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,30}"))) {
+                alertbox.feil("Opplysninger inneholder ugyldige tegn.");
+                return;
             }
+        } catch (Exception e) {
+
+        }
+
+        Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
+        textfieldKontaktpersonID.clear();
+        textfieldFornavnKontakt.clear();
+        textfieldEtternavnKontakt.clear();
+        textfieldTelefonKontakt.clear();
+        textfieldEpostKontakt.clear();
+        textfieldNettsideKontakt.clear();
+        textfieldVirksomhetKontakt.clear();
+        textareaOpplysningerKontakt.clear();
+
+        try {
+            PersonSerialiser serialiser = new PersonSerialiser();
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+
+            liste.add(kontaktperson);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
         }
 
     }
@@ -320,8 +356,9 @@ public class ControllerAdminLeggTil {
         String navn = textfieldNavnArr.getText();
         String artist = textfieldArtistArr.getText();
         String sted = textfieldStedArr.getText();
+        LocalDate dato = dateDatoArr.getValue();
+        String tidspunkt = textfieldTidspunktArr.getText();
         String beskrivelse = textfieldBeskrivelseArr.getText();
-        LocalDate dato1 = LocalDate.of(2019,4,20);
         int billettPris = 0;
         int billettMaks = 0;
         boolean ok = true;
@@ -338,8 +375,30 @@ public class ControllerAdminLeggTil {
             }
 
         } catch (inputException ie) {
-           // alertbox.feil(inputException.emptyException());
+            alertbox.feil(inputException.emptyException());
 
+        }
+
+        // Validerer input-feltene til arrangement
+        try {
+            if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("ArrangementID inneholder ugyldige tegn.");
+                return;
+            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(sted.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9 ./-]"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            }
+        } catch (Exception e) {
+            
         }
 
         // Sjekk om menyene er lik NULL
@@ -349,7 +408,7 @@ public class ControllerAdminLeggTil {
                 throw new NullPointerException();
             }
         } catch(NullPointerException npe) {
-           // alertbox.feil(inputException.nullexception());
+            alertbox.feil(inputException.nullexception());
 
         }
 
@@ -357,17 +416,25 @@ public class ControllerAdminLeggTil {
         try{
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-            ok = false;
-            throw new inputException();
+            //ok = false;
+           // throw new inputException();
         } catch(NumberFormatException nfe){
-           // alertbox.feil(inputException.intException());
+            alertbox.feil(inputException.intException());
 
         }
 
         if(!ok) {
-            alertbox.feil("Noe gikk galt, prøv på nytt");
+
         } else {
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato1, "19:00", beskrivelse, billettPris, billettMaks);
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks);
+            textfieldArrangementID.clear();
+            textfieldNavnArr.clear();
+            textfieldArtistArr.clear();
+            textfieldStedArr.clear();
+            textfieldTidspunktArr.clear();
+            textfieldBillettprisArr.clear();
+            textfieldMaksBilletterArr.clear();
+            textfieldBeskrivelseArr.clear();
 
             try {
                 //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
@@ -382,6 +449,10 @@ public class ControllerAdminLeggTil {
             } catch (IOException | ClassNotFoundException cnf) {
                 cnf.printStackTrace();
             }
+
+
         }
+
+
     }
 }
