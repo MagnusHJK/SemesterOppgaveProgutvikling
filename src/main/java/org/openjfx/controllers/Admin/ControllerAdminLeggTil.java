@@ -11,6 +11,7 @@ import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Arrangement.ArrangementValidering;
+import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -381,7 +382,10 @@ public class ControllerAdminLeggTil {
 
         // Validerer input-feltene til arrangement
         try {
-            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks);
+            Billett[] salg = new Billett[0];
+            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted,
+                                                        dato, tidspunkt, beskrivelse, billettPris, billettMaks, salg);
+
             if(ArrangementValidering.valider(etArrangement)) {
                 // TODO legg til css hvis vi har tid
             if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
@@ -400,6 +404,7 @@ public class ControllerAdminLeggTil {
                 alertbox.feil("Navn inneholder ugyldige tegn.");
                 return;
             }
+        }
         } catch (Exception e) {
 
         }
@@ -429,7 +434,10 @@ public class ControllerAdminLeggTil {
         if(!ok) {
 
         } else {
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks);
+            Billett[] salg = new Billett[billettMaks];
+
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted,
+                                                      dato, tidspunkt, beskrivelse, billettPris, billettMaks, salg);
             textfieldArrangementID.clear();
             textfieldNavnArr.clear();
             textfieldArtistArr.clear();

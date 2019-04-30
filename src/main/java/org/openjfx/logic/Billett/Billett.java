@@ -2,19 +2,75 @@ package org.openjfx.logic.Billett;
 
 import org.openjfx.logic.Arrangement.Arrangement;
 
+import java.time.LocalDate;
+
 public class Billett {
     Arrangement arrangement;
-    String plassnummer;
+    int plassnummer;
     String lokale;
-    String Dato;
+    LocalDate dato;
     String tidspunkt;
     String telefonnr;
 
+    public Billett(Arrangement arrangement, int plassnummer, String lokale, LocalDate dato, String tidspunkt, String telefonnr) {
+        this.arrangement = arrangement;
+        this.plassnummer = plassnummer;
+        this.lokale = lokale;
+        this.dato = dato;
+        this.tidspunkt = tidspunkt;
+        this.telefonnr = telefonnr;
+    }
 
-    //Finner en ledig plass til personen
-    public String finnPlassnummer(Arrangement arrangement){
-        int maks = arrangement.getBillettMaks();
+    public Arrangement getArrangement() {
+        return arrangement;
+    }
 
-        return "";
+    public void setArrangement(Arrangement arrangement) {
+        this.arrangement = arrangement;
+    }
+
+    public int getPlassnummer() {
+        return plassnummer;
+    }
+
+    public void setPlassnummer(int plassnummer) {
+        this.plassnummer = plassnummer;
+    }
+
+    public String getLokale() {
+        return lokale;
+    }
+
+    public void setLokale(String lokale) {
+        this.lokale = lokale;
+    }
+
+    public LocalDate getDato() {
+        return dato;
+    }
+
+    public void setDato(LocalDate dato) {
+        this.dato = dato;
+    }
+
+    public String getTidspunkt() {
+        return tidspunkt;
+    }
+
+    public void setTidspunkt(String tidspunkt) {
+        this.tidspunkt = tidspunkt;
+    }
+
+    public String getTelefonnr() {
+        return telefonnr;
+    }
+
+    public void setTelefonnr(String telefonnr) {
+        this.telefonnr = telefonnr;
+    }
+
+    @Override
+    public String toString(){
+        return "Plass: " + this.getPlassnummer() + " " + this.getDato() + " - " + this.getTidspunkt();
     }
 }
