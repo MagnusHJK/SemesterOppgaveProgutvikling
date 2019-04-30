@@ -7,9 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Filhåndtering.csvFil;
+import org.openjfx.logic.Filhåndtering.skrivTilCsv;
+import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -21,6 +26,7 @@ import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -213,6 +219,8 @@ public class ControllerAdminLeggTil {
         } else {
             Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
 
+
+
             try{
                 //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
                 LokaleSerialiser serialiser = new LokaleSerialiser();
@@ -222,6 +230,18 @@ public class ControllerAdminLeggTil {
                 System.out.println(liste);
 
                 serialiser.skrivArrayTilFil(liste);
+
+                //TODO fikse lagring til fil
+                // Lagre på fil
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
+
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.LokaleTilCsv(lokale.lagLokaleList(), path);
+                // Lagre på fil slutt
 
             } catch(IOException | ClassNotFoundException cnf){
                 cnf.printStackTrace();
