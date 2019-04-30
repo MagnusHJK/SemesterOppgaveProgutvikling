@@ -76,6 +76,7 @@ public class ControllerKjøp {
 
         int plassnummer = 0;
         String telefonnummer = textfieldTelefon.getText();
+        String billettTekst = "";
 
         for(int i = 0; i < antallBilletter; i++){
             plassnummer = håndtering.finnPlassnummer(valgtArrangement);
@@ -84,9 +85,13 @@ public class ControllerKjøp {
                                           valgtArrangement.getDato(), valgtArrangement.getTidspunkt(), telefonnummer);
 
             valgtArrangement.getSalg()[plassnummer] = billett;
+
+            billettTekst += valgtArrangement.getSalg()[plassnummer].toString() + "\n";
+
         }
 
-        lblBillettInfo.setText(valgtArrangement.getSalg()[plassnummer].toString());
+        //lblBillettInfo.setText(valgtArrangement.getSalg()[plassnummer].toString());
+        lblBillettInfo.setText("Billett(er) \n" + billettTekst);
 
         //TODO Gjør om til at det legges inn i Billett Array!!
         try{
