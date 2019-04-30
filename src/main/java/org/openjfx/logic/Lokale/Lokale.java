@@ -71,7 +71,6 @@ public class Lokale implements Serializable {
         return lokaleList;
     }
 
-
     public void populerArray(){
 
     }

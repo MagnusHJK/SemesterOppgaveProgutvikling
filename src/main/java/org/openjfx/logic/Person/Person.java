@@ -3,7 +3,7 @@ package org.openjfx.logic.Person;
 
 import java.io.Serializable;
 
-public abstract class Person implements Serializable {
+public class Person implements Serializable {
     private String personID;
     private String fornavn;
     private String etternavn;

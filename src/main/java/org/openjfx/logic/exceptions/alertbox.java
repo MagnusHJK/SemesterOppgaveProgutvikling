@@ -10,15 +10,19 @@ import javafx.geometry.*;
 
 public class alertbox {
 
+
+
     public static void feil (String message) {
         Stage window = new Stage();
+        final int bredde = 500;
+        final int hoyde = 350;
 
         // APPLICATION_MODAL gjør slik at man ikke kan sende input fra andre felter videre før vinduet er lukket.
         window.initModality(Modality.APPLICATION_MODAL);
         String tittel = "Feilmelding";
         window.setTitle(tittel);
-        window.setWidth(400);
-        window.setHeight(250);
+        window.setWidth(bredde);
+        window.setHeight(hoyde);
         // Oppretter et nytt label for å vise message parameteren
         Label label = new Label();
         label.setText(message);
@@ -41,13 +45,15 @@ public class alertbox {
 
     public static void godkjent (String message) {
         Stage window = new Stage();
+        final int bredde = 800;
+        final int hoyde = 350;
 
         // APPLICATION_MODAL gjør slik at man ikke kan sende input fra andre felter videre før vinduet er lukket.
         window.initModality(Modality.APPLICATION_MODAL);
         String tittel = "Godkjent";
         window.setTitle(tittel);
-        window.setWidth(300);
-        window.setHeight(250);
+        window.setWidth(bredde);
+        window.setHeight(hoyde);
         // Oppretter et nytt label for å vise message parameteren
         Label label = new Label();
         label.setText(message);
