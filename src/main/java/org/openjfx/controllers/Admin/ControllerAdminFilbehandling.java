@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.Filhåndtering.fil;
 
+import java.io.IOException;
+
 public class ControllerAdminFilbehandling {
 
 
@@ -16,9 +18,10 @@ public class ControllerAdminFilbehandling {
     @FXML
     private Button lesInnKontaktperson;
 
-    public void lesFraLokaler(ActionEvent event) {
-        fil.start();
-        // fil.getFilnavn();
+    public void lesFraLokaler(ActionEvent event) throws IOException{
+
+            fil.test();
+
     }
 
     public void lesFraArrangement(ActionEvent event) {

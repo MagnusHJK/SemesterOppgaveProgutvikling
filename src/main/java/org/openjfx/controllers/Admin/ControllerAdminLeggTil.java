@@ -22,6 +22,7 @@ import org.openjfx.logic.exceptions.inputException;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ControllerAdminLeggTil {
@@ -300,6 +301,7 @@ public class ControllerAdminLeggTil {
         String artist = textfieldArtistArr.getText();
         String sted = textfieldStedArr.getText();
         String beskrivelse = textfieldBeskrivelseArr.getText();
+        LocalDate dato1 = LocalDate.of(2019,4,20);
         int billettPris = 0;
         int billettMaks = 0;
         boolean ok = true;
@@ -345,7 +347,7 @@ public class ControllerAdminLeggTil {
         if(!ok) {
             alertbox.feil("Noe gikk galt, prøv på nytt");
         } else {
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, beskrivelse, billettPris, billettMaks);
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato1, "19:00", beskrivelse, billettPris, billettMaks);
 
             try {
                 //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
