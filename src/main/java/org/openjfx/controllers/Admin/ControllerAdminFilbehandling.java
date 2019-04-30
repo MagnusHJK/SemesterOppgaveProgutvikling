@@ -19,8 +19,8 @@ public class ControllerAdminFilbehandling {
     private Button lesInnKontaktperson;
 
     public void lesFraLokaler(ActionEvent event) throws IOException{
-       fil.start();
-        //fil.test();
+       //fil.start();
+        fil.test();
 
     }
 
