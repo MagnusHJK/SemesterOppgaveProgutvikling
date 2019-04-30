@@ -2,9 +2,10 @@ package org.openjfx.logic.Billett;
 
 import org.openjfx.logic.Arrangement.Arrangement;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Billett {
+public class Billett implements Serializable {
     Arrangement arrangement;
     int plassnummer;
     String lokale;
@@ -71,6 +72,6 @@ public class Billett {
 
     @Override
     public String toString(){
-        return "Plass: " + this.getPlassnummer() + " " + this.getDato() + " - " + this.getTidspunkt();
+        return "Plass: " + this.getPlassnummer() + " [" + this.getDato() + " - " + this.getTidspunkt() + "]";
     }
 }

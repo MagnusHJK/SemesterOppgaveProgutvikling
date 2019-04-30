@@ -15,7 +15,6 @@ import org.openjfx.logic.Billett.BillettHåndtering;
 import org.openjfx.logic.Billett.BillettNummerTextField;
 import org.openjfx.logic.exceptions.alertbox;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class ControllerKjøp {
     //Metode for å hente objekt fra forrige scene
     public void arrangementHenter(Arrangement arrangement){
         valgtArrangement = arrangement;
-        lblArrangement.setText(valgtArrangement.getNavn() + " " + valgtArrangement.getDato() + " - " + valgtArrangement.getTidspunkt());
+        lblArrangement.setText(valgtArrangement.getNavn() + " [" + valgtArrangement.getDato() + " - " + valgtArrangement.getTidspunkt() + "]");
     }
 
 
@@ -89,6 +88,7 @@ public class ControllerKjøp {
 
         lblBillettInfo.setText(valgtArrangement.getSalg()[plassnummer].toString());
 
+        //TODO Gjør om til at det legges inn i Billett Array!!
         try{
             ArrangementSerialiser serialiser = new ArrangementSerialiser();
             ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
@@ -102,7 +102,6 @@ public class ControllerKjøp {
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }
-
     }
 
 
