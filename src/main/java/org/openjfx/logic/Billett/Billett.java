@@ -6,12 +6,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Billett implements Serializable {
-    Arrangement arrangement;
-    int plassnummer;
-    String lokale;
-    LocalDate dato;
-    String tidspunkt;
-    String telefonnr;
+    private Arrangement arrangement;
+    private int plassnummer;
+    private String lokale;
+    private LocalDate dato;
+    private String tidspunkt;
+    private String telefonnr;
 
     public Billett(Arrangement arrangement, int plassnummer, String lokale, LocalDate dato, String tidspunkt, String telefonnr) {
         this.arrangement = arrangement;

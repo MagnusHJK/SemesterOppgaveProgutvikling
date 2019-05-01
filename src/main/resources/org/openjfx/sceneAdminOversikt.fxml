@@ -52,21 +52,25 @@
                         <TableColumn fx:id="KolonneLokalerPlasser" minWidth="0.0" prefWidth="147.0" text="Antall Plasser" />
                     </columns>
                   </TableView>
-                  <TableView layoutY="644.0" prefHeight="115.0" prefWidth="889.0">
+                  <TableView fx:id="tabellKontaktpersoner" layoutY="644.0" prefHeight="115.0" prefWidth="889.0">
                     <columns>
-                      <TableColumn prefWidth="53.0" text="ID" />
-                      <TableColumn prefWidth="123.0" text="Fornavn" />
-                        <TableColumn prefWidth="110.0" text="Etternavn" />
-                        <TableColumn prefWidth="118.0" text="Tlf" />
-                        <TableColumn prefWidth="132.0" text="Epost" />
-                        <TableColumn prefWidth="99.0" text="Nettside" />
-                        <TableColumn prefWidth="137.0" text="Virksomhet" />
+                      <TableColumn fx:id="KolonneKontaktpersonID" prefWidth="53.0" text="ID" />
+                      <TableColumn fx:id="KolonneKontaktpersonFornavn" prefWidth="123.0" text="Fornavn" />
+                        <TableColumn fx:id="KolonneKontaktpersonEtternavn" prefWidth="110.0" text="Etternavn" />
+                        <TableColumn fx:id="KolonneKontaktpersonTlf" prefWidth="118.0" text="Tlf" />
+                        <TableColumn fx:id="KolonneKontaktpersonEpost" prefWidth="132.0" text="Epost" />
+                        <TableColumn fx:id="KolonneKontaktpersonNettside" prefWidth="99.0" text="Nettside" />
+                        <TableColumn fx:id="KolonneKontaktpersonVirksomhet" prefWidth="137.0" text="Virksomhet" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tabellBilletter" layoutY="266.0" prefHeight="147.0" prefWidth="881.0">
                     <columns>
                       <TableColumn fx:id="KolonneBilletterArrangement" prefWidth="113.0" text="Arrangement" />
                       <TableColumn fx:id="KolonneBilletterPlassnummer" prefWidth="121.0" text="Plassnummer" />
+                        <TableColumn fx:id="KolonneBilletterLokale" prefWidth="109.0" text="Lokale" />
+                        <TableColumn fx:id="KolonneBilletterDato" prefWidth="89.0" text="Dato" />
+                        <TableColumn fx:id="KolonneBilletterTidspunkt" prefWidth="141.0" text="Tidspunkt" />
+                        <TableColumn fx:id="KolonneBilletterTelefonnr" prefWidth="118.0" text="Telefonnr" />
                     </columns>
                   </TableView>
                   <Button layoutX="401.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionOppdater" text="Oppdater" />

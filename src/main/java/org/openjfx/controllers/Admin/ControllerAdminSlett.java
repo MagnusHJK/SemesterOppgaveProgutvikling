@@ -11,6 +11,9 @@ import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Billett.Billett;
+import org.openjfx.logic.Billett.BillettHåndtering;
+import org.openjfx.logic.Billett.BillettSerialiser;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -27,7 +30,7 @@ public class ControllerAdminSlett {
     public void initialize() throws Exception{
         Element elementerListe = new Element();
 
-        choiceSlettValg.setItems(elementerListe.lagElementListe());
+        choiceSlettValg.setItems(elementerListe.lagElementListeSlett());
     }
 
 
@@ -47,6 +50,9 @@ public class ControllerAdminSlett {
     private ListView<Arrangement> listArrangement;
 
     @FXML
+    private ListView<Billett> listBillett;
+
+    @FXML
     private Button btnSlettElement;
 
 
@@ -63,6 +69,7 @@ public class ControllerAdminSlett {
             listLokale.setVisible(true);
             listKontaktperson.setVisible(false);
             listArrangement.setVisible(false);
+            listBillett.setVisible(false);
 
             try{
                 LokaleSerialiser serialiser = new LokaleSerialiser();
@@ -80,6 +87,7 @@ public class ControllerAdminSlett {
             listLokale.setVisible(false);
             listKontaktperson.setVisible(true);
             listArrangement.setVisible(false);
+            listBillett.setVisible(false);
 
             try{
                 PersonSerialiser serialiser = new PersonSerialiser();
@@ -95,6 +103,7 @@ public class ControllerAdminSlett {
             listLokale.setVisible(false);
             listKontaktperson.setVisible(false);
             listArrangement.setVisible(true);
+            listBillett.setVisible(false);
 
             try{
                 ArrangementSerialiser serialiser = new ArrangementSerialiser();
@@ -102,6 +111,21 @@ public class ControllerAdminSlett {
                 ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
                 listArrangement.setItems(håndtering.lagObservableList(liste));
+            }catch(IOException | ClassNotFoundException e){
+                e.printStackTrace();
+            }
+        }else if(valg.equals("Billett")){
+            listLokale.setVisible(false);
+            listKontaktperson.setVisible(false);
+            listArrangement.setVisible(false);
+            listBillett.setVisible(true);
+
+            try{
+                BillettSerialiser serialiser = new BillettSerialiser();
+                BillettHåndtering håndtering = new BillettHåndtering();
+                ArrayList<Billett> liste = serialiser.lesArrayFraFil();
+
+                listBillett.setItems(håndtering.lagObservableList(liste));
             }catch(IOException | ClassNotFoundException e){
                 e.printStackTrace();
             }
@@ -121,6 +145,11 @@ public class ControllerAdminSlett {
 
     @FXML
     private void actionArrangementTrykk(MouseEvent event){
+        btnSlettElement.setDisable(false);
+    }
+
+    @FXML
+    private void actionBillettTrykk(MouseEvent event){
         btnSlettElement.setDisable(false);
     }
 
@@ -155,9 +184,17 @@ public class ControllerAdminSlett {
 
             håndtering.slettArrangement(arrangement);
         }
-        else{
-            System.out.println("Du må velge noe");
+        else if(valg.equals("Billett")){
+            BillettHåndtering håndteringBill = new BillettHåndtering();
+            ArrangementHåndtering håndteringArr = new ArrangementHåndtering();
+
+            Billett billett = listBillett.getSelectionModel().getSelectedItem();
+
+            håndteringBill.slettBillett(billett);
+            håndteringArr.oppdaterArrangementSalg(billett.getArrangement());
+
         }
+
 
     }
 }

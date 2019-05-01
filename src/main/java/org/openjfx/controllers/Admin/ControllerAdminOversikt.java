@@ -20,6 +20,7 @@ import org.openjfx.logic.Person.PersonSerialiser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class ControllerAdminOversikt {
 
@@ -34,7 +35,7 @@ public class ControllerAdminOversikt {
         KolonneArrangementTidspunkt.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("tidspunkt"));
         KolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
         KolonneArrangementBillettMaks.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettMaks"));
-        KolonneArrangementSolgte.setCellValueFactory(new PropertyValueFactory<Arrangement, Billett[]>("salg"));
+        KolonneArrangementSolgte.setCellValueFactory(new PropertyValueFactory<Billett, Billett[]>("salg"));
 
 
         KolonneLokalerID.setCellValueFactory(new PropertyValueFactory<Lokale, String>("lokaleID"));
@@ -42,11 +43,21 @@ public class ControllerAdminOversikt {
         KolonneLokalerType.setCellValueFactory(new PropertyValueFactory<Lokale, String>("type"));
         KolonneLokalerPlasser.setCellValueFactory(new PropertyValueFactory<Lokale, String>("antallPlasser"));
 
-
+        KolonneKontaktpersonID.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("personID"));
+        KolonneKontaktpersonFornavn.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("fornavn"));
+        KolonneKontaktpersonEtternavn.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("etternavn"));
+        KolonneKontaktpersonTlf.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("telefon"));
+        KolonneKontaktpersonEpost.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("epost"));
+        KolonneKontaktpersonNettside.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("nettside"));
+        KolonneKontaktpersonVirksomhet.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("virksomhet"));
 
 
         KolonneBilletterArrangement.setCellValueFactory(new PropertyValueFactory<Billett, Arrangement>("arrangement"));
         KolonneBilletterPlassnummer.setCellValueFactory(new PropertyValueFactory<Billett, Billett>("plassnummer"));
+        KolonneBilletterLokale.setCellValueFactory(new PropertyValueFactory<Billett, Lokale>("lokale"));
+        KolonneBilletterDato.setCellValueFactory(new PropertyValueFactory<Billett, LocalDate>("dato"));
+        KolonneBilletterTidspunkt.setCellValueFactory(new PropertyValueFactory<Billett, String>("tidspunkt"));
+        KolonneBilletterTelefonnr.setCellValueFactory(new PropertyValueFactory<Billett, String>("telefonnr"));
     }
 
 
@@ -84,7 +95,7 @@ public class ControllerAdminOversikt {
     private TableColumn<Arrangement, String> KolonneArrangementBillettMaks;
 
     @FXML
-    private TableColumn<Arrangement, Billett[]> KolonneArrangementSolgte;
+    private TableColumn<Billett, Billett[]> KolonneArrangementSolgte;
 
 
 
@@ -107,6 +118,36 @@ public class ControllerAdminOversikt {
 
 
     @FXML
+    private TableView<Kontaktperson> tabellKontaktpersoner;
+
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonID;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonFornavn;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonEtternavn;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonTlf;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonEpost;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonNettside;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonVirksomhet;
+
+
+
+
+
+
+    @FXML
     private TableView<Billett> tabellBilletter;
 
     @FXML
@@ -114,6 +155,18 @@ public class ControllerAdminOversikt {
 
     @FXML
     private TableColumn<Billett, Billett> KolonneBilletterPlassnummer;
+
+    @FXML
+    private TableColumn<Billett, Lokale> KolonneBilletterLokale;
+
+    @FXML
+    private TableColumn<Billett, LocalDate> KolonneBilletterDato;
+
+    @FXML
+    private TableColumn<Billett, String> KolonneBilletterTidspunkt;
+
+    @FXML
+    private TableColumn<Billett, String> KolonneBilletterTelefonnr;
 
 
 
@@ -136,6 +189,7 @@ public class ControllerAdminOversikt {
         try{
             tabellArrangementer.setItems(håndteringArr.lagObservableList(serialiserArr.lesArrayFraFil()));
             tabellLokaler.setItems(håndteringLok.lagObservableList(serialiserLok.lesArrayFraFil()));
+            tabellKontaktpersoner.setItems(håndteringPer.lagObservableList(serialiserPer.lesArrayFraFil()));
             tabellBilletter.setItems(håndteringBill.lagObservableList(serialiserBill.lesArrayFraFil()));
         }catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
