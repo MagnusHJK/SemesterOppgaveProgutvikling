@@ -7,11 +7,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Billett.Billett;
+import org.openjfx.logic.Filhåndtering.skrivTilCsv;
+import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -25,7 +29,9 @@ import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
 
 
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -231,6 +237,8 @@ public class ControllerAdminLeggTil {
         }
 
 
+
+
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
@@ -238,6 +246,17 @@ public class ControllerAdminLeggTil {
         textfieldPlasserLokale.clear();
 
         try{
+            // Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.LokaleTilCsv(lokale.lagLokaleList(),path);
+            // Slutt
+
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
@@ -272,6 +291,7 @@ public class ControllerAdminLeggTil {
         String nettside = textfieldNettsideKontakt.getText();
         String virksomhet = textfieldVirksomhetKontakt.getText();
         String opplysninger = textareaOpplysningerKontakt.getText();
+
 
         // Sjekk om feltene er tomme
         try {
@@ -382,12 +402,6 @@ public class ControllerAdminLeggTil {
 
         // Validerer input-feltene til arrangement
         try {
-            Billett[] salg = new Billett[0];
-            Arrangement etArrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted,
-                                                        dato, tidspunkt, beskrivelse, billettPris, billettMaks, salg);
-
-            if(ArrangementValidering.valider(etArrangement)) {
-                // TODO legg til css hvis vi har tid
             if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
                 alertbox.feil("ArrangementID inneholder ugyldige tegn.");
                 return;
@@ -404,9 +418,8 @@ public class ControllerAdminLeggTil {
                 alertbox.feil("Navn inneholder ugyldige tegn.");
                 return;
             }
-        }
         } catch (Exception e) {
-
+            
         }
 
         // Sjekk om menyene er lik NULL
@@ -434,10 +447,8 @@ public class ControllerAdminLeggTil {
         if(!ok) {
 
         } else {
-            Billett[] salg = new Billett[billettMaks];
-
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted,
-                                                      dato, tidspunkt, beskrivelse, billettPris, billettMaks, salg);
+            Billett[] billett = new Billett[billettMaks];
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
             textfieldArrangementID.clear();
             textfieldNavnArr.clear();
             textfieldArtistArr.clear();
