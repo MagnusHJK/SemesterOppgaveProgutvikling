@@ -36,12 +36,44 @@ public class skrivTilCsv extends skrivTilFil{
 
     @Override
     public void ArrangementTilCsv(ArrayList<Arrangement> arrangement, String path) {
+        PrintWriter skriver = null;
 
+        try {
+            skriver = new PrintWriter(path, StandardCharsets.UTF_8);
+
+            for(Arrangement arrangementer : arrangement) {
+                skriver.println(arrangementer);
+            }
+        } catch(FileNotFoundException | UnsupportedEncodingException ue) {
+            ue.printStackTrace();
+        } catch(IOException io) {
+            io.printStackTrace();
+        } finally {
+            if(skriver != null) {
+                skriver.close();
+            }
+        }
     }
 
     @Override
     public void PersonTilCsv(ArrayList<Kontaktperson> person , String path) {
+        PrintWriter skriver = null;
 
+        try {
+            skriver = new PrintWriter(path, StandardCharsets.UTF_8);
+
+            for(Kontaktperson personer : person) {
+                skriver.println(personer);
+            }
+        } catch(FileNotFoundException | UnsupportedEncodingException ue) {
+            ue.printStackTrace();
+        } catch(IOException io) {
+            io.printStackTrace();
+        } finally {
+            if(skriver != null) {
+                skriver.close();
+            }
+        }
     }
 
 
