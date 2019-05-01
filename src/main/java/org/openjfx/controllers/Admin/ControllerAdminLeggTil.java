@@ -246,16 +246,7 @@ public class ControllerAdminLeggTil {
         textfieldPlasserLokale.clear();
 
         try{
-            // Lagerer på fil
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            String path = selectedFile.getPath();
 
-            skrivTilFil skriv = new skrivTilCsv();
-            skriv.LokaleTilCsv(lokale.lagLokaleList(),path);
-            // Slutt
 
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
             LokaleSerialiser serialiser = new LokaleSerialiser();
@@ -265,6 +256,19 @@ public class ControllerAdminLeggTil {
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
+
+            // Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            // Slutt
 
         } catch(IOException ioe){
             ioe.printStackTrace();
@@ -354,6 +358,19 @@ public class ControllerAdminLeggTil {
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
+
+            // Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            PersonSerialiser personSerialiser = new PersonSerialiser();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.PersonTilCsv(personSerialiser.lesArrayFraFil(),path);
+            // Slutt
 
         }catch(IOException ioe){
             ioe.printStackTrace();
@@ -467,6 +484,20 @@ public class ControllerAdminLeggTil {
                 System.out.println(liste);
 
                 serialiser.skrivArrayTilFil(liste);
+
+                // Lagerer på fil
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
+
+                ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
+
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.ArrangementTilCsv(arrangementSerialiser.lesArrayFraFil(),path);
+                // Slutt
+
 
             } catch (IOException | ClassNotFoundException cnf) {
                 cnf.printStackTrace();
