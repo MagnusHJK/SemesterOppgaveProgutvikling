@@ -21,6 +21,7 @@
       <ListView fx:id="listLokale" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionLokaleTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
       <ListView fx:id="listKontaktperson" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionKontaktpersonTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
       <ListView fx:id="listArrangement" layoutX="200.0" layoutY="250.0" onMouseClicked="#actionArrangementTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
+      <ListView fx:id="listBillett" layoutX="210.0" layoutY="260.0" onMouseClicked="#actionBillettTrykk" prefHeight="200.0" prefWidth="500.0" visible="false" />
       <GridPane layoutX="308.0" layoutY="129.0" prefHeight="30.0" prefWidth="284.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

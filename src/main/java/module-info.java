@@ -9,11 +9,13 @@ module hellofx {
     opens org.openjfx.logic.Lokale to javafx.base;
     opens org.openjfx.logic.Arrangement to javafx.base;
     opens org.openjfx.logic.Billett to javafx.fxml;
+    opens org.openjfx.logic.Person to javafx.fxml;
 
 
     exports org.openjfx.controllers;
     exports org.openjfx.controllers.Admin;
     exports org.openjfx.controllers.Butikk;
     exports org.openjfx.logic.Billett;
+    exports org.openjfx.logic.Person;
     exports org.openjfx;
 }

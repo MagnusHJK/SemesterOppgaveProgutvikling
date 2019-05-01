@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.logic.Arrangement.Arrangement;
+import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Billett.BillettHåndtering;
@@ -53,8 +54,6 @@ public class ControllerKjøp {
 
 
 
-
-    //TODO Legg til så 1 er minimum
     @FXML
     private void actionAntallBilletter(KeyEvent event){
         int pris = 0;
@@ -70,47 +69,15 @@ public class ControllerKjøp {
     }
 
 
-    //TODO Skriv metode for plassnummer,
     @FXML
     private void actionBekreftBillett(ActionEvent event){
-        BillettHåndtering håndtering = new BillettHåndtering();
-
-        int plassnummer = 0;
-        String telefonnummer = textfieldTelefon.getText();
-        String billettTekst = "";
+        BillettHåndtering billett = new BillettHåndtering();
+        String telefonnr = textfieldTelefon.getText();
 
 
-        for(int i = 0; i < antallBilletter; i++){
-            plassnummer = håndtering.finnPlassnummer(valgtArrangement);
+        String billettTekst = billett.leggTilBillett(valgtArrangement, telefonnr, antallBilletter);
 
-            Billett billett = new Billett(valgtArrangement, plassnummer, valgtArrangement.getSted(),
-                                          valgtArrangement.getDato(), valgtArrangement.getTidspunkt(), telefonnummer);
-
-            valgtArrangement.getSalg()[plassnummer] = billett;
-
-            billettTekst += valgtArrangement.getSalg()[plassnummer].toString() + "\n";
-
-            //Serialiserer og legger til billettene i database
-            try{
-                BillettSerialiser serialiser = new BillettSerialiser();
-                ArrayList<Billett> liste = serialiser.lesArrayFraFil();
-
-                liste.add(billett);
-                System.out.println(liste);
-
-                serialiser.skrivArrayTilFil(liste);
-            }catch(IOException e){
-                e.printStackTrace();
-            }catch (ClassNotFoundException e){
-                e.printStackTrace();
-            }
-
-
-        }
-
-        //lblBillettInfo.setText(valgtArrangement.getSalg()[plassnummer].toString());
         lblBillettInfo.setText("Billett(er) \n" + billettTekst);
-
     }
 
 

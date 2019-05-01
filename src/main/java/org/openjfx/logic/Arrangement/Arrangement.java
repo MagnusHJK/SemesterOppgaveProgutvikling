@@ -146,7 +146,7 @@ public class Arrangement implements Serializable {
 
     @Override
     public String toString() {
-        return this.getNavn() + " " + this.getType() + " " + this.getKontaktperson();
+        return this.getNavn();
     }
 
 
