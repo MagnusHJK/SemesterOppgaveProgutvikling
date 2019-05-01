@@ -36,4 +36,20 @@ public class LokaleHåndtering {
         }
 
     }
+
+    public void endreLokale(Lokale lokale) {
+        LokaleSerialiser serialiser = new LokaleSerialiser();
+
+        try {
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+            liste.removeIf(Lokale -> Lokale.getLokaleID().equals(lokale.getLokaleID()));
+            liste.add(lokale);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

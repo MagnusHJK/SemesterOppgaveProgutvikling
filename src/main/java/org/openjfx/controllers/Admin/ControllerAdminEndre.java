@@ -7,22 +7,25 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Filhåndtering.skrivTilCsv;
+import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
-import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.*;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
-import org.openjfx.logic.exceptions.valgException;
-import org.openjfx.logic.exceptions.nullException;
-import org.openjfx.logic.exceptions.arrangementException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -108,5 +111,93 @@ public class ControllerAdminEndre{
     @FXML
     private void actionLokaleTrykk(MouseEvent event) { btnEndre.setDisable(false); }
 
+    @FXML
+    private Pane paneLokale;
+
+    @FXML
+    private TextField textfieldLokaleID;
+
+    @FXML
+    private TextField textfieldNavnLokale;
+
+    @FXML
+    private TextField textfieldTypeLokale;
+
+    @FXML
+    private TextField textfieldPlasserLokale;
+
+    @FXML
+    private void actionEndreElement(ActionEvent event) {
+        String valg = choiceEndre.getSelectionModel().getSelectedItem();
+        //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
+
+        if(valg.equals("Lokale")){
+            paneLokale.setVisible(true);
+            //paneKontaktperson.setVisible(false);
+            //paneArrangement.setVisible(false);
+
+        } else{
+
+        }
+    }
+
+    @FXML
+    private void actionEndreLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+
+        Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
+        System.out.println("Du har trykket på endre lokale");
+
+        String lokaleID = etLokale.getLokaleID();
+        String navn = textfieldNavnLokale.getText();
+        String type = textfieldTypeLokale.getText();
+        int plasser = 0;
+
+        //Prøver å konvertere plasser til int
+        try{
+            plasser = Integer.parseInt(textfieldPlasserLokale.getText());
+
+        } catch(NumberFormatException nfe){
+            alertbox.feil("Antall plasser er nødt til å være heltall.");
+        }
+
+        Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
+        LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
+        lokaleHåndtering.endreLokale(lokale);
+        textfieldLokaleID.clear();
+        textfieldNavnLokale.clear();
+        textfieldTypeLokale.clear();
+        textfieldPlasserLokale.clear();
+
+        try{
+
+
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            LokaleSerialiser serialiser = new LokaleSerialiser();
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+            //liste.add(lokale);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+            /*// Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            // Slutt*/
+
+        } catch(IOException ioe){
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf){
+            cnf.printStackTrace();
+        }
+    }
 
 }
