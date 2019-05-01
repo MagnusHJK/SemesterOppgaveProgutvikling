@@ -185,6 +185,8 @@ public class ControllerAdminLeggTil {
             paneLokale.setVisible(false);
             paneKontaktperson.setVisible(false);
             paneArrangement.setVisible(true);
+        }else{
+
         }
 
     }
@@ -468,6 +470,7 @@ public class ControllerAdminLeggTil {
 
         } else {
             Billett[] billett = new Billett[billettMaks];
+
             Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
             textfieldArrangementID.clear();
             textfieldNavnArr.clear();

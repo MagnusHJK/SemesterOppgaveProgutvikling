@@ -8,11 +8,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+
 <?import org.openjfx.logic.Billett.*?>
 
 <AnchorPane fx:id="paneKjøp" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.Butikk.ControllerKjøp">
    <children>
-      <GridPane layoutX="350.0" layoutY="585.0">
+      <GridPane layoutX="368.0" layoutY="604.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,7 +26,7 @@
             <Button mnemonicParsing="false" onAction="#actionBekreftBillett" text="Bekreft" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
-      <GridPane layoutX="266.0" layoutY="189.0" prefHeight="167.0" prefWidth="368.0">
+      <GridPane layoutX="266.0" layoutY="162.0" prefHeight="167.0" prefWidth="368.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,8 +45,8 @@
             <Label fx:id="lblPris" alignment="CENTER" prefHeight="16.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Label fx:id="lblBillettInfo" alignment="TOP_CENTER" layoutX="284.0" layoutY="434.0" prefHeight="128.0" prefWidth="368.0" text="Takk for din bestilling, plassnummer etc" />
-      <Label fx:id="lblArrangement" alignment="TOP_CENTER" layoutX="273.0" layoutY="96.0" prefHeight="73.0" prefWidth="415.0" wrapText="true">
+      <Label fx:id="lblBillettInfo" alignment="TOP_CENTER" layoutX="284.0" layoutY="355.0" prefHeight="231.0" prefWidth="368.0" text="Takk for din bestilling, plassnummer etc" />
+      <Label fx:id="lblArrangement" alignment="TOP_CENTER" layoutX="273.0" layoutY="83.0" prefHeight="73.0" prefWidth="415.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>

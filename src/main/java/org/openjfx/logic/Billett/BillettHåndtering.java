@@ -1,8 +1,23 @@
 package org.openjfx.logic.Billett;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.openjfx.logic.Arrangement.Arrangement;
 
+import java.util.ArrayList;
+
 public class BillettHåndtering {
+
+
+    //Lager en ObservableList som JavaFX kan bruke i sine komponenter
+    public ObservableList<Billett> lagObservableList(ArrayList<Billett> ArrayListe) throws Exception{
+
+        ObservableList<Billett> observListe = FXCollections.observableArrayList();
+        observListe.addAll(ArrayListe);
+
+        return observListe;
+    }
+
 
     //Finner en ledig plass til personen
     public int finnPlassnummer(Arrangement arrangement){
