@@ -13,6 +13,7 @@ import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Billett.BillettHåndtering;
 import org.openjfx.logic.Billett.BillettNummerTextField;
+import org.openjfx.logic.Billett.BillettSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
 
 import java.io.FileNotFoundException;
@@ -78,6 +79,7 @@ public class ControllerKjøp {
         String telefonnummer = textfieldTelefon.getText();
         String billettTekst = "";
 
+
         for(int i = 0; i < antallBilletter; i++){
             plassnummer = håndtering.finnPlassnummer(valgtArrangement);
 
@@ -88,25 +90,27 @@ public class ControllerKjøp {
 
             billettTekst += valgtArrangement.getSalg()[plassnummer].toString() + "\n";
 
+            //Serialiserer og legger til billettene i database
+            try{
+                BillettSerialiser serialiser = new BillettSerialiser();
+                ArrayList<Billett> liste = serialiser.lesArrayFraFil();
+
+                liste.add(billett);
+                System.out.println(liste);
+
+                serialiser.skrivArrayTilFil(liste);
+            }catch(IOException e){
+                e.printStackTrace();
+            }catch (ClassNotFoundException e){
+                e.printStackTrace();
+            }
+
+
         }
 
         //lblBillettInfo.setText(valgtArrangement.getSalg()[plassnummer].toString());
         lblBillettInfo.setText("Billett(er) \n" + billettTekst);
 
-        //TODO Gjør om til at det legges inn i Billett Array!!
-        try{
-            ArrangementSerialiser serialiser = new ArrangementSerialiser();
-            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
-
-            liste.add(valgtArrangement);
-            System.out.println(liste);
-
-            serialiser.skrivArrayTilFil(liste);
-        }catch(IOException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }
     }
 
 
