@@ -9,6 +9,8 @@ import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Billett.Billett;
+import org.openjfx.logic.Billett.BillettHåndtering;
+import org.openjfx.logic.Billett.BillettSerialiser;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -35,13 +37,16 @@ public class ControllerAdminOversikt {
         KolonneArrangementSolgte.setCellValueFactory(new PropertyValueFactory<Arrangement, Billett[]>("salg"));
 
 
-        KolonneLokalerID.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("lokaleID"));
-        KolonneLokalerNavn.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("navn"));
-        KolonneLokalerType.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("type"));
-        KolonneLokalerPlasser.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("antallPlasser"));
+        KolonneLokalerID.setCellValueFactory(new PropertyValueFactory<Lokale, String>("lokaleID"));
+        KolonneLokalerNavn.setCellValueFactory(new PropertyValueFactory<Lokale, String>("navn"));
+        KolonneLokalerType.setCellValueFactory(new PropertyValueFactory<Lokale, String>("type"));
+        KolonneLokalerPlasser.setCellValueFactory(new PropertyValueFactory<Lokale, String>("antallPlasser"));
 
 
 
+
+        KolonneBilletterArrangement.setCellValueFactory(new PropertyValueFactory<Billett, Arrangement>("arrangement"));
+        KolonneBilletterPlassnummer.setCellValueFactory(new PropertyValueFactory<Billett, Billett>("plassnummer"));
     }
 
 
@@ -88,17 +93,27 @@ public class ControllerAdminOversikt {
 
 
     @FXML
-    private TableColumn<Arrangement, String> KolonneLokalerID;
+    private TableColumn<Lokale, String> KolonneLokalerID;
 
     @FXML
-    private TableColumn<Arrangement, String> KolonneLokalerNavn;
+    private TableColumn<Lokale, String> KolonneLokalerNavn;
 
     @FXML
-    private TableColumn<Arrangement, String> KolonneLokalerType;
+    private TableColumn<Lokale, String> KolonneLokalerType;
 
     @FXML
-    private TableColumn<Arrangement, String> KolonneLokalerPlasser;
+    private TableColumn<Lokale, String> KolonneLokalerPlasser;
 
+
+
+    @FXML
+    private TableView<Billett> tabellBilletter;
+
+    @FXML
+    private TableColumn<Billett, Arrangement> KolonneBilletterArrangement;
+
+    @FXML
+    private TableColumn<Billett, Billett> KolonneBilletterPlassnummer;
 
 
 
@@ -114,15 +129,17 @@ public class ControllerAdminOversikt {
         PersonSerialiser serialiserPer = new PersonSerialiser();
         PersonHåndtering håndteringPer = new PersonHåndtering();
 
+        BillettSerialiser serialiserBill = new BillettSerialiser();
+        BillettHåndtering håndteringBill = new BillettHåndtering();
+
 
         try{
             tabellArrangementer.setItems(håndteringArr.lagObservableList(serialiserArr.lesArrayFraFil()));
             tabellLokaler.setItems(håndteringLok.lagObservableList(serialiserLok.lesArrayFraFil()));
+            tabellBilletter.setItems(håndteringBill.lagObservableList(serialiserBill.lesArrayFraFil()));
         }catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
-
-
     }
 
 }

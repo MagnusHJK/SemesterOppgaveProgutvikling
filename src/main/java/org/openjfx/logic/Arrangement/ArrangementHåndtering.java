@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Lokale.Lokale;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -72,6 +73,23 @@ public class ArrangementHåndtering {
             }
         }
         return "";
+    }
+
+    public void oppdaterArrangementSalg(Arrangement arrangement){
+        ArrangementSerialiser serialiser = new ArrangementSerialiser();
+
+        try{
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+            //Fjerner det gamle arrangementet og legger til det nye, med riktige plasser
+            liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
+            liste.add(arrangement);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        }catch(IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public void slettArrangement(Arrangement arrangement){
