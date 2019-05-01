@@ -43,7 +43,13 @@ public class ControllerAdminOversikt {
         KolonneLokalerType.setCellValueFactory(new PropertyValueFactory<Lokale, String>("type"));
         KolonneLokalerPlasser.setCellValueFactory(new PropertyValueFactory<Lokale, String>("antallPlasser"));
 
-
+        KolonneKontaktpersonID.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("personID"));
+        KolonneKontaktpersonFornavn.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("fornavn"));
+        KolonneKontaktpersonEtternavn.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("etternavn"));
+        KolonneKontaktpersonTlf.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("telefon"));
+        KolonneKontaktpersonEpost.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("epost"));
+        KolonneKontaktpersonNettside.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("nettside"));
+        KolonneKontaktpersonVirksomhet.setCellValueFactory(new PropertyValueFactory<Kontaktperson, String>("virksomhet"));
 
 
         KolonneBilletterArrangement.setCellValueFactory(new PropertyValueFactory<Billett, Arrangement>("arrangement"));
@@ -112,6 +118,36 @@ public class ControllerAdminOversikt {
 
 
     @FXML
+    private TableView<Kontaktperson> tabellKontaktpersoner;
+
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonID;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonFornavn;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonEtternavn;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonTlf;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonEpost;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonNettside;
+
+    @FXML
+    private TableColumn<Kontaktperson, String> KolonneKontaktpersonVirksomhet;
+
+
+
+
+
+
+    @FXML
     private TableView<Billett> tabellBilletter;
 
     @FXML
@@ -153,6 +189,7 @@ public class ControllerAdminOversikt {
         try{
             tabellArrangementer.setItems(håndteringArr.lagObservableList(serialiserArr.lesArrayFraFil()));
             tabellLokaler.setItems(håndteringLok.lagObservableList(serialiserLok.lesArrayFraFil()));
+            tabellKontaktpersoner.setItems(håndteringPer.lagObservableList(serialiserPer.lesArrayFraFil()));
             tabellBilletter.setItems(håndteringBill.lagObservableList(serialiserBill.lesArrayFraFil()));
         }catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
