@@ -4,6 +4,7 @@ package org.openjfx.logic.Arrangement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,9 +20,9 @@ public class ArrangementHåndtering {
 
 
     //Endrer et spesifikt arrangement
-    public boolean endreArrangement(Arrangement arrangement){
+    /*public boolean endreArrangement(Arrangement arrangement){
         return true;
-    }
+    }*/
 
 
 
@@ -105,5 +106,21 @@ public class ArrangementHåndtering {
             e.printStackTrace();
         }
 
+    }
+
+    public void endreArrangement(Arrangement arrangement) {
+        ArrangementSerialiser serialiser = new ArrangementSerialiser();
+
+        try {
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+            liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
+            liste.add(arrangement);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
