@@ -329,10 +329,10 @@ public class ControllerAdminLeggTil {
             } else if (!(nettside.matches("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}"))) {
                 alertbox.feil("Nettside inneholder ugyldige tegn.");
                 return;
-            } else if (!(virksomhet.matches("^[A-Za-z ]{4,30}"))) {
+            } else if (!(virksomhet.matches("^[A-Za-z ]{2,30}"))) {
                 alertbox.feil("Virksomhet inneholder ugyldige tegn.");
                 return;
-            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,30}"))) {
+            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,}$"))) {
                 alertbox.feil("Opplysninger inneholder ugyldige tegn.");
                 return;
             }
@@ -422,17 +422,20 @@ public class ControllerAdminLeggTil {
             if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
                 alertbox.feil("ArrangementID inneholder ugyldige tegn.");
                 return;
-            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå :\\-]{2,30}$"))) {
                 alertbox.feil("Navn inneholder ugyldige tegn.");
                 return;
             } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
-                alertbox.feil("Navn inneholder ugyldige tegn.");
+                alertbox.feil("Artist inneholder ugyldige tegn.");
                 return;
             } else if(!(sted.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
-                alertbox.feil("Navn inneholder ugyldige tegn.");
+                alertbox.feil("Sted inneholder ugyldige tegn.");
                 return;
-            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9 ./-]"))) {
-                alertbox.feil("Navn inneholder ugyldige tegn.");
+            } else if(!(tidspunkt.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
+                alertbox.feil("Tid er i feil format.");
+                return;
+            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9./ \\-]{1,}$"))) {
+                alertbox.feil("Beskrivelse inneholder ugyldige tegn.");
                 return;
             }
         } catch (Exception e) {
