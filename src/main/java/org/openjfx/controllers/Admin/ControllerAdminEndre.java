@@ -34,7 +34,13 @@ public class ControllerAdminEndre{
     }
 
     @FXML
-    private ListView EndreTabell;
+    private ListView<Lokale> listLokale;
+
+    @FXML
+    private ListView<Kontaktperson> listKontaktperson;
+
+    @FXML
+    private ListView<Arrangement> listArrangement;
 
     @FXML
     private AnchorPane paneAdminEndre;
@@ -51,19 +57,23 @@ public class ControllerAdminEndre{
     @FXML
     public void endreInnhold (ActionEvent event) throws Exception {
 
-        LokaleHåndtering lokaler = new LokaleHåndtering();
-        LokaleSerialiser serialiser = new LokaleSerialiser();
+        //LokaleHåndtering lokaler = new LokaleHåndtering();
+        //LokaleSerialiser serialiser = new LokaleSerialiser();
 
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
 
         if(valg.equals("Lokale")){
+            listLokale.setVisible(true);
+            //listKontaktperson.setVisible(false);
+            //listArrangement.setVisible(false);
+
             try {
                 LokaleSerialiser lSerialiser = new LokaleSerialiser();
                 LokaleHåndtering håndtering = new LokaleHåndtering();
                 ArrayList<Lokale> liste = lSerialiser.lesArrayFraFil();
 
-                EndreTabell.setItems(håndtering.lagObservableList(liste));
-            } catch(Exception e) {
+                listLokale.setItems(håndtering.lagObservableList(liste));
+            } catch(IOException | ClassNotFoundException e){
                 e.printStackTrace();
             }
 
@@ -74,7 +84,7 @@ public class ControllerAdminEndre{
                 PersonHåndtering håndtering = new PersonHåndtering();
                 ArrayList<Kontaktperson> liste = pSerialiser.lesArrayFraFil();
 
-                EndreTabell.setItems(håndtering.lagObservableList(liste));
+                //EndreTabell.setItems(håndtering.lagObservableList(liste));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,7 +96,7 @@ public class ControllerAdminEndre{
                 ArrangementHåndtering håndtering = new ArrangementHåndtering();
                 ArrayList<Arrangement> liste = aSerialiser.lesArrayFraFil();
 
-                EndreTabell.setItems(håndtering.lagObservableList(liste));
+                //EndreTabell.setItems(håndtering.lagObservableList(liste));
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -94,5 +104,9 @@ public class ControllerAdminEndre{
 
         }
     }
+
+    @FXML
+    private void actionLokaleTrykk(MouseEvent event) { btnEndre.setDisable(false); }
+
 
 }
