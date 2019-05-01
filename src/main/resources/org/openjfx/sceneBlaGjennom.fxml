@@ -24,10 +24,11 @@
                <children>
                   <TableView fx:id="tabellArrangement" onMouseClicked="#actionArrangementTrykk" prefHeight="285.0" prefWidth="598.0">
                     <columns>
-                      <TableColumn fx:id="kolonneArrangementNavn" prefWidth="154.0" text="Navn" />
-                      <TableColumn fx:id="kolonneArrangementType" prefWidth="109.0" text="Type" />
-                        <TableColumn fx:id="kolonneArrangementKjendis" prefWidth="156.0" text="Kjendis" />
-                        <TableColumn fx:id="kolonneArrangementPris" prefWidth="89.0" text="Pris" />
+                      <TableColumn fx:id="kolonneArrangementNavn" prefWidth="182.0" text="Navn" />
+                        <TableColumn fx:id="kolonneArrangementBillettMaks" prefWidth="118.0" text="Antall plasser" />
+                        <TableColumn fx:id="kolonneArrangementPris" prefWidth="67.0" text="Pris" />
+                        <TableColumn fx:id="kolonneArrangementDato" prefWidth="129.0" text="Dato" />
+                        <TableColumn fx:id="kolonneArrangementTidspunkt" prefWidth="133.0" text="Tidspunkt" />
                     </columns>
                   </TableView>
                   <GridPane prefHeight="194.0" prefWidth="603.0">

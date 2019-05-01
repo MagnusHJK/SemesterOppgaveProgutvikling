@@ -48,6 +48,7 @@ public class ControllerAdminEndre{
     @FXML
     private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
 
+    @FXML
     public void endreInnhold (ActionEvent event) throws Exception {
 
         LokaleHåndtering lokaler = new LokaleHåndtering();
