@@ -138,9 +138,9 @@ public class ControllerAdminFilbehandling {
             Lokale.setItems(hånderLokale.lagObservableList(hentLokale.lesArrayFraFil()));
 
             String personFraInput = velgPerson.getSelectionModel().getSelectedItem().toString();
-            String lokaleFraInput = Lokale.getlectionModel().getSelectedItem().toString();
+            String lokaleFraInput = Lokale.getSelectionModel().getSelectedItem().toString();
 
-            //TODO Drep meg vær så snill Æ
+            //TODO Drep meg vær så snill
 
             String ID = data.get(0);
             String navn= data.get(1);
