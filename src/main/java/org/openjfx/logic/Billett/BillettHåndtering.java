@@ -93,6 +93,8 @@ public class BillettHåndtering {
 
             liste.removeIf(Billett -> Billett.getPlassnummer()  == (billett.getPlassnummer()));
 
+            billett.getArrangement().getSalg()[billett.getPlassnummer()] = null;
+
             serialiser.skrivArrayTilFil(liste);
         }catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
