@@ -405,7 +405,7 @@ public class ControllerAdminLeggTil {
             if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
                 alertbox.feil("ArrangementID inneholder ugyldige tegn.");
                 return;
-            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå :\\-]{2,30}$"))) {
                 alertbox.feil("Navn inneholder ugyldige tegn.");
                 return;
             } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
@@ -417,7 +417,7 @@ public class ControllerAdminLeggTil {
             } else if(!(tidspunkt.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
                 alertbox.feil("Tid er i feil format.");
                 return;
-            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9 ./-]"))) {
+            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9./ \\-]{1,}$"))) {
                 alertbox.feil("Beskrivelse inneholder ugyldige tegn.");
                 return;
             }
