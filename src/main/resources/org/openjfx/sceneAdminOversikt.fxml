@@ -67,6 +67,10 @@
                     <columns>
                       <TableColumn fx:id="KolonneBilletterArrangement" prefWidth="113.0" text="Arrangement" />
                       <TableColumn fx:id="KolonneBilletterPlassnummer" prefWidth="121.0" text="Plassnummer" />
+                        <TableColumn fx:id="KolonneBilletterLokale" prefWidth="109.0" text="Lokale" />
+                        <TableColumn fx:id="KolonneBilletterDato" prefWidth="89.0" text="Dato" />
+                        <TableColumn fx:id="KolonneBilletterTidspunkt" prefWidth="141.0" text="Tidspunkt" />
+                        <TableColumn fx:id="KolonneBilletterTelefonnr" prefWidth="118.0" text="Telefonnr" />
                     </columns>
                   </TableView>
                   <Button layoutX="401.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionOppdater" text="Oppdater" />
