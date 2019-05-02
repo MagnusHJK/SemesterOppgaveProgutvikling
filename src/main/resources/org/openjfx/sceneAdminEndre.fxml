@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Button?>
 
 <AnchorPane fx:id="paneAdminEndre" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.Admin.ControllerAdminEndre">
     <children>
-        <HBox layoutX="20.0" layoutY="70.0" prefHeight="133.0" prefWidth="848.0" spacing="20.0">
-            <children>
-                <ListView prefHeight="133.0" prefWidth="318.0" />
-                <TableView disable="true" prefHeight="133.0" prefWidth="438.0">
-                    <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                </TableView>
-            </children>
-        </HBox>
+        <ListView fx:id="listLokale" layoutX="191.0" layoutY="81.0" onMouseClicked="#actionEndreElement" prefHeight="133.0" prefWidth="318.0" visible="false" />
         <Label layoutX="20.0" layoutY="20.0" prefHeight="16.0" prefWidth="308.0" text="Velg det elementet du vil endre">
             <font>
                 <Font size="19.0" />
             </font>
         </Label>
         <ChoiceBox fx:id="choiceEndre" layoutX="350.0" layoutY="20.0" prefWidth="150.0" />
-        <Button fx:id="btnEndre" layoutX="550.0" layoutY="20.0" mnemonicParsing="false"
-                onAction="#endreInnhold" text="Velg" />
+        <Button layoutX="550.0" layoutY="20.0" mnemonicParsing="false" onAction="#endreInnhold" text="Velg" />
+        <Pane fx:id="paneLokale" layoutX="208.0" layoutY="262.0" prefHeight="282.0" prefWidth="285.0" visible="false">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="textfieldNavnLokale" GridPane.columnIndex="1" />
+                        <TextField fx:id="textfieldTypeLokale" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textfieldPlasserLokale" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Navn" />
+                        <Label text="Type" GridPane.rowIndex="1" />
+                        <Label text="Plasser" GridPane.rowIndex="2" />
+                        <Button fx:id="btnEndreLokale" mnemonicParsing="false" onAction="#actionEndreLokale" text="Endre" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+                </GridPane>
+            </children>
+        </Pane>
+        <Button fx:id="btnEndre" disable="true" layoutX="529.0" layoutY="134.0" mnemonicParsing="false" onAction="#actionEndreElement" onMouseClicked="#actionEndreElement" text="Velg" />
     </children>
 
 </AnchorPane>
