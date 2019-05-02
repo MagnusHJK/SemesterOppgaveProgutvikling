@@ -36,6 +36,8 @@ public class ControllerAdminEndre {
     public void initialize() throws Exception {
         Element elementerListe = new Element();
         choiceEndre.setItems(elementerListe.lagElementListe());
+
+        //choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
     }
 
     @FXML
@@ -70,7 +72,7 @@ public class ControllerAdminEndre {
         if (valg.equals("Lokale")) {
             listLokale.setVisible(true);
             //listKontaktperson.setVisible(false);
-            //listArrangement.setVisible(false);
+            listArrangement.setVisible(false);
 
             try {
                 LokaleSerialiser lSerialiser = new LokaleSerialiser();
@@ -97,13 +99,14 @@ public class ControllerAdminEndre {
             }
         } else if (valg.equals("Arrangement")) {
             listArrangement.setVisible(true);
+            listLokale.setVisible(false);
 
             try {
                 ArrangementSerialiser aSerialiser = new ArrangementSerialiser();
                 ArrangementHåndtering håndtering = new ArrangementHåndtering();
                 ArrayList<Arrangement> liste = aSerialiser.lesArrayFraFil();
 
-                //EndreTabell.setItems(håndtering.lagObservableList(liste));
+                listArrangement.setItems(håndtering.lagObservableList(liste));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -174,20 +177,38 @@ public class ControllerAdminEndre {
     private TextArea textareaBeskrivelse;
 
     @FXML
-    private void actionEndreElement(ActionEvent event) {
+    private void actionEndreElement(ActionEvent event) throws Exception{
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
         //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
 
         if (valg.equals("Lokale")) {
             paneLokale.setVisible(true);
-            listLokale.setVisible(true);
-            //paneKontaktperson.setVisible(false);
-            //paneArrangement.setVisible(false);
+            paneArrangement.setVisible(false);
+
+
+            try {
+                LokaleSerialiser serialiser = new LokaleSerialiser();
+                LokaleHåndtering håndtering = new LokaleHåndtering();
+                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+                listLokale.setItems(håndtering.lagObservableList(liste));
+            } catch(IOException | ClassNotFoundException e){
+                e.printStackTrace();
+            }
 
         } else if (valg.equals("Arrangement")) {
             paneArrangement.setVisible(true);
-            listArrangement.setVisible(true);
-            //paneLokale.setVisible(false);
+            paneLokale.setVisible(false);
+
+            try{
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
+                ArrangementHåndtering håndtering = new ArrangementHåndtering();
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+                listArrangement.setItems(håndtering.lagObservableList(liste));
+            }catch(IOException | ClassNotFoundException e){
+                e.printStackTrace();
+            }
         } else {
 
         }
@@ -215,7 +236,7 @@ public class ControllerAdminEndre {
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         lokaleHåndtering.endreLokale(lokale);
-        textfieldLokaleID.clear();
+        //textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
         textfieldTypeLokale.clear();
         textfieldPlasserLokale.clear();
@@ -227,12 +248,12 @@ public class ControllerAdminEndre {
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
-            //liste.add(lokale);
+            liste.add(lokale);
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
 
-            /*// Lagerer på fil
+            // Lagerer på fil
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
@@ -243,7 +264,7 @@ public class ControllerAdminEndre {
 
             skrivTilFil skriv = new skrivTilCsv();
             skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
-            // Slutt*/
+            // Slutt
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -252,14 +273,16 @@ public class ControllerAdminEndre {
         }
     }
 
-    @FXML
+    /*@FXML
     private void actionEndreArrangement(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
-        /*Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
+        Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på legg til arrangement");
 
         String arrangementID = etArrangement.getArrangementID();
-        Kontaktperson kontaktperson = choiceKontaktperson.getSelectionModel().getSelectedItem();
-        Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
+        //Kontaktperson kontaktperson = choiceKontaktperson.getSelectionModel().getSelectedItem();
+        //Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
+        Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
+        Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
         String navn = textfieldNavn.getText();
         String artist = textfieldArtist.getText();
         String sted = textfieldSted.getText();
@@ -286,7 +309,7 @@ public class ControllerAdminEndre {
 
         // Sjekk om menyene er lik NULL
         try {
-            if (kontaktperson == null || lokale == null) {
+            if (enKontaktperson == null || etLokale == null) {
                 ok = false;
                 throw new NullPointerException();
             }
@@ -294,6 +317,7 @@ public class ControllerAdminEndre {
             alertbox.feil(inputException.nullexception());
 
         }
+
 
         // Sjekker om input feltene inneholder tall der det trengs
         try {
@@ -349,6 +373,6 @@ public class ControllerAdminEndre {
                 cnf.printStackTrace();
             }
         }
-    */
-    }
+
+    }*/
 }
