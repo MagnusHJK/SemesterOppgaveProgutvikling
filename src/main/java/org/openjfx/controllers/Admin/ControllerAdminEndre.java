@@ -43,9 +43,6 @@ public class ControllerAdminEndre {
         choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
 
         choicePerson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
-
-        //choiceKontaktperson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
-        //choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
     }
 
     @FXML
@@ -58,26 +55,10 @@ public class ControllerAdminEndre {
     private ListView<Arrangement> listArrangement;
 
     @FXML
-    private AnchorPane paneAdminEndre;
-
-    @FXML
     private ChoiceBox<String> choiceEndre;
 
     @FXML
-    private Button btnEndre;
-
-    @FXML
-    private Button btnEndre2;
-
-    @FXML
-    private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
-
-    @FXML
     public void endreInnhold(ActionEvent event) throws Exception {
-
-        //LokaleHåndtering lokaler = new LokaleHåndtering();
-        //LokaleSerialiser serialiser = new LokaleSerialiser();
-
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
 
         if (valg.equals("Lokale")) {
@@ -87,8 +68,6 @@ public class ControllerAdminEndre {
             paneKontaktperson.setVisible(false);
             listArrangement.setVisible(false);
             paneArrangement.setVisible(false);
-            //listKontaktperson.setVisible(false);
-            //listArrangement.setVisible(false);
 
             try {
                 LokaleSerialiser lSerialiser = new LokaleSerialiser();
@@ -107,7 +86,6 @@ public class ControllerAdminEndre {
             paneLokale.setVisible(false);
             listArrangement.setVisible(false);
             paneArrangement.setVisible(false);
-            //listArrangement.setVisible(true);
 
             try {
                 PersonSerialiser pSerialiser = new PersonSerialiser();
@@ -142,17 +120,7 @@ public class ControllerAdminEndre {
         }
     }
 
-    @FXML
-    private void actionLokaleTrykk(MouseEvent event) {
-        btnEndre.setDisable(false);
-    }
-
-    @FXML
-    private void actionArrangementTrykk(MouseEvent event) {
-        btnEndre.setDisable(false);
-    }
-
-    // Lokale
+    // Lokale FXML
     @FXML
     private Pane paneLokale;
 
@@ -168,11 +136,7 @@ public class ControllerAdminEndre {
     @FXML
     private TextField textfieldPlasserLokale;
 
-    @FXML
-    private Button btnEndreLokale;
-
-    // Kontaktperson
-
+    // Kontaktperson FXML
     @FXML
     private Pane paneKontaktperson;
 
@@ -197,11 +161,7 @@ public class ControllerAdminEndre {
     @FXML
     private TextArea textareaOpplysningerPerson;
 
-    @FXML
-    private Button btnEndreKontaktperson;
-
-
-    // Arrangement
+    // Arrangement FXML
     @FXML
     private Pane paneArrangement;
 
@@ -235,59 +195,9 @@ public class ControllerAdminEndre {
     @FXML
     private TextArea textareaBeskrivelse;
 
-    @FXML
-    private void actionEndreElement(ActionEvent event) throws Exception{
-        //paneLokale.setDisable(false);
-        /*String valg = choiceEndre.getSelectionModel().getSelectedItem();
-        //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
-
-        if (valg.equals("Lokale")) {
-            paneLokale.setVisible(true);
-            btnEndreLokale.setDisable(false);
-            //paneLokale.setDisable(false);
-
-            //paneArrangement.setVisible(false);
-
-
-            try {
-                LokaleSerialiser serialiser = new LokaleSerialiser();
-                LokaleHåndtering håndtering = new LokaleHåndtering();
-                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
-
-                listLokale.setItems(håndtering.lagObservableList(liste));
-            } catch(IOException io){
-               alertbox.feil(inputException.ioException());
-            } catch(ClassNotFoundException cnf) {
-                alertbox.feil(klasseException.klasseException());
-            }
-
-        } else if (valg.equals("Kontaktperson")) {
-
-        }
-        else if (valg.equals("Arrangement")) {
-            paneArrangement.setVisible(true);
-            paneLokale.setVisible(false);
-
-            try{
-                ArrangementSerialiser serialiser = new ArrangementSerialiser();
-                ArrangementHåndtering håndtering = new ArrangementHåndtering();
-                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
-
-                listArrangement.setItems(håndtering.lagObservableList(liste));
-            }catch(IOException e){
-                alertbox.feil(inputException.ioException());
-            } catch(ClassNotFoundException cnf) {
-                alertbox.feil(klasseException.klasseException());
-            }
-        } else {
-
-        }*/
-    }
-
+    // Metode som endrer lokalet
     @FXML
     private void actionEndreLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
-        //paneLokale.setDisable(false);
-
         Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på endre lokale");
 
@@ -305,22 +215,44 @@ public class ControllerAdminEndre {
             alertbox.feil("Antall plasser er nødt til å være heltall.");
         }
 
+        // Sjekker om input feltene er tomme
+        try {
+            if(lokaleID.isEmpty() || navn.isEmpty() ||
+                    type.isEmpty()) {
+                throw new inputException();
+            }
+        } catch (inputException ie) {
+            alertbox.feil(inputException.emptyException());
+        }
+
+        // Validerer input-feltene til lokale
+        try {
+            if (!(lokaleID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("LokaleID må bestå av kun tall");
+                return;
+            } else if (!(navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Navn har ugyldige tegn. Gyldige tegn er: A-Å, a-å, -");
+                return;
+            } else if (!(type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$"))) {
+                alertbox.feil("Type har ugyldige tegn. Gyldige tegn er: A-Å, a-å, 0-9, -");
+                return;
+            }
+        } catch (Exception e) {
+
+        }
+
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         lokaleHåndtering.endreLokale(lokale);
-        //textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
         textfieldTypeLokale.clear();
         textfieldPlasserLokale.clear();
 
         try {
-
-
-            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            // Henter det nåværende Array av Lokale
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
-            //liste.add(lokale);
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
@@ -347,6 +279,7 @@ public class ControllerAdminEndre {
         }
     }
 
+    // Metode som endrer kontaktperson
     @FXML
     private void actionEndreKontaktperson(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
         Kontaktperson enKontaktperson = listKontaktperson.getSelectionModel().getSelectedItem();
@@ -361,10 +294,52 @@ public class ControllerAdminEndre {
         String virksomhet = textfieldVirksomhetPerson.getText();
         String opplysninger = textareaOpplysningerPerson.getText();
 
+        // Sjekk om feltene er tomme
+        try {
+            if(fornavn.isEmpty() || etternavn.isEmpty() ||
+                    tlf.isEmpty() || epost.isEmpty() ||
+                    nettside.isEmpty() || virksomhet.isEmpty() ||
+                    opplysninger.isEmpty()) {
+                throw new inputException();
+            }
+        } catch (inputException ie) {
+            alertbox.feil(inputException.emptyException());
+        }
+
+        // Validerer input-feltene til kontaktperson
+        try {
+            if (!(personID.matches("^[0-9]{1,10}$"))) {
+                alertbox.feil("Person ID inneholder ugyldige tegn.");
+                return;
+            } else if (!(fornavn.matches("^[A-ZÆØÅa-zæøå -]{2,20}$"))) {
+                alertbox.feil("Fornavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(etternavn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
+                alertbox.feil("Etternavn inneholder ugyldige tegn.");
+                return;
+            } else if (!(tlf.matches("^[0-9]{8}$"))) {
+                alertbox.feil("Telefon inneholder ugyldige tegn.");
+                return;
+            } else if (!(epost.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"))) {
+                alertbox.feil("Epost inneholder ugyldige tegn.");
+                return;
+            } else if (!(nettside.matches("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}"))) {
+                alertbox.feil("Nettside inneholder ugyldige tegn.");
+                return;
+            } else if (!(virksomhet.matches("^[A-Za-z ]{2,30}"))) {
+                alertbox.feil("Virksomhet inneholder ugyldige tegn.");
+                return;
+            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,}$"))) {
+                alertbox.feil("Opplysninger inneholder ugyldige tegn.");
+                return;
+            }
+        } catch (Exception e) {
+
+        }
+
         Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
         PersonHåndtering personHåndtering = new PersonHåndtering();
         personHåndtering.endrePerson(kontaktperson);
-        //textfieldLokaleID.clear();
         textfieldFornavnPerson.clear();
         textfieldEtternavnPerson.clear();
         textfieldTlfPerson.clear();
@@ -376,11 +351,10 @@ public class ControllerAdminEndre {
         try {
 
 
-            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            //Henter det nåværende Array av Kontaktperson
             PersonSerialiser serialiser = new PersonSerialiser();
             ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
 
-            //liste.add(lokale);
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
@@ -407,20 +381,13 @@ public class ControllerAdminEndre {
         }
     }
 
-
+    // Metode som endrer arrangement
     @FXML
     private void actionEndreArrangement(ActionEvent event) throws idException, inputException, NullPointerException {
         Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
-        //Lokale etLokale = choiceLokale.getSelectionModel().getSelectedItem();
-        //Kontaktperson enKontaktperson = choicePerson.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på legg til arrangement");
 
         String arrangementID = etArrangement.getArrangementID();
-        //Kontaktperson kontaktperson = choiceKontaktperson.getSelectionModel().getSelectedItem();
-        //Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
-        //Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
-        //Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
-        //Kontaktperson kontaktperson = (Kontaktperson) choicePerson.getSelectionModel().getSelectedItem();
         Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
         Kontaktperson kontaktperson = choicePerson.getSelectionModel().getSelectedItem();
         String navn = textfieldNavnArr.getText();
@@ -431,15 +398,15 @@ public class ControllerAdminEndre {
         String beskrivelse = textareaBeskrivelse.getText();
         int billettPris = 0;
         int billettMaks = 0;
-        //boolean ok = true;
 
+        // Sjekker at billettpris inneholder heltall
         try {
             billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
-
         } catch (NumberFormatException nfe) {
             alertbox.feil("Billettpris er nødt til å være heltall.");
         }
 
+        // Sjekker at maks billetter inneholder heltall
         try {
             billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
         } catch (NumberFormatException nfe) {
@@ -449,7 +416,6 @@ public class ControllerAdminEndre {
         // Sjekk om menyene er lik NULL
         try {
             if(kontaktperson == null || lokale == null) {
-                //ok = false;
                 throw new NullPointerException();
             }
         } catch(NullPointerException npe) {
@@ -457,95 +423,80 @@ public class ControllerAdminEndre {
 
         }
 
-/*
         // Sjekk om feltene er tomme
         try {
             if (navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
-                //ok = false;
                 throw new inputException();
-
             }
-
         } catch (inputException ie) {
             alertbox.feil(inputException.emptyException());
+        }
+
+        // Validerer input-feltene til arrangement
+        try {
+            if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
+                alertbox.feil("ArrangementID inneholder ugyldige tegn.");
+                return;
+            } else if(!(navn.matches("^[A-ZÆØÅa-zæøå :\\-]{2,30}$"))) {
+                alertbox.feil("Navn inneholder ugyldige tegn.");
+                return;
+            } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Artist inneholder ugyldige tegn.");
+                return;
+            } else if(!(sted.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
+                alertbox.feil("Sted inneholder ugyldige tegn.");
+                return;
+            } else if(!(tidspunkt.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
+                alertbox.feil("Tid er i feil format.");
+                return;
+            } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9./ \\-]{1,}$"))) {
+                alertbox.feil("Beskrivelse inneholder ugyldige tegn.");
+                return;
+            }
+        } catch (Exception e) {
 
         }
 
-        // Sjekk om menyene er lik NULL
-        try {
-            if (kontaktperson == null || lokale == null) {
-                //ok = false;
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException npe) {
-            alertbox.feil(inputException.nullexception());
+        Billett[] billett = new Billett[billettMaks];
 
+        Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
+        ArrangementHåndtering arrangementHåndtering = new ArrangementHåndtering();
+        arrangementHåndtering.endreArrangement(arrangement);
+        textfieldNavnArr.clear();
+        textfieldArtistArr.clear();
+        textfieldStedArr.clear();
+        textfieldTidspunktArr.clear();
+        textfieldBillettprisArr.clear();
+        textfieldMaksBilletterArr.clear();
+        textareaBeskrivelse.clear();
+
+        try {
+            //Henter det nåværende Array av Arrangementer
+            ArrangementSerialiser serialiser = new ArrangementSerialiser();
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+            // Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
+            // Slutt
+        } catch (IOException ioe) {
+            alertbox.feil(inputException.ioException());
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
-
-
-        // Sjekker om input feltene inneholder tall der det trengs
-        try {
-            billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
-            billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
-            //ok = false;
-            // throw new inputException();
-        } catch (NumberFormatException nfe) {
-            alertbox.feil(inputException.intException());
-
-        }*/
-
-
-        /*if (!ok) {
-
-        } else {
-*/
-            Billett[] billett = new Billett[billettMaks];
-
-            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
-            ArrangementHåndtering arrangementHåndtering = new ArrangementHåndtering();
-            arrangementHåndtering.endreArrangement(arrangement);
-            //textfieldArrangementID.clear();
-            textfieldNavnArr.clear();
-            textfieldArtistArr.clear();
-            textfieldStedArr.clear();
-            textfieldTidspunktArr.clear();
-            textfieldBillettprisArr.clear();
-            textfieldMaksBilletterArr.clear();
-            textareaBeskrivelse.clear();
-
-            try {
-                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
-                ArrangementSerialiser serialiser = new ArrangementSerialiser();
-                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
-
-                //liste.add(arrangement);
-                System.out.println(liste);
-
-                serialiser.skrivArrayTilFil(liste);
-
-                // Lagerer på fil
-                Stage stage = new Stage();
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-                File selectedFile = fileChooser.showOpenDialog(stage);
-                String path = selectedFile.getPath();
-
-                ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
-
-                skrivTilFil skriv = new skrivTilCsv();
-                skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
-                // Slutt
-
-
-            } catch (IOException ioe) {
-                alertbox.feil(inputException.ioException());
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException cnf) {
-
-                alertbox.feil(klasseException.klasseException());
-            }
-        //}
-
     }
 }
