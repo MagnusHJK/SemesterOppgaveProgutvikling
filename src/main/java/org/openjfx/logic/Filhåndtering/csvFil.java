@@ -3,8 +3,6 @@ package org.openjfx.logic.Filhåndtering;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.openjfx.logic.exceptions.alertbox;
-import org.openjfx.logic.exceptions.filException;
-import org.openjfx.logic.exceptions.inputException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,18 +23,19 @@ public class csvFil extends fil {
             System.out.println(data);
 
         } catch (FileNotFoundException fnf) {
-           alertbox.feil(filException.filException());
+            fnf.printStackTrace();
         } catch (IOException io) {
-           alertbox.feil(inputException.ioException());
+            io.printStackTrace();
         }
 
         return data;
     }
 
     @Override
-    public ArrayList<String>  lesJobjFil(String path, ArrayList<String> data) {
+    public ArrayList<String> lesJobjFil(String path, ArrayList<String> data) {
         return data;
     }
+
 
 
 }

@@ -15,5 +15,5 @@ public class inputException extends Exception{
 
     public static String validException() { return "Input-feltene må inneholde gyldige tegn"; }
 
-    public static String ioException() {return "Feil i input/output";}
+    public static String ioException() { return "Feil i input/output"; }
 }

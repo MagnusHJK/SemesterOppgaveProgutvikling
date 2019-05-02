@@ -38,10 +38,6 @@ public class ControllerAdminEndre {
         LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
         PersonHåndtering personer = new PersonHåndtering();
-        // midlertidig
-        Kontaktperson.lagKontaktpersonListe();
-        PersonSerialiser personSerialiser = new PersonSerialiser();
-        Kontaktperson.lagKontaktpersonListe();
 
         //choiceKontaktperson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
         //choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
@@ -287,7 +283,7 @@ public class ControllerAdminEndre {
             LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
             skrivTilFil skriv = new skrivTilCsv();
-            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
             // Slutt
 
         } catch (IOException ioe) {

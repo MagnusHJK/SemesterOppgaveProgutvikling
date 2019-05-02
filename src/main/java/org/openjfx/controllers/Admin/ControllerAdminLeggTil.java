@@ -270,7 +270,7 @@ public class ControllerAdminLeggTil {
             LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
             skrivTilFil skriv = new skrivTilCsv();
-            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
             // Slutt
 
         } catch(IOException ioe){
@@ -372,7 +372,7 @@ public class ControllerAdminLeggTil {
             PersonSerialiser personSerialiser = new PersonSerialiser();
 
             skrivTilFil skriv = new skrivTilCsv();
-            skriv.PersonTilCsv(personSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(),path);
             // Slutt
 
         }catch(IOException ioe){
@@ -502,7 +502,7 @@ public class ControllerAdminLeggTil {
                 ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
 
                 skrivTilFil skriv = new skrivTilCsv();
-                skriv.ArrangementTilCsv(arrangementSerialiser.lesArrayFraFil(),path);
+                skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(),path);
                 // Slutt
 
 
