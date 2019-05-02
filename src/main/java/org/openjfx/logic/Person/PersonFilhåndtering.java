@@ -31,7 +31,7 @@ public class PersonFilhåndtering {
             velgFil.velgFil(navn,path,data);
 
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+            alertbox.feil(nullException.nullException());
         } catch (RuntimeException rt) {
             alertbox.feil(kjoreException.kjoreException());
         }
@@ -81,7 +81,7 @@ public class PersonFilhåndtering {
                 alertbox.feil(kjoreException.kjoreException());
             }
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+            alertbox.feil(nullException.nullException());
         }
     }
 }

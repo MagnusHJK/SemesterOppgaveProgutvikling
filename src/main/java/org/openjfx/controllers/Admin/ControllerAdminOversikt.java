@@ -17,6 +17,9 @@ import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -190,8 +193,10 @@ public class ControllerAdminOversikt {
             tabellLokaler.setItems(håndteringLok.lagObservableList(serialiserLok.lesArrayFraFil()));
             tabellKontaktpersoner.setItems(håndteringPer.lagObservableList(serialiserPer.lesArrayFraFil()));
             tabellBilletter.setItems(håndteringBill.lagObservableList(serialiserBill.lesArrayFraFil()));
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 

@@ -377,13 +377,12 @@ public class ControllerAdminEndre {
                 skrivTilFil skriv = new skrivTilCsv();
                 skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(), path);
             } catch (NullPointerException npe) {
-                npe.printStackTrace();
+                alertbox.feil(nullException.nullException());
             }
             // Slutt
 
         } catch (IOException ioe) {
             alertbox.feil(inputException.ioException());
-            ioe.printStackTrace();
         } catch (ClassNotFoundException cnf) {
 
             alertbox.feil(klasseException.klasseException());
@@ -502,12 +501,11 @@ public class ControllerAdminEndre {
                 skrivTilFil skriv = new skrivTilCsv();
                 skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
             } catch (NullPointerException npe) {
-                npe.printStackTrace();
+                alertbox.feil(nullException.nullException());
             }
             // Slutt
         } catch (IOException ioe) {
             alertbox.feil(inputException.ioException());
-            ioe.printStackTrace();
         } catch (ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
         }

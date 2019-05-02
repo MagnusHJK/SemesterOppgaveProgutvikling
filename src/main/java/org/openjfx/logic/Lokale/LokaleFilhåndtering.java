@@ -26,7 +26,7 @@ public class LokaleFilhåndtering {
 
             velgFil.velgFil(navn,path,data);
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+           alertbox.feil(nullException.nullException());
         } catch (RuntimeException rt) {
             alertbox.feil(kjoreException.kjoreException());
         }
@@ -72,7 +72,7 @@ public class LokaleFilhåndtering {
                 alertbox.feil(kjoreException.kjoreException());
             }
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+           alertbox.feil(nullException.nullException());
         }
     }
 }

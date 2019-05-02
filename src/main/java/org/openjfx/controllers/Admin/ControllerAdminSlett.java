@@ -20,6 +20,9 @@ import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -81,8 +84,10 @@ public class ControllerAdminSlett {
 
                 listLokale.setItems(håndtering.lagObservableList(liste));
 
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch(IOException io){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
 
 
@@ -98,8 +103,10 @@ public class ControllerAdminSlett {
                 ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
 
                 listKontaktperson.setItems(håndtering.lagObservableList(liste));
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch(IOException io){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
 
         }else if(valg.equals("Arrangement")){
@@ -114,8 +121,10 @@ public class ControllerAdminSlett {
                 ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
                 listArrangement.setItems(håndtering.lagObservableList(liste));
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch(IOException io){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
         }else if(valg.equals("Billett")){
             listLokale.setVisible(false);
@@ -129,8 +138,10 @@ public class ControllerAdminSlett {
                 ArrayList<Billett> liste = serialiser.lesArrayFraFil();
 
                 listBillett.setItems(håndtering.lagObservableList(liste));
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch(IOException io){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
         }
     }
