@@ -27,15 +27,6 @@ import java.util.stream.Stream;
 public class ArrangementHåndtering {
 
 
-    //Endrer et spesifikt arrangement
-    public boolean endreArrangement(Arrangement arrangement){
-        return true;
-    }
-
-
-
-
-
     //Lager en ObservableList som JavaFX kan bruke i sine komponenter
     public ObservableList<Arrangement> lagObservableList(ArrayList<Arrangement> ArrayListe) throws Exception{
 
@@ -132,13 +123,16 @@ public class ArrangementHåndtering {
             serialiser.skrivArrayTilFil(liste);
 
         } catch (IOException e) {
-           alertbox.feil(inputException.ioException());
-        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(inputException.ioException());
+        } catch (ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
         }
-        //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
-        public ArrayList<Arrangement> lagArrangementListe(){
-            ArrayList<Arrangement>arrangementListe = new ArrayList<>();
+    }
+
+    //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
+
+    public ArrayList<Arrangement> lagArrangementListe(){
+        ArrayList<Arrangement>arrangementListe = new ArrayList<>();
         PersonHåndtering person = new PersonHåndtering();
         ArrayList<Kontaktperson> kontaktpersonListe = person.lagKontaktpersonListe();
 
