@@ -78,6 +78,8 @@ public class ControllerAdminEndre {
         if (valg.equals("Lokale")) {
             listLokale.setVisible(true);
             paneLokale.setVisible(true);
+            listKontaktperson.setVisible(false);
+            paneKontaktperson.setVisible(false);
             //listKontaktperson.setVisible(false);
             //listArrangement.setVisible(false);
 
@@ -91,7 +93,11 @@ public class ControllerAdminEndre {
                 alertbox.feil(klasseException.klasseException());
             }
 
-        } /*else if (valg.equals("Kontaktperson")) {
+        } else if (valg.equals("Kontaktperson")) {
+            listKontaktperson.setVisible(true);
+            paneKontaktperson.setVisible(true);
+            listLokale.setVisible(false);
+            paneLokale.setVisible(false);
             //listArrangement.setVisible(true);
 
             try {
@@ -99,12 +105,12 @@ public class ControllerAdminEndre {
                 PersonHåndtering håndtering = new PersonHåndtering();
                 ArrayList<Kontaktperson> liste = pSerialiser.lesArrayFraFil();
 
-                //EndreTabell.setItems(håndtering.lagObservableList(liste));
+                listKontaktperson.setItems(håndtering.lagObservableList(liste));
 
             } catch (Exception e) {
                 alertbox.feil(opprettException.opprettException());
             }
-        } else if (valg.equals("Arrangement")) {
+        } /*else if (valg.equals("Arrangement")) {
             listArrangement.setVisible(true);
             listLokale.setVisible(false);
 
@@ -151,6 +157,35 @@ public class ControllerAdminEndre {
     @FXML
     private Button btnEndreLokale;
 
+    // Kontaktperson
+
+    @FXML
+    private Pane paneKontaktperson;
+
+    @FXML
+    private TextField textfieldFornavnPerson;
+
+    @FXML
+    private TextField textfieldEtternavnPerson;
+
+    @FXML
+    private TextField textfieldTlfPerson;
+
+    @FXML
+    private TextField textfieldEpostPerson;
+
+    @FXML
+    private TextField textfieldNettsidePerson;
+
+    @FXML
+    private TextField textfieldVirksomhetPerson;
+
+    @FXML
+    private TextArea textareaOpplysningerPerson;
+
+    @FXML
+    private Button btnEndreKontaktperson;
+
 
     // Arrangement
     @FXML
@@ -189,7 +224,7 @@ public class ControllerAdminEndre {
     @FXML
     private void actionEndreElement(ActionEvent event) throws Exception{
         //paneLokale.setDisable(false);
-        String valg = choiceEndre.getSelectionModel().getSelectedItem();
+        /*String valg = choiceEndre.getSelectionModel().getSelectedItem();
         //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
 
         if (valg.equals("Lokale")) {
@@ -212,7 +247,10 @@ public class ControllerAdminEndre {
                 alertbox.feil(klasseException.klasseException());
             }
 
-        } /*else if (valg.equals("Arrangement")) {
+        } else if (valg.equals("Kontaktperson")) {
+
+        }
+        else if (valg.equals("Arrangement")) {
             paneArrangement.setVisible(true);
             paneLokale.setVisible(false);
 
@@ -227,9 +265,9 @@ public class ControllerAdminEndre {
             } catch(ClassNotFoundException cnf) {
                 alertbox.feil(klasseException.klasseException());
             }
-        } */else {
+        } else {
 
-        }
+        }*/
     }
 
     @FXML
@@ -256,7 +294,7 @@ public class ControllerAdminEndre {
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         lokaleHåndtering.endreLokale(lokale);
-        textfieldLokaleID.clear();
+        //textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
         textfieldTypeLokale.clear();
         textfieldPlasserLokale.clear();
@@ -288,11 +326,73 @@ public class ControllerAdminEndre {
 
         } catch (IOException ioe) {
            alertbox.feil(inputException.ioException());
+           ioe.printStackTrace();
         } catch (ClassNotFoundException cnf) {
 
             alertbox.feil(klasseException.klasseException());
         }
     }
+
+    @FXML
+    private void actionEndreKontaktperson(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+        Kontaktperson enKontaktperson = listKontaktperson.getSelectionModel().getSelectedItem();
+        System.out.println("Du har trykket på endre kontaktperson");
+
+        String personID = enKontaktperson.getPersonID();
+        String fornavn = textfieldFornavnPerson.getText();
+        String etternavn = textfieldEtternavnPerson.getText();
+        String tlf = textfieldTlfPerson.getText();
+        String epost = textfieldEpostPerson.getText();
+        String nettside = textfieldNettsidePerson.getText();
+        String virksomhet = textfieldVirksomhetPerson.getText();
+        String opplysninger = textareaOpplysningerPerson.getText();
+
+        Kontaktperson kontaktperson = new Kontaktperson(personID, fornavn, etternavn, tlf, epost, nettside, virksomhet, opplysninger);
+        PersonHåndtering personHåndtering = new PersonHåndtering();
+        personHåndtering.endrePerson(kontaktperson);
+        //textfieldLokaleID.clear();
+        textfieldFornavnPerson.clear();
+        textfieldEtternavnPerson.clear();
+        textfieldTlfPerson.clear();
+        textfieldEpostPerson.clear();
+        textfieldNettsidePerson.clear();
+        textfieldVirksomhetPerson.clear();
+        textareaOpplysningerPerson.clear();
+
+        try {
+
+
+            //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+            PersonSerialiser serialiser = new PersonSerialiser();
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+
+            //liste.add(lokale);
+            System.out.println(liste);
+
+            serialiser.skrivArrayTilFil(liste);
+
+            // Lagerer på fil
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+
+            PersonSerialiser personSerialiser = new PersonSerialiser();
+
+            skrivTilFil skriv = new skrivTilCsv();
+            skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(),path);
+            // Slutt
+
+        } catch (IOException ioe) {
+            alertbox.feil(inputException.ioException());
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnf) {
+
+            alertbox.feil(klasseException.klasseException());
+        }
+    }
+
 
     /*@FXML
     private void actionEndreArrangement(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
