@@ -198,6 +198,7 @@ public class ControllerAdminEndre {
     // Metode som endrer lokalet
     @FXML
     private void actionEndreLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+
         Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på endre lokale");
 
@@ -228,13 +229,13 @@ public class ControllerAdminEndre {
         // Validerer input-feltene til lokale
         try {
             if (!(lokaleID.matches("^[0-9]{1,30}$"))) {
-                alertbox.feil("LokaleID må bestå av kun tall");
+                alertbox.feil("LokaleID må bestå av kun tall eller har for mange/for få tegn");
                 return;
             } else if (!(navn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
-                alertbox.feil("Navn har ugyldige tegn. Gyldige tegn er: A-Å, a-å, -");
+                alertbox.feil("Navn har ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(type.matches("^[A-ZÆØÅa-zæøå0-9 -]{2,30}$"))) {
-                alertbox.feil("Type har ugyldige tegn. Gyldige tegn er: A-Å, a-å, 0-9, -");
+                alertbox.feil("Type har ugyldige tegn eller har for mange/for få tegn");
                 return;
             }
         } catch (Exception e) {
@@ -309,28 +310,28 @@ public class ControllerAdminEndre {
         // Validerer input-feltene til kontaktperson
         try {
             if (!(personID.matches("^[0-9]{1,10}$"))) {
-                alertbox.feil("Person ID inneholder ugyldige tegn.");
+                alertbox.feil("Person ID inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(fornavn.matches("^[A-ZÆØÅa-zæøå -]{2,20}$"))) {
-                alertbox.feil("Fornavn inneholder ugyldige tegn.");
+                alertbox.feil("Fornavn inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(etternavn.matches("^[A-ZÆØÅa-zæøå -]{2,30}$"))) {
-                alertbox.feil("Etternavn inneholder ugyldige tegn.");
+                alertbox.feil("Etternavn inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(tlf.matches("^[0-9]{8}$"))) {
-                alertbox.feil("Telefon inneholder ugyldige tegn.");
+                alertbox.feil("Telefon inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(epost.matches("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$"))) {
-                alertbox.feil("Epost inneholder ugyldige tegn.");
+                alertbox.feil("Epost inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(nettside.matches("^[A-ZÆØÅa-zæøå0-9.-/]{4,30}"))) {
-                alertbox.feil("Nettside inneholder ugyldige tegn.");
+                alertbox.feil("Nettside inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if (!(virksomhet.matches("^[A-Za-z ]{2,30}"))) {
-                alertbox.feil("Virksomhet inneholder ugyldige tegn.");
+                alertbox.feil("Virksomhet inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
-            } else if (!(opplysninger.matches("^[A-Za-z0-9. ]{1,}$"))) {
-                alertbox.feil("Opplysninger inneholder ugyldige tegn.");
+            } else if (!(opplysninger.matches("^[A-Za-z0-9 . ]{1,}$"))) {
+                alertbox.feil("Opplysninger inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             }
         } catch (Exception e) {
@@ -436,22 +437,22 @@ public class ControllerAdminEndre {
         // Validerer input-feltene til arrangement
         try {
             if(!(arrangementID.matches("^[0-9]{1,30}$"))) {
-                alertbox.feil("ArrangementID inneholder ugyldige tegn.");
+                alertbox.feil("ArrangementID inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if(!(navn.matches("^[A-ZÆØÅa-zæøå :\\-]{2,30}$"))) {
-                alertbox.feil("Navn inneholder ugyldige tegn.");
+                alertbox.feil("Navn inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if(!(artist.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
-                alertbox.feil("Artist inneholder ugyldige tegn.");
+                alertbox.feil("Artist inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if(!(sted.matches("^[A-ZÆØÅa-zæøå ]{2,30}$"))) {
-                alertbox.feil("Sted inneholder ugyldige tegn.");
+                alertbox.feil("Sted inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             } else if(!(tidspunkt.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
-                alertbox.feil("Tid er i feil format.");
+                alertbox.feil("Tid er i feil format");
                 return;
             } else if(!(beskrivelse.matches("^[A-ZÆØÅa-zæøå0-9./ \\-]{1,}$"))) {
-                alertbox.feil("Beskrivelse inneholder ugyldige tegn.");
+                alertbox.feil("Beskrivelse inneholder ugyldige tegn eller har for mange/for få tegn");
                 return;
             }
         } catch (Exception e) {
