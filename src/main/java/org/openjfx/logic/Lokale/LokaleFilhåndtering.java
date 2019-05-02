@@ -62,7 +62,7 @@ public class LokaleFilhåndtering {
 
         skrivTilFil skriv = new skrivTilCsv();
         try{
-            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
         } catch (IOException io) {
             alertbox.feil(inputException.ioException());
         } catch(ClassNotFoundException cnf) {

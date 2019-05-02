@@ -86,7 +86,7 @@ public class ArrangementFilhåndtering {
 
         skrivTilFil skriv = new skrivTilCsv();
         try{
-            skriv.ArrangementTilCsv(arrangementSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(),path);
         } catch (IOException io) {
             alertbox.feil(inputException.ioException());
         } catch(ClassNotFoundException cnf) {

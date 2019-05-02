@@ -72,7 +72,7 @@ public class PersonFilhåndtering {
 
         skrivTilFil skriv = new skrivTilCsv();
         try{
-            skriv.PersonTilCsv(personSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(),path);
         } catch (IOException io) {
             alertbox.feil(inputException.ioException());
         } catch(ClassNotFoundException cnf) {
