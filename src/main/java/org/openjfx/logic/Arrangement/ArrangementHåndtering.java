@@ -133,6 +133,7 @@ public class ArrangementHåndtering {
 
     public ArrayList<Arrangement> lagArrangementListe(){
         ArrayList<Arrangement>arrangementListe = new ArrayList<>();
+
         PersonHåndtering person = new PersonHåndtering();
         ArrayList<Kontaktperson> kontaktpersonListe = person.lagKontaktpersonListe();
 
@@ -141,14 +142,15 @@ public class ArrangementHåndtering {
 
         LocalDate dato1 = LocalDate.of(2019,4,20);
 
-        Billett[] salg = new Billett[100];
+        Billett[] salg = new Billett[69];
+        Billett[] salg2 = new Billett[100];
 
 
         arrangementListe.add(new Arrangement("023", kontaktpersonListe.get(0), lokaleListe.get(0),
                 "La La Land", "Emma Stone", "Ottestad", dato1, "19:00", "Sykt bra film.", 100, 69, salg));
 
         arrangementListe.add(new Arrangement("047", kontaktpersonListe.get(1), lokaleListe.get(1),
-                "Cats", "Gunnar", "Ottestad", dato1,"20:00", "Sykt kule katter", 250, 100, salg));
+                "Cats", "Gunnar", "Ottestad", dato1,"20:00", "Sykt kule katter", 250, 100, salg2));
 
 
         return arrangementListe;

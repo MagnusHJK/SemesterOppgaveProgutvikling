@@ -9,6 +9,7 @@ import org.openjfx.logic.exceptions.inputException;
 import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -105,5 +106,22 @@ public class BillettHåndtering {
             alertbox.feil(klasseException.klasseException());
         }
 
+    }
+
+    //Lager ObservableList med billetter som brukes til å populere GUI
+    public ArrayList<Billett> lagBillettListe(){
+        ArrayList<Billett> billettList = new ArrayList<>();
+
+        ArrangementHåndtering arrangementHåndtering = new ArrangementHåndtering();
+        ArrayList<Arrangement> arrangementList = arrangementHåndtering.lagArrangementListe();
+
+
+        billettList.add(new Billett(arrangementList.get(0), 1, arrangementList.get(0).getSted(),
+                arrangementList.get(0).getDato(), arrangementList.get(0).getTidspunkt(), "12345678"));
+
+        billettList.add(new Billett(arrangementList.get(1), 2, arrangementList.get(1).getSted(),
+                arrangementList.get(1).getDato(), arrangementList.get(1).getTidspunkt(), "87654321"));
+
+        return billettList;
     }
 }

@@ -2,6 +2,7 @@ package org.openjfx.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
@@ -21,12 +22,17 @@ import java.util.ArrayList;
 
 public class ControllerAdminReset {
 
+
+    @FXML
+    private Label lblReset;
+
     @FXML
     private void actionLokaleReset(ActionEvent event){
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
         ArrayList<Lokale> lokaleListe = lokaleHåndtering.lagLokaleListe();
+        lblReset.setText("Lokaler er resatt");
 
         try{
             lokaleSerialiser.skrivArrayTilFil(lokaleListe);
@@ -42,6 +48,7 @@ public class ControllerAdminReset {
 
         ArrayList<Kontaktperson> personListe = personHåndtering.lagKontaktpersonListe();
 
+        lblReset.setText("Kontaktpersoner er resatt");
         try{
             personSerialiser.skrivArrayTilFil(personListe);
         }catch(IOException | ClassNotFoundException e){
@@ -56,6 +63,8 @@ public class ControllerAdminReset {
 
         ArrayList<Arrangement> arrangementListe = arrangementHåndtering.lagArrangementListe();
 
+        lblReset.setText("Arrangementer er resatt");
+
         try{
             arrangementSerialiser.skrivArrayTilFil(arrangementListe);
         }catch(IOException | ClassNotFoundException e){
@@ -63,13 +72,15 @@ public class ControllerAdminReset {
         }
     }
 
-    /*
+
     @FXML
     private void actionBillettReset(ActionEvent event){
         BillettHåndtering billettHåndtering = new BillettHåndtering();
         BillettSerialiser billettSerialiser = new BillettSerialiser();
 
-        //ArrayList<Billett> billettListe = billettHåndtering.lagBillettListe();
+        ArrayList<Billett> billettListe = billettHåndtering.lagBillettListe();
+
+        lblReset.setText("Billetter er resatt");
 
         try{
             billettSerialiser.skrivArrayTilFil(billettListe);
@@ -79,5 +90,4 @@ public class ControllerAdminReset {
 
     }
 
-     */
 }
