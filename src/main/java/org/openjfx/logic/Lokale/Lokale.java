@@ -63,7 +63,7 @@ public class Lokale implements Serializable {
 
 
     //Lager ObservableList med lokaler som brukes til å populere GUI  -  SKRIV OM SENERE TIL Å LESE FIL
-    public static ArrayList<Lokale> lagLokaleList(){
+    public static ArrayList<Lokale> lagLokaleListe(){
         ArrayList<Lokale> lokaleList = new ArrayList<>();
         lokaleList.add(new Lokale("lokale1", "Ottestad Kino", "Kinosal", 100));
         lokaleList.add(new Lokale("lokale2", "Ottestad Konsert", "Konsertsal", 500));

@@ -7,7 +7,7 @@ import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
+
 
 public class BillettHåndtering {
 
