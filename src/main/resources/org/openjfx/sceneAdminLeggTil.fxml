@@ -137,5 +137,9 @@
                 <Button layoutX="147.0" layoutY="406.0" mnemonicParsing="false" onAction="#actionLeggTilKontaktperson" text="Legg til Kontaktperson" />
             </children>
         </Pane>
+      <Label fx:id="lblLeggTill" alignment="CENTER" layoutX="247.0" layoutY="643.0" prefHeight="16.0" prefWidth="457.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
     </children>
 </AnchorPane>

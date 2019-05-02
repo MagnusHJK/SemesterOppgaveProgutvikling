@@ -70,7 +70,6 @@ public class ControllerAdminFilbehandling {
     }
 
 
-
     @FXML
     public void lesFraPersoner(ActionEvent event) throws IOException{
         PersonFilhåndtering filhåndtering = new PersonFilhåndtering();
