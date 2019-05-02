@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import org.openjfx.logic.Filhåndtering.skrivTilCsv;
 import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Filhåndtering.velgFil;
+import org.openjfx.logic.Filhåndtering.velgFilSkriv;
 import org.openjfx.logic.exceptions.*;
 
 import java.io.File;
@@ -32,8 +33,6 @@ public class PersonFilhåndtering {
         }
         try {
 
-            alertbox.feil(data.toString());
-
             String ID = data.get(0);
             String fornavn = data.get(1);
             String etternavn = data.get(2);
@@ -56,7 +55,9 @@ public class PersonFilhåndtering {
             alertbox.feil(tallFormatException.tallFormatException());
         } catch (ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
-        }catch (IOException ioe){
+        } catch(IndexOutOfBoundsException iob) {
+            alertbox.feil(rekkeviddeException.rekkeviddeException());
+        } catch (IOException ioe){
             alertbox.feil(inputException.ioException());
         }
     }
@@ -67,16 +68,13 @@ public class PersonFilhåndtering {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
         File selectedFile = fileChooser.showOpenDialog(stage);
         String path = selectedFile.getPath();
+        String navn = selectedFile.getName();
+        ArrayList<String> data = new ArrayList<>();
 
-        PersonSerialiser personSerialiser = new PersonSerialiser();
-
-        skrivTilFil skriv = new skrivTilCsv();
         try{
-            skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(),path);
-        } catch (IOException io) {
-            alertbox.feil(inputException.ioException());
-        } catch(ClassNotFoundException cnf) {
-            alertbox.feil(klasseException.klasseException());
+            velgFilSkriv.velgFilSkriv(navn,path,data,"databases/person.txt");
+        } catch(RuntimeException rt) {
+            alertbox.feil(kjoreException.kjoreException());
         }
     }
 }

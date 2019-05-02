@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import org.openjfx.logic.Filhåndtering.skrivTilCsv;
 import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Filhåndtering.velgFil;
+import org.openjfx.logic.Filhåndtering.velgFilSkriv;
 import org.openjfx.logic.exceptions.*;
 
 import java.io.File;
@@ -44,7 +45,9 @@ public class LokaleFilhåndtering {
 
         } catch(NumberFormatException nfe) {
             alertbox.feil(tallFormatException.tallFormatException());
-        } catch (ClassNotFoundException cnf) {
+        } catch(IndexOutOfBoundsException iob) {
+            alertbox.feil(rekkeviddeException.rekkeviddeException());
+        }  catch (ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
         }catch (IOException ioe){
             alertbox.feil(inputException.ioException());
@@ -57,16 +60,13 @@ public class LokaleFilhåndtering {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
         File selectedFile = fileChooser.showOpenDialog(stage);
         String path = selectedFile.getPath();
+        String navn = selectedFile.getName();
+        ArrayList<String> data = new ArrayList<>();
 
-        LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
-
-        skrivTilFil skriv = new skrivTilCsv();
         try{
-            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
-        } catch (IOException io) {
-            alertbox.feil(inputException.ioException());
-        } catch(ClassNotFoundException cnf) {
-            alertbox.feil(klasseException.klasseException());
+            velgFilSkriv.velgFilSkriv(navn,path,data,"databases/lokale.txt");
+        } catch(RuntimeException rt) {
+            alertbox.feil(kjoreException.kjoreException());
         }
     }
 }
