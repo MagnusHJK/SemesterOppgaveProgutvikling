@@ -48,9 +48,9 @@ public class ControllerAdminLeggTil {
 
         PersonHåndtering personer = new PersonHåndtering();
         // midlertidig
-        Kontaktperson.lagKontaktpersonListe();
+       // Kontaktperson.lagKontaktpersonListe();
         PersonSerialiser personSerialiser = new PersonSerialiser();
-        Kontaktperson.lagKontaktpersonListe();
+        //Kontaktperson.lagKontaktpersonListe();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());

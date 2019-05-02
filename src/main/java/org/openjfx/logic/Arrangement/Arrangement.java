@@ -1,5 +1,8 @@
 package org.openjfx.logic.Arrangement;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Billett.Billett;
@@ -144,47 +147,23 @@ public class Arrangement implements Serializable {
         this.salg = salg;
     }
 
+
+    //get metode for å finne antall solgte billetter for arrangementet
+    public ObservableValue<Integer> getSalgAntall(){
+        int salgAntall = 0;
+        for(int i = 0; i < this.getSalg().length; i++){
+            if(this.getSalg()[i] != null){
+                salgAntall++;
+            }
+        }
+        ObservableValue<Integer> salgAntallObservable = new SimpleIntegerProperty(salgAntall).asObject();
+        return salgAntallObservable;
+    }
+
     @Override
     public String toString() {
         return this.getNavn();
     }
 
 
-
-    //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
-    public static ArrayList<Arrangement> lagArrangementListe(){
-        ArrayList<Arrangement>arrangementListe = new ArrayList<>();
-
-        LocalDate dato1 = LocalDate.of(2019,4,20);
-
-        Billett[] salg = new Billett[100];
-
-
-        arrangementListe.add(new Arrangement("adaw2", Kontaktperson.lagKontaktpersonListe().get(0), Lokale.lagLokaleList().get(0),
-                "La La Land", "Emma Stone", "Ottestad", dato1, "19:00", "Sykt bra film.", 100, 69, salg));
-
-        arrangementListe.add(new Arrangement("Dwad3", Kontaktperson.lagKontaktpersonListe().get(1), Lokale.lagLokaleList().get(1),
-                "Cats", "Gunnar", "Ottestad", dato1,"20:00", "Sykt kule katter", 250, 100, salg));
-
-
-        return arrangementListe;
-    }
-
-
-
-   /*
-   public static ObservableList<Arrangement> lagArrangementListe() {
-        ObservableList<Arrangement> arrangementListe = FXCollections.observableArrayList();
-
-        arrangementListe.add(new Arrangement("adaw2", Kontaktperson.lagKontaktpersonListe().get(0),
-                Lokale.lagLokaleList().get(0), "La La Land", "Emma Stone",
-                "Ottestad", "Sykt bra film.", 100, 69));
-
-        arrangementListe.add(new Arrangement("Dwad3", Kontaktperson.lagKontaktpersonListe().get(1),
-                Lokale.lagLokaleList().get(1), "Cats", "Gunnar", "Ottestad",
-                "Sykt kule katter", 250, 100));
-
-        return arrangementListe;
-    }
-    */
 }

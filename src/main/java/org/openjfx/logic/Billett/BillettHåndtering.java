@@ -10,7 +10,7 @@ import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
+
 
 public class BillettHåndtering {
 
@@ -95,6 +95,8 @@ public class BillettHåndtering {
             ArrayList<Billett> liste = serialiser.lesArrayFraFil();
 
             liste.removeIf(Billett -> Billett.getPlassnummer()  == (billett.getPlassnummer()));
+
+            billett.getArrangement().getSalg()[billett.getPlassnummer()] = null;
 
             serialiser.skrivArrayTilFil(liste);
         }catch(IOException e){

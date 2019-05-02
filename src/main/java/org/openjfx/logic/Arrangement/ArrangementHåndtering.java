@@ -3,15 +3,20 @@ package org.openjfx.logic.Arrangement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
 import org.openjfx.logic.exceptions.klasseException;
+import org.openjfx.logic.Lokale.LokaleHåndtering;
+import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.Person.PersonHåndtering;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,15 +25,6 @@ import java.util.stream.Stream;
 
 //Klasse for håndtering av Arrangement fra GUI, lages, endres eller slettes
 public class ArrangementHåndtering {
-
-
-    //Endrer et spesifikt arrangement
-    /*public boolean endreArrangement(Arrangement arrangement){
-        return true;
-    }*/
-
-
-
 
 
     //Lager en ObservableList som JavaFX kan bruke i sine komponenter
@@ -127,9 +123,34 @@ public class ArrangementHåndtering {
             serialiser.skrivArrayTilFil(liste);
 
         } catch (IOException e) {
-           alertbox.feil(inputException.ioException());
-        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(inputException.ioException());
+        } catch (ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
         }
+    }
+
+    //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
+
+    public ArrayList<Arrangement> lagArrangementListe(){
+        ArrayList<Arrangement>arrangementListe = new ArrayList<>();
+        PersonHåndtering person = new PersonHåndtering();
+        ArrayList<Kontaktperson> kontaktpersonListe = person.lagKontaktpersonListe();
+
+        LokaleHåndtering lokale = new LokaleHåndtering();
+        ArrayList<Lokale> lokaleListe = lokale.lagLokaleListe();
+
+        LocalDate dato1 = LocalDate.of(2019,4,20);
+
+        Billett[] salg = new Billett[100];
+
+
+        arrangementListe.add(new Arrangement("023", kontaktpersonListe.get(0), lokaleListe.get(0),
+                "La La Land", "Emma Stone", "Ottestad", dato1, "19:00", "Sykt bra film.", 100, 69, salg));
+
+        arrangementListe.add(new Arrangement("047", kontaktpersonListe.get(1), lokaleListe.get(1),
+                "Cats", "Gunnar", "Ottestad", dato1,"20:00", "Sykt kule katter", 250, 100, salg));
+
+
+        return arrangementListe;
     }
 }

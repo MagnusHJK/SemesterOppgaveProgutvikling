@@ -57,13 +57,13 @@ public class ControllerAdmin {
     private ControllerAdminSlett controllerAdminSlett;
 
     @FXML
-    private Tab tabSerialiser;
+    private Tab tabReset;
 
     @FXML
-    private AnchorPane paneAdminSerialiser;
+    private AnchorPane paneAdminReset;
 
     @FXML
-    private ControllerAdminSerialiser controllerAdminSerialiser;
+    private ControllerAdminReset controllerAdminReset;
 
     @FXML
     private Tab tabFilbehandling;
