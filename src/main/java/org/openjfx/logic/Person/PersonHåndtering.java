@@ -2,6 +2,8 @@ package org.openjfx.logic.Person;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
 import org.openjfx.logic.exceptions.klasseException;
@@ -32,6 +34,24 @@ public class PersonHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
         }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
+        }
+    }
+
+    public void endrePerson(Kontaktperson kontaktperson) {
+        PersonSerialiser serialiser = new PersonSerialiser();
+
+        try {
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+
+            liste.removeIf(Kontaktperson -> Kontaktperson.getPersonID().equals(kontaktperson.getPersonID()));
+            liste.add(kontaktperson);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch (IOException io) {
             alertbox.feil(inputException.ioException());
         } catch(ClassNotFoundException cnf) {
             alertbox.feil(klasseException.klasseException());
