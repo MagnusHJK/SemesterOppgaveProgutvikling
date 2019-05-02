@@ -24,8 +24,8 @@
                     <fx:include fx:id="paneAdminSlett" source="sceneAdminSlett.fxml" />
                 </Tab>
 
-                <Tab fx:id="tabSerialiser" text="Serialiser">
-                    <fx:include fx:id="paneAdminSerialiser" source="sceneAdminSerialiser.fxml" />
+                <Tab fx:id="tabReset" text="Reset">
+                    <fx:include fx:id="paneAdminReset" source="sceneAdminReset.fxml" />
                 </Tab>
             <Tab fx:id="tabFilbehandling" text="Filbehandling">
                 <fx:include fx:id="paneAdminFilbehandling" source="sceneAdminFilbehandling.fxml" />
