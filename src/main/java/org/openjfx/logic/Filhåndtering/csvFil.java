@@ -24,8 +24,6 @@ public class csvFil extends fil {
             buffer.close();
             System.out.println(data);
 
-
-
         } catch (FileNotFoundException fnf) {
            alertbox.feil(filException.filException());
         } catch (IOException io) {
@@ -36,8 +34,8 @@ public class csvFil extends fil {
     }
 
     @Override
-    public String lesJobjFil(String path, ArrayList<String> data) {
-        return "hei";
+    public ArrayList<String>  lesJobjFil(String path, ArrayList<String> data) {
+        return data;
     }
 
 

@@ -44,7 +44,7 @@ public class LokaleSerialiser {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(inputException.ioException());
         }
 
     }

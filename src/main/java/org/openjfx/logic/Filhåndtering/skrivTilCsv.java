@@ -82,5 +82,20 @@ public class skrivTilCsv extends skrivTilFil{
         }
     }
 
+    @Override
+    public void LokaleTiljobj(ArrayList<Lokale> lokale, String path) {
+
+    }
+
+    @Override
+    public void ArrangementTilJobj(ArrayList<Arrangement> arrangement, String path) {
+
+    }
+
+    @Override
+    public void PersonTilJobj(ArrayList<Kontaktperson> person, String path) {
+
+    }
+
 
 }
