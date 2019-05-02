@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,6 +16,7 @@
 <AnchorPane fx:id="paneAdminEndre" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controllers.Admin.ControllerAdminEndre">
     <children>
         <ListView fx:id="listLokale" layoutX="191.0" layoutY="81.0" onMouseClicked="#actionEndreElement" prefHeight="133.0" prefWidth="318.0" visible="false" />
+      <ListView fx:id="listKontaktperson" layoutX="191.0" layoutY="79.0" onMouseClicked="#actionEndreElement" prefHeight="133.0" prefWidth="318.0" visible="false" />
         <Label layoutX="20.0" layoutY="20.0" prefHeight="16.0" prefWidth="308.0" text="Velg det elementet du vil endre">
             <font>
                 <Font size="19.0" />
@@ -22,6 +24,43 @@
         </Label>
         <ChoiceBox fx:id="choiceEndre" layoutX="350.0" layoutY="20.0" prefWidth="150.0" />
         <Button layoutX="550.0" layoutY="20.0" mnemonicParsing="false" onAction="#endreInnhold" text="Velg" />
+      <Pane fx:id="paneKontaktperson" layoutX="206.0" layoutY="260.0" prefHeight="320.0" prefWidth="297.0" visible="false">
+         <children>
+            <GridPane prefHeight="320.0" prefWidth="227.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="textfieldFornavnPerson" GridPane.columnIndex="1" />
+                  <TextField fx:id="textfieldEtternavnPerson" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textfieldTlfPerson" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textfieldEpostPerson" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textfieldNettsidePerson" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textfieldVirksomhetPerson" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="btnEndreKontaktperson" mnemonicParsing="false" onAction="#actionEndreKontaktperson" text="Endre" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextArea fx:id="textareaOpplysningerPerson" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="Fornavn" />
+                  <Label text="Etternavn" GridPane.rowIndex="1" />
+                  <Label text="Telefonnr" GridPane.rowIndex="2" />
+                  <Label text="Epost" GridPane.rowIndex="3" />
+                  <Label text="Nettside" GridPane.rowIndex="4" />
+                  <Label text="Virksomhet" GridPane.rowIndex="5" />
+                  <Label text="Opplysninger" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
         <Pane fx:id="paneLokale" layoutX="208.0" layoutY="262.0" prefHeight="282.0" prefWidth="285.0" visible="false">
             <children>
                 <GridPane>
@@ -47,7 +86,6 @@
                 </GridPane>
             </children>
         </Pane>
-        <Button fx:id="btnEndre" disable="true" layoutX="529.0" layoutY="134.0" mnemonicParsing="false" onAction="#actionEndreElement" onMouseClicked="#actionEndreElement" text="Velg" />
     </children>
 
 </AnchorPane>

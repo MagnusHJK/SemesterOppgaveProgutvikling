@@ -55,6 +55,9 @@ public class ControllerAdminSlett {
     @FXML
     private Button btnSlettElement;
 
+    @FXML
+    private Label lblSlett;
+
 
 
 
@@ -170,6 +173,8 @@ public class ControllerAdminSlett {
 
             håndtering.slettLokale(lokale);
 
+            lblSlett.setText("Lokale slettet!");
+
         }else if(valg.equals("Kontaktperson")){
             PersonHåndtering håndtering = new PersonHåndtering();
 
@@ -177,12 +182,16 @@ public class ControllerAdminSlett {
 
             håndtering.slettPerson(kontaktperson);
 
+            lblSlett.setText("Kontaktperson slettet!");
+
         }else if(valg.equals("Arrangement")){
             ArrangementHåndtering håndtering = new ArrangementHåndtering();
 
             Arrangement arrangement = listArrangement.getSelectionModel().getSelectedItem();
 
             håndtering.slettArrangement(arrangement);
+
+            lblSlett.setText("Arrangement slettet!");
         }
         else if(valg.equals("Billett")){
             BillettHåndtering håndteringBill = new BillettHåndtering();
@@ -193,6 +202,7 @@ public class ControllerAdminSlett {
             håndteringBill.slettBillett(billett);
             håndteringArr.oppdaterArrangementSalg(billett.getArrangement());
 
+            lblSlett.setText("Billett slettet!");
         }
 
 
