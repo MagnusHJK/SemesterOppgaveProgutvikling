@@ -8,11 +8,7 @@ import java.util.ArrayList;
 
 public abstract class skrivTilFil {
 
-    public abstract void LokaleTilCsv(ArrayList<Lokale> lokale, String path);
-    public abstract void ArrangementTilCsv(ArrayList<Arrangement> arrangement, String path);
-    public abstract void PersonTilCsv(ArrayList<Kontaktperson> person, String path);
+    public abstract void skrivTilCsv(ArrayList data, String path);
 
-    public abstract void LokaleTiljobj(ArrayList<Lokale> lokale, String path);
-    public abstract void ArrangementTilJobj(ArrayList<Arrangement> arrangement, String path);
-    public abstract void PersonTilJobj(ArrayList<Kontaktperson> person, String path);
+    public abstract void skrivTilJobj(ArrayList data, String path);
 }

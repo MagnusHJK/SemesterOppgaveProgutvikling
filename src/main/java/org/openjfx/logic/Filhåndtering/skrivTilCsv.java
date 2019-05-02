@@ -18,63 +18,21 @@ import java.util.ArrayList;
 public class skrivTilCsv extends skrivTilFil{
 
     @Override
-    public void LokaleTilCsv(ArrayList<Lokale> lokale, String path) {
+    public void skrivTilCsv(ArrayList data, String path) {
         PrintWriter skriver = null;
 
         try {
             skriver = new PrintWriter(path, StandardCharsets.UTF_8);
 
-            for(Lokale lokaler : lokale) {
-                skriver.println(lokaler);
-            }
-        } catch(FileNotFoundException | UnsupportedEncodingException ue) {
-            ue.printStackTrace();
-        } catch(IOException io) {
-            io.printStackTrace();
-        } finally {
-            if(skriver != null) {
-                skriver.close();
-            }
-        }
-    }
-
-    @Override
-    public void ArrangementTilCsv(ArrayList<Arrangement> arrangement, String path) {
-        PrintWriter skriver = null;
-
-        try {
-            skriver = new PrintWriter(path, StandardCharsets.UTF_8);
-
-            for(Arrangement arrangementer : arrangement) {
-                skriver.println(arrangementer);
-            }
-        } catch(FileNotFoundException | UnsupportedEncodingException ue) {
-            ue.printStackTrace();
-        } catch(IOException io) {
-            io.printStackTrace();
-        } finally {
-            if(skriver != null) {
-                skriver.close();
-            }
-        }
-    }
-
-    @Override
-    public void PersonTilCsv(ArrayList<Kontaktperson> person , String path) {
-        PrintWriter skriver = null;
-
-        try {
-            skriver = new PrintWriter(path, StandardCharsets.UTF_8);
-
-            for(Kontaktperson personer : person) {
-                skriver.println(personer);
+            for(Object info : data) {
+                skriver.println(info);
             }
         } catch(FileNotFoundException fnf) {
-            alertbox.feil(filException.filException());
+           alertbox.feil(filException.filException());
         } catch(UnsupportedEncodingException ue) {
             alertbox.feil(kodesprakException.kodesprakException());
-        }catch(IOException io) {
-          alertbox.feil(inputException.ioException());
+        } catch(IOException io) {
+           alertbox.feil(inputException.ioException());
         } finally {
             if(skriver != null) {
                 skriver.close();
@@ -83,19 +41,7 @@ public class skrivTilCsv extends skrivTilFil{
     }
 
     @Override
-    public void LokaleTiljobj(ArrayList<Lokale> lokale, String path) {
+    public void skrivTilJobj(ArrayList data, String path) {
 
     }
-
-    @Override
-    public void ArrangementTilJobj(ArrayList<Arrangement> arrangement, String path) {
-
-    }
-
-    @Override
-    public void PersonTilJobj(ArrayList<Kontaktperson> person, String path) {
-
-    }
-
-
 }
