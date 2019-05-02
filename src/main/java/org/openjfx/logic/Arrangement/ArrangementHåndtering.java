@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -88,8 +91,10 @@ public class ArrangementHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
 
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 
@@ -102,8 +107,10 @@ public class ArrangementHåndtering {
             liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
 
             serialiser.skrivArrayTilFil(liste);
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+           alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException  cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
 
     }
@@ -119,8 +126,10 @@ public class ArrangementHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+           alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 }

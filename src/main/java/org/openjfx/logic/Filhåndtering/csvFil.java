@@ -3,6 +3,8 @@ package org.openjfx.logic.Filhåndtering;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -25,9 +27,9 @@ public class csvFil extends fil {
 
 
         } catch (FileNotFoundException fnf) {
-            fnf.printStackTrace();
+           alertbox.feil(filException.filException());
         } catch (IOException io) {
-            io.printStackTrace();
+           alertbox.feil(inputException.ioException());
         }
 
         return data;

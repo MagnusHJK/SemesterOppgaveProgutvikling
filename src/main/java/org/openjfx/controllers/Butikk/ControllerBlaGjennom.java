@@ -14,13 +14,10 @@ import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
-import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.*;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
-import org.openjfx.logic.exceptions.valgException;
-import org.openjfx.logic.exceptions.nullException;
-import org.openjfx.logic.exceptions.arrangementException;
 
 
 import java.io.FileNotFoundException;
@@ -99,9 +96,11 @@ public class ControllerBlaGjennom {
         try {
             tabellArrangement.setItems(filterArr.filtrerArrangementer(serialiserArr.lesArrayFraFil(), lokale));
         } catch (NullPointerException npe) {
-            //alertbox.display(nullException.nullException());
-        } catch (IOException  | ClassNotFoundException cnf) {
-            cnf.printStackTrace();
+            alertbox.feil(nullException.nullException());
+        } catch (IOException io) {
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
 
     }

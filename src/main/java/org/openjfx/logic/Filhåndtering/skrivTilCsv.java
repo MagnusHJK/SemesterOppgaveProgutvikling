@@ -3,6 +3,10 @@ package org.openjfx.logic.Filhåndtering;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.kodesprakException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -65,10 +69,12 @@ public class skrivTilCsv extends skrivTilFil{
             for(Kontaktperson personer : person) {
                 skriver.println(personer);
             }
-        } catch(FileNotFoundException | UnsupportedEncodingException ue) {
-            ue.printStackTrace();
-        } catch(IOException io) {
-            io.printStackTrace();
+        } catch(FileNotFoundException fnf) {
+            alertbox.feil(filException.filException());
+        } catch(UnsupportedEncodingException ue) {
+            alertbox.feil(kodesprakException.kodesprakException());
+        }catch(IOException io) {
+          alertbox.feil(inputException.ioException());
         } finally {
             if(skriver != null) {
                 skriver.close();

@@ -1,5 +1,10 @@
 package org.openjfx.logic.Person;
 
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,16 +23,13 @@ public class PersonSerialiser {
             ois.close();
             fis.close();
         }catch(FileNotFoundException e){
-            e.printStackTrace();
+            alertbox.feil(filException.filException());
             //alertbox.display("Feil","En feil oppstod");
         }
         catch(IOException ois){
-            System.err.println("Feil i I/O");
-            ois.printStackTrace();
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(inputException.ioException());
         }catch(ClassNotFoundException c){
-            System.err.println("Feil klasse");
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(klasseException.klasseException());
         }
 
         return personListe;
