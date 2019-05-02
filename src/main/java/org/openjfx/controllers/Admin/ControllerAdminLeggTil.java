@@ -63,6 +63,9 @@ public class ControllerAdminLeggTil {
     @FXML
     private Button btnLeggTilValg;
 
+    @FXML
+    private Label lblLeggTill;
+
 
 
 
@@ -252,6 +255,7 @@ public class ControllerAdminLeggTil {
 
             LokaleFilhåndtering filhåndtering = new LokaleFilhåndtering();
             filhåndtering.lokaleSkriv();
+            lblLeggTill.setText("Lokale lagt til!");
 
         } catch(IOException ioe){
             alertbox.feil(inputException.ioException());
@@ -344,6 +348,7 @@ public class ControllerAdminLeggTil {
 
             PersonFilhåndtering filhåndtering = new PersonFilhåndtering();
             filhåndtering.personSkriv();
+            lblLeggTill.setText("Kontaktperson lagt til!");
 
         }catch(IOException ioe){
             alertbox.feil(inputException.ioException());
@@ -464,6 +469,8 @@ public class ControllerAdminLeggTil {
 
                 ArrangementFilhåndtering filhåndtering = new ArrangementFilhåndtering();
                 filhåndtering.arrangementSkriv();
+
+                lblLeggTill.setText("Arrangement lagt til!");
 
 
             } catch (IOException | ClassNotFoundException cnf) {

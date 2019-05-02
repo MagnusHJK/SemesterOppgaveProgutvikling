@@ -38,6 +38,9 @@
          </font>
       </Label>
       <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="86.0" prefHeight="104.0" prefWidth="270.0" text="Her kan du resete de forskjellige Elementene, da vil programmet bli fylt med noen enkle start verdier i hver kategori" wrapText="true" />
-      <Label fx:id="lblReset" alignment="CENTER" layoutX="285.0" layoutY="512.0" prefHeight="16.0" prefWidth="316.0" />
+      <Label fx:id="lblReset" alignment="CENTER" layoutX="285.0" layoutY="512.0" prefHeight="16.0" prefWidth="316.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
    </children>
 </AnchorPane>
