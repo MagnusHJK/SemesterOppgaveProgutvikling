@@ -38,6 +38,11 @@ public class ControllerAdminEndre {
         LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
         PersonHåndtering personer = new PersonHåndtering();
+        PersonSerialiser personSerialiser = new PersonSerialiser();
+
+        choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
+
+        choicePerson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
 
         //choiceKontaktperson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
         //choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
@@ -80,6 +85,8 @@ public class ControllerAdminEndre {
             paneLokale.setVisible(true);
             listKontaktperson.setVisible(false);
             paneKontaktperson.setVisible(false);
+            listArrangement.setVisible(false);
+            paneArrangement.setVisible(false);
             //listKontaktperson.setVisible(false);
             //listArrangement.setVisible(false);
 
@@ -98,6 +105,8 @@ public class ControllerAdminEndre {
             paneKontaktperson.setVisible(true);
             listLokale.setVisible(false);
             paneLokale.setVisible(false);
+            listArrangement.setVisible(false);
+            paneArrangement.setVisible(false);
             //listArrangement.setVisible(true);
 
             try {
@@ -110,9 +119,14 @@ public class ControllerAdminEndre {
             } catch (Exception e) {
                 alertbox.feil(opprettException.opprettException());
             }
-        } /*else if (valg.equals("Arrangement")) {
+        } else if (valg.equals("Arrangement")) {
             listArrangement.setVisible(true);
+            paneArrangement.setVisible(true);
             listLokale.setVisible(false);
+            paneLokale.setVisible(false);
+            listKontaktperson.setVisible(false);
+            paneKontaktperson.setVisible(false);
+
 
             try {
                 ArrangementSerialiser aSerialiser = new ArrangementSerialiser();
@@ -125,7 +139,7 @@ public class ControllerAdminEndre {
             }
 
 
-        }*/
+        }
     }
 
     @FXML
@@ -192,31 +206,31 @@ public class ControllerAdminEndre {
     private Pane paneArrangement;
 
     @FXML
-    private ChoiceBox choiceKontaktperson;
+    private ChoiceBox<Kontaktperson> choicePerson;
 
     @FXML
-    private ChoiceBox choiceLokale;
+    private ChoiceBox<Lokale> choiceLokale;
 
     @FXML
-    private TextField textfieldNavn;
+    private TextField textfieldNavnArr;
 
     @FXML
-    private TextField textfieldArtist;
+    private TextField textfieldArtistArr;
 
     @FXML
-    private TextField textfieldSted;
+    private TextField textfieldStedArr;
 
     @FXML
-    private DatePicker dateDato;
+    private DatePicker datoDatoArr;
 
     @FXML
-    private TextField textfieldTidspunkt;
+    private TextField textfieldTidspunktArr;
 
     @FXML
-    private TextField textfieldBillettpris;
+    private TextField textfieldBillettprisArr;
 
     @FXML
-    private TextField textfieldMaksBilletter;
+    private TextField textfieldMaksBilletterArr;
 
     @FXML
     private TextArea textareaBeskrivelse;
@@ -394,9 +408,11 @@ public class ControllerAdminEndre {
     }
 
 
-    /*@FXML
-    private void actionEndreArrangement(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+    @FXML
+    private void actionEndreArrangement(ActionEvent event) throws idException, inputException, NullPointerException {
         Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
+        //Lokale etLokale = choiceLokale.getSelectionModel().getSelectedItem();
+        //Kontaktperson enKontaktperson = choicePerson.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på legg til arrangement");
 
         String arrangementID = etArrangement.getArrangementID();
@@ -404,23 +420,49 @@ public class ControllerAdminEndre {
         //Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
         //Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
         //Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
-        Kontaktperson kontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
-        Lokale lokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
-        String navn = textfieldNavn.getText();
-        String artist = textfieldArtist.getText();
-        String sted = textfieldSted.getText();
-        LocalDate dato = dateDato.getValue();
-        String tidspunkt = textfieldTidspunkt.getText();
+        //Kontaktperson kontaktperson = (Kontaktperson) choicePerson.getSelectionModel().getSelectedItem();
+        Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
+        Kontaktperson kontaktperson = choicePerson.getSelectionModel().getSelectedItem();
+        String navn = textfieldNavnArr.getText();
+        String artist = textfieldArtistArr.getText();
+        String sted = textfieldStedArr.getText();
+        LocalDate dato = datoDatoArr.getValue();
+        String tidspunkt = textfieldTidspunktArr.getText();
         String beskrivelse = textareaBeskrivelse.getText();
         int billettPris = 0;
         int billettMaks = 0;
-        boolean ok = true;
+        //boolean ok = true;
 
+        try {
+            billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
+
+        } catch (NumberFormatException nfe) {
+            alertbox.feil("Billettpris er nødt til å være heltall.");
+        }
+
+        try {
+            billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
+        } catch (NumberFormatException nfe) {
+            alertbox.feil("Maks billetter må være heltatll.");
+        }
+
+        // Sjekk om menyene er lik NULL
+        try {
+            if(kontaktperson == null || lokale == null) {
+                //ok = false;
+                throw new NullPointerException();
+            }
+        } catch(NullPointerException npe) {
+            alertbox.feil(inputException.nullexception());
+
+        }
+
+/*
         // Sjekk om feltene er tomme
         try {
             if (navn.isEmpty() ||
                     artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
-                ok = false;
+                //ok = false;
                 throw new inputException();
 
             }
@@ -433,7 +475,7 @@ public class ControllerAdminEndre {
         // Sjekk om menyene er lik NULL
         try {
             if (kontaktperson == null || lokale == null) {
-                ok = false;
+                //ok = false;
                 throw new NullPointerException();
             }
         } catch (NullPointerException npe) {
@@ -444,28 +486,32 @@ public class ControllerAdminEndre {
 
         // Sjekker om input feltene inneholder tall der det trengs
         try {
-            billettPris = Integer.parseInt(textfieldBillettpris.getText());
-            billettMaks = Integer.parseInt(textfieldMaksBilletter.getText());
+            billettPris = Integer.parseInt(textfieldBillettprisArr.getText());
+            billettMaks = Integer.parseInt(textfieldMaksBilletterArr.getText());
             //ok = false;
             // throw new inputException();
         } catch (NumberFormatException nfe) {
             alertbox.feil(inputException.intException());
 
-        }
+        }*/
 
-        if (!ok) {
+
+        /*if (!ok) {
 
         } else {
+*/
             Billett[] billett = new Billett[billettMaks];
 
             Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
+            ArrangementHåndtering arrangementHåndtering = new ArrangementHåndtering();
+            arrangementHåndtering.endreArrangement(arrangement);
             //textfieldArrangementID.clear();
-            textfieldNavn.clear();
-            textfieldArtist.clear();
-            textfieldSted.clear();
-            textfieldTidspunkt.clear();
-            textfieldBillettpris.clear();
-            textfieldMaksBilletter.clear();
+            textfieldNavnArr.clear();
+            textfieldArtistArr.clear();
+            textfieldStedArr.clear();
+            textfieldTidspunktArr.clear();
+            textfieldBillettprisArr.clear();
+            textfieldMaksBilletterArr.clear();
             textareaBeskrivelse.clear();
 
             try {
@@ -473,7 +519,7 @@ public class ControllerAdminEndre {
                 ArrangementSerialiser serialiser = new ArrangementSerialiser();
                 ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
-                liste.add(arrangement);
+                //liste.add(arrangement);
                 System.out.println(liste);
 
                 serialiser.skrivArrayTilFil(liste);
@@ -488,16 +534,18 @@ public class ControllerAdminEndre {
                 ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
 
                 skrivTilFil skriv = new skrivTilCsv();
-                skriv.ArrangementTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
+                skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
                 // Slutt
 
 
-            } catch (IOException io) {
-               alertbox.feil(inputException.ioexception());
-            } catch(| ClassNotFoundException cnf) {
+            } catch (IOException ioe) {
+                alertbox.feil(inputException.ioException());
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException cnf) {
+
                 alertbox.feil(klasseException.klasseException());
             }
-        }
+        //}
 
-    }*/
+    }
 }

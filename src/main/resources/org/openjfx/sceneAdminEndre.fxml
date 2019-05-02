@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
@@ -17,6 +18,7 @@
     <children>
         <ListView fx:id="listLokale" layoutX="191.0" layoutY="81.0" onMouseClicked="#actionEndreElement" prefHeight="133.0" prefWidth="318.0" visible="false" />
       <ListView fx:id="listKontaktperson" layoutX="191.0" layoutY="79.0" onMouseClicked="#actionEndreElement" prefHeight="133.0" prefWidth="318.0" visible="false" />
+      <ListView fx:id="listArrangement" layoutX="191.0" layoutY="81.0" onMouseClicked="#actionEndreElement" prefHeight="102.0" prefWidth="318.0" visible="false" />
         <Label layoutX="20.0" layoutY="20.0" prefHeight="16.0" prefWidth="308.0" text="Velg det elementet du vil endre">
             <font>
                 <Font size="19.0" />
@@ -86,6 +88,52 @@
                 </GridPane>
             </children>
         </Pane>
+      <Pane fx:id="paneArrangement" layoutX="228.0" layoutY="214.0" prefHeight="381.0" prefWidth="285.0" visible="false">
+         <children>
+            <GridPane layoutY="-15.0" prefHeight="366.0" prefWidth="254.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ChoiceBox fx:id="choicePerson" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="choiceLokale" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textfieldNavnArr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textfieldArtistArr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textfieldStedArr" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="datoDatoArr" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="textfieldTidspunktArr" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="textfieldBillettprisArr" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="textfieldMaksBilletterArr" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextArea fx:id="textareaBeskrivelse" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <Label text="Kotaktperson" />
+                  <Label text="Lokale" GridPane.rowIndex="1" />
+                  <Label text="Navn" GridPane.rowIndex="2" />
+                  <Label text="Artist" GridPane.rowIndex="3" />
+                  <Label text="Sted" GridPane.rowIndex="4" />
+                  <Label text="Dato" GridPane.rowIndex="5" />
+                  <Label text="Tidspunkt" GridPane.rowIndex="6" />
+                  <Label text="Billettpris" GridPane.rowIndex="7" />
+                  <Label text="Maks billetter" GridPane.rowIndex="8" />
+                  <Label text="Beskrivelse" GridPane.rowIndex="9" />
+                  <Button fx:id="btnEndreArrangement" mnemonicParsing="false" onAction="#actionEndreArrangement" text="Endre" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
     </children>
 
 </AnchorPane>
