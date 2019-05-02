@@ -8,6 +8,7 @@ import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Filhåndtering.velgFil;
 import org.openjfx.logic.Filhåndtering.velgFilSkriv;
 import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.exceptions.*;
 
@@ -62,10 +63,11 @@ public class ArrangementFilhåndtering {
 
             Arrangement arrangement = new Arrangement(ID,kontakperson,lokale,navn,artist,sted,dato,tidspunkt,beskrivelse,billettPris,billettMaks,billetter);
 
-            ArrayList <Arrangement> KonverterArrangement = new ArrayList<>();
-            KonverterArrangement.add(arrangement);
             ArrangementSerialiser serialiser = new ArrangementSerialiser();
-            serialiser.skrivArrayTilFil(KonverterArrangement);
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+            liste.add(arrangement);
+
+            serialiser.skrivArrayTilFil(liste);
 
         } catch(NumberFormatException nfe) {
             alertbox.feil(tallFormatException.tallFormatException());
