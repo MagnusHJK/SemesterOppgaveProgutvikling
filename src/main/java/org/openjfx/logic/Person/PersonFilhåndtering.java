@@ -30,6 +30,8 @@ public class PersonFilhåndtering {
 
             velgFil.velgFil(navn,path,data);
 
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         } catch (RuntimeException rt) {
             alertbox.feil(kjoreException.kjoreException());
         }
@@ -64,18 +66,22 @@ public class PersonFilhåndtering {
     }
 
     public void personSkriv(){
-        Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        String path = selectedFile.getPath();
-        String navn = selectedFile.getName();
-        ArrayList<String> data = new ArrayList<>();
+        try {
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            String path = selectedFile.getPath();
+            String navn = selectedFile.getName();
+            ArrayList<String> data = new ArrayList<>();
 
-        try{
-            velgFilSkriv.velgFilSkriv(navn,path,data,"databases/person.txt");
-        } catch(RuntimeException rt) {
-            alertbox.feil(kjoreException.kjoreException());
+            try {
+                velgFilSkriv.velgFilSkriv(navn, path, data, "databases/person.txt");
+            } catch (RuntimeException rt) {
+                alertbox.feil(kjoreException.kjoreException());
+            }
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
     }
 }

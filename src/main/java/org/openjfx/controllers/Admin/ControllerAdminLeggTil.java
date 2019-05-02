@@ -2,21 +2,14 @@ package org.openjfx.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementFilhåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
-import org.openjfx.logic.Arrangement.ArrangementValidering;
 import org.openjfx.logic.Billett.Billett;
-import org.openjfx.logic.Filhåndtering.skrivTilCsv;
-import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Lokale.*;
 import org.openjfx.logic.Person.*;
 import org.openjfx.logic.exceptions.idException;
@@ -25,12 +18,9 @@ import org.openjfx.logic.exceptions.inputException;
 import org.openjfx.logic.exceptions.klasseException;
 
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControllerAdminLeggTil {
 

@@ -259,16 +259,20 @@ public class ControllerAdminEndre {
             serialiser.skrivArrayTilFil(liste);
 
             // Lagerer på fil
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            String path = selectedFile.getPath();
+            try {
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
 
-            LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+                LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
-            skrivTilFil skriv = new skrivTilCsv();
-            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(), path);
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
             // Slutt
 
         } catch (IOException ioe) {
@@ -361,16 +365,20 @@ public class ControllerAdminEndre {
             serialiser.skrivArrayTilFil(liste);
 
             // Lagerer på fil
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            String path = selectedFile.getPath();
+            try {
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
 
-            PersonSerialiser personSerialiser = new PersonSerialiser();
+                PersonSerialiser personSerialiser = new PersonSerialiser();
 
-            skrivTilFil skriv = new skrivTilCsv();
-            skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(),path);
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(), path);
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
             // Slutt
 
         } catch (IOException ioe) {
@@ -482,16 +490,20 @@ public class ControllerAdminEndre {
             serialiser.skrivArrayTilFil(liste);
 
             // Lagerer på fil
-            Stage stage = new Stage();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            String path = selectedFile.getPath();
+            try {
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
 
-            ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
+                ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
 
-            skrivTilFil skriv = new skrivTilCsv();
-            skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
             // Slutt
         } catch (IOException ioe) {
             alertbox.feil(inputException.ioException());
