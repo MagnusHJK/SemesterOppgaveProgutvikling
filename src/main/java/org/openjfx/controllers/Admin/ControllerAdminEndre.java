@@ -2,9 +2,7 @@ package org.openjfx.controllers.Admin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -23,7 +21,6 @@ import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.*;
 import org.openjfx.logic.Lokale.Lokale;
-import org.openjfx.logic.Lokale.LokaleCellFactory;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 
 import java.io.File;
@@ -37,7 +34,13 @@ public class ControllerAdminEndre {
         Element elementerListe = new Element();
         choiceEndre.setItems(elementerListe.lagElementListe());
 
-        //choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+        LokaleHåndtering lokaler = new LokaleHåndtering();
+        LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
+
+        PersonHåndtering personer = new PersonHåndtering();
+
+        //choiceKontaktperson.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
+        //choiceLokale.setItems(lokaler.lagObservableList(lokaleSerialiser.lesArrayFraFil()));
     }
 
     @FXML
@@ -59,6 +62,9 @@ public class ControllerAdminEndre {
     private Button btnEndre;
 
     @FXML
+    private Button btnEndre2;
+
+    @FXML
     private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
 
     @FXML
@@ -71,8 +77,9 @@ public class ControllerAdminEndre {
 
         if (valg.equals("Lokale")) {
             listLokale.setVisible(true);
+            paneLokale.setVisible(true);
             //listKontaktperson.setVisible(false);
-            listArrangement.setVisible(false);
+            //listArrangement.setVisible(false);
 
             try {
                 LokaleSerialiser lSerialiser = new LokaleSerialiser();
@@ -84,7 +91,7 @@ public class ControllerAdminEndre {
                 alertbox.feil(klasseException.klasseException());
             }
 
-        } else if (valg.equals("Kontaktperson")) {
+        } /*else if (valg.equals("Kontaktperson")) {
             //listArrangement.setVisible(true);
 
             try {
@@ -112,7 +119,7 @@ public class ControllerAdminEndre {
             }
 
 
-        }
+        }*/
     }
 
     @FXML
@@ -140,6 +147,9 @@ public class ControllerAdminEndre {
 
     @FXML
     private TextField textfieldPlasserLokale;
+
+    @FXML
+    private Button btnEndreLokale;
 
 
     // Arrangement
@@ -178,12 +188,16 @@ public class ControllerAdminEndre {
 
     @FXML
     private void actionEndreElement(ActionEvent event) throws Exception{
+        //paneLokale.setDisable(false);
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
         //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
 
         if (valg.equals("Lokale")) {
             paneLokale.setVisible(true);
-            paneArrangement.setVisible(false);
+            btnEndreLokale.setDisable(false);
+            //paneLokale.setDisable(false);
+
+            //paneArrangement.setVisible(false);
 
 
             try {
@@ -198,7 +212,7 @@ public class ControllerAdminEndre {
                 alertbox.feil(klasseException.klasseException());
             }
 
-        } else if (valg.equals("Arrangement")) {
+        } /*else if (valg.equals("Arrangement")) {
             paneArrangement.setVisible(true);
             paneLokale.setVisible(false);
 
@@ -213,13 +227,14 @@ public class ControllerAdminEndre {
             } catch(ClassNotFoundException cnf) {
                 alertbox.feil(klasseException.klasseException());
             }
-        } else {
+        } */else {
 
         }
     }
 
     @FXML
     private void actionEndreLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+        //paneLokale.setDisable(false);
 
         Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på endre lokale");
@@ -228,6 +243,7 @@ public class ControllerAdminEndre {
         String navn = textfieldNavnLokale.getText();
         String type = textfieldTypeLokale.getText();
         int plasser = 0;
+
 
         //Prøver å konvertere plasser til int
         try {
@@ -240,7 +256,7 @@ public class ControllerAdminEndre {
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         lokaleHåndtering.endreLokale(lokale);
-        //textfieldLokaleID.clear();
+        textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
         textfieldTypeLokale.clear();
         textfieldPlasserLokale.clear();
@@ -252,7 +268,7 @@ public class ControllerAdminEndre {
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
-            liste.add(lokale);
+            //liste.add(lokale);
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
@@ -267,7 +283,7 @@ public class ControllerAdminEndre {
             LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
 
             skrivTilFil skriv = new skrivTilCsv();
-            skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
+            skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
             // Slutt
 
         } catch (IOException ioe) {
@@ -286,8 +302,10 @@ public class ControllerAdminEndre {
         String arrangementID = etArrangement.getArrangementID();
         //Kontaktperson kontaktperson = choiceKontaktperson.getSelectionModel().getSelectedItem();
         //Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
-        Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
-        Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
+        //Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
+        //Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
+        Kontaktperson kontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
+        Lokale lokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
         String navn = textfieldNavn.getText();
         String artist = textfieldArtist.getText();
         String sted = textfieldSted.getText();
@@ -314,7 +332,7 @@ public class ControllerAdminEndre {
 
         // Sjekk om menyene er lik NULL
         try {
-            if (enKontaktperson == null || etLokale == null) {
+            if (kontaktperson == null || lokale == null) {
                 ok = false;
                 throw new NullPointerException();
             }

@@ -57,7 +57,6 @@ public class ControllerMain {
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {
             alertbox.feil(inputException.ioException());
-
         }
     }
 
@@ -69,6 +68,7 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar det til Bla Gjennom siden.");
         } catch (IOException e) {
+            alertbox.feil("ss");
             alertbox.feil(inputException.ioException());
 
         }
