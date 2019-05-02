@@ -8,6 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Filhåndtering.csvFil;
 import org.openjfx.logic.Filhåndtering.jobjFil;
 import org.openjfx.logic.Lokale.Lokale;
@@ -22,6 +23,7 @@ import org.openjfx.logic.Filhåndtering.fil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -117,30 +119,15 @@ public class ControllerAdminFilbehandling {
 
         try {
 
-            PersonSerialiser hentArray = new PersonSerialiser();
-            PersonHåndtering hånderArray = new PersonHåndtering();
+            PersonSerialiser person = new PersonSerialiser();
+            System.out.println();
 
-            LokaleSerialiser hentLokale = new LokaleSerialiser();
-            LokaleHåndtering hånderLokale = new LokaleHåndtering();
+            // Legger til standardverdi for både kontakperson og lokale, dette er nødt til å endres på senere!
+            Kontaktperson kontakperson = new Kontaktperson(
+                    "MaHan","Martin","Johansen","12312334",
+                    "Martin@Hotmail.com", "eksempel.com","Google","Admin");
 
-
-
-            //alertbox.feil(data.toString());
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            String tittel = "Ekstra informasjon";
-            stage.setTitle(tittel);
-
-            ChoiceBox velgPerson = new ChoiceBox();
-            velgPerson.setItems(hånderArray.lagObservableList(hentArray.lesArrayFraFil()));
-            ChoiceBox Lokale = new ChoiceBox();
-            Lokale.setItems(hånderLokale.lagObservableList(hentLokale.lesArrayFraFil()));
-
-            String personFraInput = velgPerson.getSelectionModel().getSelectedItem().toString();
-            String lokaleFraInput = Lokale.getSelectionModel().getSelectedItem().toString();
-
-            //TODO Drep meg vær så snill
+            Lokale lokale = new Lokale("100","endre","endre",100);
 
             String ID = data.get(0);
             String navn= data.get(1);
@@ -152,9 +139,9 @@ public class ControllerAdminFilbehandling {
             String beskrivelse = data.get(6);
             int billettPris = Integer.parseInt(data.get(7));
             int billettMaks = Integer.parseInt(data.get(8));
-            String tidspunkt = data.get(8);
+            Billett[] billetter = new Billett[billettMaks];
 
-            Arrangement arrangement = new Arrangement(ID,personFraInput,lokaleFraInput,navn,artist,sted,dato,tidspunkt,beskrivelse,billettPris,billettMaks);
+            Arrangement arrangement = new Arrangement(ID,kontakperson,lokale,navn,artist,sted,dato,tidspunkt,beskrivelse,billettPris,billettMaks,billetter);
 
             alertbox.godkjent(arrangement.toString());
 
@@ -163,8 +150,8 @@ public class ControllerAdminFilbehandling {
             ArrangementSerialiser serialiser = new ArrangementSerialiser();
             serialiser.skrivArrayTilFil(KonverterArrangement);
 
-        } catch(ClassNotFoundException | ParseException ps) {
-            ps.printStackTrace();
+        } catch(ClassNotFoundException cnf) {
+            cnf.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
         }
