@@ -1,5 +1,10 @@
 package org.openjfx.logic.Lokale;
 
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -19,16 +24,12 @@ public class LokaleSerialiser {
             ois.close();
             fis.close();
         }catch(FileNotFoundException e){
-            e.printStackTrace();
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(filException.filException());
         }
         catch(IOException ois){
-            System.err.println("Feil i I/O");
-            ois.printStackTrace();
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(inputException.ioException());
         }catch(ClassNotFoundException c){
-            System.err.println("Feil klasse");
-            //alertbox.display("Feil","En feil oppstod");
+           alertbox.feil(klasseException.klasseException());
         }
 
         return lokaleListe;
@@ -43,7 +44,7 @@ public class LokaleSerialiser {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(inputException.ioException());
         }
 
     }

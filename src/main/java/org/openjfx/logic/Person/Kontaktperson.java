@@ -59,18 +59,4 @@ public class Kontaktperson extends Person implements Serializable {
     }
 
 
-
-    public static ArrayList<Kontaktperson> lagKontaktpersonListe(){
-        ArrayList<Kontaktperson>kontaktpersonListe = new ArrayList<>();
-
-        kontaktpersonListe.add(new Kontaktperson("Dest23","Magnus", "Hjelmen", "91994468",
-                "Magnus@email.com", "example.com", "Google", "I am very cool"));
-
-        kontaktpersonListe.add(new Kontaktperson("LDKFG445","Tonje", "Pettersen", "12345678",
-                "Tonje@email.com", "example.com", "Microsoft", "Jag är från sverige"));
-
-
-        return kontaktpersonListe;
-    }
-
 }

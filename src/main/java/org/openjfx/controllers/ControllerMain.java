@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
 
 import java.io.IOException;
 
@@ -55,8 +56,8 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {
-            alertbox.feil("En feil oppstod");
-            e.printStackTrace();
+            alertbox.feil(inputException.ioException());
+
         }
     }
 
@@ -68,8 +69,8 @@ public class ControllerMain {
             paneHjem.getChildren().setAll(pane);
             System.out.println("Tar det til Bla Gjennom siden.");
         } catch (IOException e) {
-            alertbox.feil("En feil oppstod");
-            e.printStackTrace();
+            alertbox.feil(inputException.ioException());
+
         }
     }
 

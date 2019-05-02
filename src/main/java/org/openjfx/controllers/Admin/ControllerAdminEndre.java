@@ -92,7 +92,7 @@ public class ControllerAdminEndre {
 
                 listLokale.setItems(håndtering.lagObservableList(liste));
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                alertbox.feil(klasseException.klasseException());
             }
 
         } /*else if (valg.equals("Kontaktperson")) {
@@ -106,7 +106,7 @@ public class ControllerAdminEndre {
                 //EndreTabell.setItems(håndtering.lagObservableList(liste));
 
             } catch (Exception e) {
-                e.printStackTrace();
+                alertbox.feil(opprettException.opprettException());
             }
         } else if (valg.equals("Arrangement")) {
             listArrangement.setVisible(true);
@@ -119,7 +119,7 @@ public class ControllerAdminEndre {
 
                 listArrangement.setItems(håndtering.lagObservableList(liste));
             } catch (Exception e) {
-                e.printStackTrace();
+                alertbox.feil(opprettException.opprettException());
             }
 
 
@@ -210,8 +210,10 @@ public class ControllerAdminEndre {
                 ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
                 listLokale.setItems(håndtering.lagObservableList(liste));
-            } catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            } catch(IOException io){
+               alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
 
         } /*else if (valg.equals("Arrangement")) {
@@ -224,8 +226,10 @@ public class ControllerAdminEndre {
                 ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
                 listArrangement.setItems(håndtering.lagObservableList(liste));
-            }catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch(IOException e){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
         } */else {
 
@@ -287,9 +291,10 @@ public class ControllerAdminEndre {
             // Slutt
 
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+           alertbox.feil(inputException.ioException());
         } catch (ClassNotFoundException cnf) {
-            cnf.printStackTrace();
+
+            alertbox.feil(klasseException.klasseException());
         }
     }
 
@@ -391,8 +396,10 @@ public class ControllerAdminEndre {
                 // Slutt
 
 
-            } catch (IOException | ClassNotFoundException cnf) {
-                cnf.printStackTrace();
+            } catch (IOException io) {
+               alertbox.feil(inputException.ioexception());
+            } catch(| ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
             }
         }
 

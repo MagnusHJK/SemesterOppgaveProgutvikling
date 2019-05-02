@@ -27,6 +27,7 @@ import org.openjfx.logic.Person.PersonSerialiser;
 import org.openjfx.logic.exceptions.idException;
 import org.openjfx.logic.exceptions.alertbox;
 import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 
 import java.io.File;
@@ -47,9 +48,9 @@ public class ControllerAdminLeggTil {
 
         PersonHåndtering personer = new PersonHåndtering();
         // midlertidig
-        Kontaktperson.lagKontaktpersonListe();
+       // Kontaktperson.lagKontaktpersonListe();
         PersonSerialiser personSerialiser = new PersonSerialiser();
-        Kontaktperson.lagKontaktpersonListe();
+        //Kontaktperson.lagKontaktpersonListe();
 
 
         choiceLeggTillValg.setItems(elementerListe.lagElementListe());
@@ -273,9 +274,9 @@ public class ControllerAdminLeggTil {
             // Slutt
 
         } catch(IOException ioe){
-            ioe.printStackTrace();
+            alertbox.feil(inputException.ioException());
         } catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+            alertbox.feil(klasseException.klasseException());
         }
 
     }
@@ -375,9 +376,9 @@ public class ControllerAdminLeggTil {
             // Slutt
 
         }catch(IOException ioe){
-            ioe.printStackTrace();
+            alertbox.feil(inputException.ioException());
         }catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+            alertbox.feil(klasseException.klasseException());
         }
 
     }
@@ -506,7 +507,7 @@ public class ControllerAdminLeggTil {
 
 
             } catch (IOException | ClassNotFoundException cnf) {
-                cnf.printStackTrace();
+               alertbox.feil(inputException.ioException());
             }
 
 

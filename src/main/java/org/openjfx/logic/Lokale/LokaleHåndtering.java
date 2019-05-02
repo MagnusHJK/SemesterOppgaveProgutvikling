@@ -2,6 +2,9 @@ package org.openjfx.logic.Lokale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,8 +34,10 @@ public class LokaleHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
 
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
 
     }
@@ -48,8 +53,19 @@ public class LokaleHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException io) {
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
+    }
+
+    //Lager ObservableList med lokaler som brukes til å populere GUI  -  SKRIV OM SENERE TIL Å LESE FIL
+    public ArrayList<Lokale> lagLokaleListe(){
+        ArrayList<Lokale> lokaleList = new ArrayList<>();
+        lokaleList.add(new Lokale("lokale1", "Ottestad Kino", "Kinosal", 100));
+        lokaleList.add(new Lokale("lokale2", "Ottestad Konsert", "Konsertsal", 500));
+
+        return lokaleList;
     }
 }

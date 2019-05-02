@@ -11,13 +11,14 @@ import org.openjfx.logic.Arrangement.ArrangementSerialiser;
 import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Filhåndtering.csvFil;
 import org.openjfx.logic.Filhåndtering.jobjFil;
+import org.openjfx.logic.Filhåndtering.velgFil;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
 import org.openjfx.logic.Person.PersonSerialiser;
-import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.*;
 import org.openjfx.logic.Filhåndtering.fil;
 
 import java.io.File;
@@ -28,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,33 +48,18 @@ public class ControllerAdminFilbehandling {
     public void lesFraLokaler(ActionEvent event) throws IOException{
 
         ArrayList<String> data = new ArrayList<>();
-
         try {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
             File selectedFile = fileChooser.showOpenDialog(stage);
             String path = selectedFile.getPath();
-
             String navn = selectedFile.getName();
 
-            String t = navn.substring(navn.lastIndexOf("."), navn.length());
-
-            fil lesCsv = new csvFil();
-            lesCsv.lesCsvFil(path,data);
-/*
-            if (t.equals(".csv")) {
-                fil lesCsv = new csvFil();
-                lesCsv.lesCsvFil(path,data);
-            } else {
-                fil lesJobjFil = new jobjFil();
-                lesJobjFil.lesJobjFil(path,data);
-            }
-            */
+            velgFil.velgFil(navn,path,data);
         } catch (RuntimeException rt) {
-            rt.printStackTrace();
+            alertbox.feil(kjoreException.kjoreException());
         }
-
 
         try {
             String ID = data.get(0);
@@ -81,15 +68,24 @@ public class ControllerAdminFilbehandling {
             int plasser = Integer.parseInt(data.get(3));
 
             Lokale lokale = new Lokale(ID,navn,type,plasser);
+
+            ArrayList<Lokale> KonverterLokale = new ArrayList<>();
+            KonverterLokale.add(lokale);
+
+            LokaleSerialiser serialiser = new LokaleSerialiser();
+            serialiser.skrivArrayTilFil(KonverterLokale);
+
         } catch(NumberFormatException nfe) {
-            nfe.printStackTrace();
+            alertbox.feil(tallFormatException.tallFormatException());
+        } catch (ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 
     public void lesFraArrangement(ActionEvent event) throws IOException{
 
         ArrayList<String> data = new ArrayList<>();
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
         try {
             Stage stage = new Stage();
@@ -97,30 +93,16 @@ public class ControllerAdminFilbehandling {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
             File selectedFile = fileChooser.showOpenDialog(stage);
             String path = selectedFile.getPath();
-
             String navn = selectedFile.getName();
 
-            String t = navn.substring(navn.lastIndexOf("."), navn.length());
-
-            fil lesCsv = new csvFil();
-            lesCsv.lesCsvFil(path,data);
-
-           /* if (t.equals(".csv")) {
-                fil lesCsv = new csvFil();
-                lesCsv.lesCsvFil(path,data);
-            } else {
-                fil lesJobjFil = new jobjFil();
-                lesJobjFil.lesJobjFil(path,data);
-            }
-            */
+            velgFil.velgFil(navn,path,data);
         } catch(RuntimeException rt) {
-            rt.printStackTrace();
+            alertbox.feil(kjoreException.kjoreException());
         }
 
         try {
 
-            PersonSerialiser person = new PersonSerialiser();
-            System.out.println();
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             // Legger til standardverdi for både kontakperson og lokale, dette er nødt til å endres på senere!
             Kontaktperson kontakperson = new Kontaktperson(
@@ -134,7 +116,7 @@ public class ControllerAdminFilbehandling {
             String artist = data.get(2);
             String sted = data.get(3);
             String datoTekst = data.get(4);
-            LocalDate dato = LocalDate.parse(datoTekst);
+            LocalDate dato = LocalDate.parse(datoTekst,formater);
             String tidspunkt = data.get(5);
             String beskrivelse = data.get(6);
             int billettPris = Integer.parseInt(data.get(7));
@@ -143,21 +125,19 @@ public class ControllerAdminFilbehandling {
 
             Arrangement arrangement = new Arrangement(ID,kontakperson,lokale,navn,artist,sted,dato,tidspunkt,beskrivelse,billettPris,billettMaks,billetter);
 
-            alertbox.godkjent(arrangement.toString());
-
             ArrayList <Arrangement> KonverterArrangement = new ArrayList<>();
             KonverterArrangement.add(arrangement);
             ArrangementSerialiser serialiser = new ArrangementSerialiser();
             serialiser.skrivArrayTilFil(KonverterArrangement);
 
         } catch(ClassNotFoundException cnf) {
-            cnf.printStackTrace();
-        } catch(Exception e) {
-            e.printStackTrace();
+            alertbox.feil(klasseException.klasseException());
+        } catch(DateTimeParseException dtp) {
+            alertbox.feil(datoException.datoException());
         }
     }
 
-    public void lesFraPersoner(ActionEvent event) throws IOException,ClassNotFoundException {
+    public void lesFraPersoner(ActionEvent event) throws IOException {
 
         ArrayList<String> data = new ArrayList<>();
 
@@ -169,28 +149,11 @@ public class ControllerAdminFilbehandling {
             String path = selectedFile.getPath();
             String navn = selectedFile.getName();
 
-            String subString = navn.substring(navn.lastIndexOf("."), navn.length());
+            velgFil.velgFil(navn,path,data);
 
-            alertbox.godkjent(data.toString());
-
-            fil lesCsv = new csvFil();
-            lesCsv.lesCsvFil(path,data);
-
-
-
-           /* if (t.equals(".csv")) {
-                fil lesCsv = new csvFil();
-                lesCsv.lesCsvFil(path,data);
-                System.out.println(data.toString());
-            } else {
-                fil lesJobjFil = new jobjFil();
-                lesJobjFil.lesJobjFil(path,data);
-            }
-            */
         } catch (RuntimeException rt) {
-            rt.printStackTrace();
+            alertbox.feil(kjoreException.kjoreException());
         }
-        // TODO implemnter metode for å lese fra JOBJ filer.
         try {
 
         alertbox.feil(data.toString());
@@ -214,7 +177,7 @@ public class ControllerAdminFilbehandling {
         serialiser.skrivArrayTilFil(KonverterKontakperson);
 
         } catch(ClassNotFoundException cnf) {
-            cnf.printStackTrace();
+            alertbox.feil(klasseException.klasseException());
         }
     }
 

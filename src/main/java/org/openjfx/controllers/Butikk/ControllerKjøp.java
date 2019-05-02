@@ -16,6 +16,8 @@ import org.openjfx.logic.Billett.BillettHåndtering;
 import org.openjfx.logic.Billett.BillettNummerTextField;
 import org.openjfx.logic.Billett.BillettSerialiser;
 import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.tallFormatException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class ControllerKjøp {
             antallBilletter = Integer.parseInt(textfieldAntallBilletter.getText());
             pris = antallBilletter * valgtArrangement.getBillettPris();
         }catch (NumberFormatException e){
-            e.printStackTrace();
+            alertbox.feil(tallFormatException.tallFormatException());
         }
 
         lblPris.setText(Integer.toString(pris));
@@ -89,8 +91,7 @@ public class ControllerKjøp {
             paneKjøp.getChildren().setAll(pane);
             System.out.println("Tar det til Bla Gjennom siden.");
         } catch (IOException e) {
-            alertbox.feil("En feil oppstod");
-            e.printStackTrace();
+            alertbox.feil(inputException.ioException());
         }
     }
 }

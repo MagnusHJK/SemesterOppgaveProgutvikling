@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
+
 
 public class BillettHåndtering {
 
@@ -75,9 +78,9 @@ public class BillettHåndtering {
                 håndteringArr.oppdaterArrangementSalg(arrangement);
 
             }catch(IOException e){
-                e.printStackTrace();
+                alertbox.feil(inputException.ioException());
             }catch (ClassNotFoundException e){
-                e.printStackTrace();
+                alertbox.feil(klasseException.klasseException());
             }
         }
 
@@ -93,9 +96,13 @@ public class BillettHåndtering {
 
             liste.removeIf(Billett -> Billett.getPlassnummer()  == (billett.getPlassnummer()));
 
+            billett.getArrangement().getSalg()[billett.getPlassnummer()] = null;
+
             serialiser.skrivArrayTilFil(liste);
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+           alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
 
     }
