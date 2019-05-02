@@ -6,6 +6,8 @@ import org.openjfx.logic.Filhåndtering.skrivTilCsv;
 import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Filhåndtering.velgFil;
 import org.openjfx.logic.Filhåndtering.velgFilSkriv;
+import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
 import org.openjfx.logic.exceptions.*;
 
 import java.io.File;
@@ -44,12 +46,11 @@ public class PersonFilhåndtering {
 
             Kontaktperson kontaktperson = new Kontaktperson(ID, fornavn, etternavn, telefon, ePost, nettside, virksomhet, opplysninger);
 
-            alertbox.godkjent(kontaktperson.toString());
-
-            ArrayList <Kontaktperson> KonverterKontakperson = new ArrayList<>();
-            KonverterKontakperson.add(kontaktperson);
             PersonSerialiser serialiser = new PersonSerialiser();
-            serialiser.skrivArrayTilFil(KonverterKontakperson);
+            ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+            liste.add(kontaktperson);
+
+            serialiser.skrivArrayTilFil(liste);
 
         } catch(NumberFormatException nfe) {
             alertbox.feil(tallFormatException.tallFormatException());

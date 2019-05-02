@@ -248,8 +248,9 @@ public class ControllerAdminLeggTil {
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
+            System.out.println("før: " + liste);
             liste.add(lokale);
-            System.out.println(liste);
+            System.out.println("etter nytt element " + liste);
 
             serialiser.skrivArrayTilFil(liste);
 

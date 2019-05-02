@@ -37,11 +37,11 @@ public class LokaleFilhåndtering {
 
             Lokale lokale = new Lokale(ID,navn,type,plasser);
 
-            ArrayList<Lokale> KonverterLokale = new ArrayList<>();
-            KonverterLokale.add(lokale);
-
             LokaleSerialiser serialiser = new LokaleSerialiser();
-            serialiser.skrivArrayTilFil(KonverterLokale);
+            ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+            liste.add(lokale);
+            
+            serialiser.skrivArrayTilFil(liste);
 
         } catch(NumberFormatException nfe) {
             alertbox.feil(tallFormatException.tallFormatException());
