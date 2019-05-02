@@ -1,9 +1,12 @@
 package org.openjfx.logic.Filhåndtering;
 
 
+import java.util.ArrayList;
+
 public abstract class fil {
 
-    public abstract void lesCsvFil();
+    public abstract ArrayList<String> lesCsvFil(String path, ArrayList<String> data);
+    public abstract String lesJobjFil(String path, ArrayList<String> data);
 
 }
 

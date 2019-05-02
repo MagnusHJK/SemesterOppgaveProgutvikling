@@ -5,6 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Lokale.Lokale;
+import org.openjfx.logic.Lokale.LokaleSerialiser;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 import org.openjfx.logic.Lokale.LokaleHåndtering;
 import org.openjfx.logic.Person.Kontaktperson;
 import org.openjfx.logic.Person.PersonHåndtering;
@@ -92,8 +96,10 @@ public class ArrangementHåndtering {
 
             serialiser.skrivArrayTilFil(liste);
 
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 
@@ -106,15 +112,33 @@ public class ArrangementHåndtering {
             liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
 
             serialiser.skrivArrayTilFil(liste);
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+           alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException  cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
+
     }
 
-    //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
-    public ArrayList<Arrangement> lagArrangementListe(){
-        ArrayList<Arrangement>arrangementListe = new ArrayList<>();
+    public void endreArrangement(Arrangement arrangement) {
+        ArrangementSerialiser serialiser = new ArrangementSerialiser();
 
+        try {
+            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+            liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
+            liste.add(arrangement);
+
+            serialiser.skrivArrayTilFil(liste);
+
+        } catch (IOException e) {
+           alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
+        }
+        //Lager midlertidig statisk Arrangement liste, husk å konverter til ObservableList før du bruker i JavaFX
+        public ArrayList<Arrangement> lagArrangementListe(){
+            ArrayList<Arrangement>arrangementListe = new ArrayList<>();
         PersonHåndtering person = new PersonHåndtering();
         ArrayList<Kontaktperson> kontaktpersonListe = person.lagKontaktpersonListe();
 

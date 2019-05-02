@@ -2,6 +2,9 @@ package org.openjfx.logic.Person;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,8 +31,10 @@ public class PersonHåndtering {
             liste.removeIf(Kontaktperson -> Kontaktperson.getPersonID().equals(person.getPersonID()));
 
             serialiser.skrivArrayTilFil(liste);
-        }catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        }catch(IOException e){
+            alertbox.feil(inputException.ioException());
+        } catch(ClassNotFoundException cnf) {
+            alertbox.feil(klasseException.klasseException());
         }
     }
 

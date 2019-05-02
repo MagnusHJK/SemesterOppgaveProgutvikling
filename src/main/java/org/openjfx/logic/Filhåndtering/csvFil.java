@@ -2,6 +2,9 @@ package org.openjfx.logic.Filhåndtering;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,28 +13,32 @@ import java.util.List;
 public class csvFil extends fil {
 
     @Override
-    public void lesCsvFil() {
-
-        Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        String path = selectedFile.getPath();
-
+    public ArrayList<String> lesCsvFil(String path,ArrayList data) {
         String rad;
-        List<String> data = new ArrayList<>();
         try {
             BufferedReader buffer = new BufferedReader(new FileReader(path));
             while ((rad = buffer.readLine()) != null) {
                 data.add(rad);
+
             }
             buffer.close();
+            System.out.println(data);
+
+
 
         } catch (FileNotFoundException fnf) {
-            fnf.printStackTrace();
+           alertbox.feil(filException.filException());
         } catch (IOException io) {
-            io.printStackTrace();
+           alertbox.feil(inputException.ioException());
         }
-        System.out.println(data);
+
+        return data;
     }
+
+    @Override
+    public String lesJobjFil(String path, ArrayList<String> data) {
+        return "hei";
+    }
+
+
 }

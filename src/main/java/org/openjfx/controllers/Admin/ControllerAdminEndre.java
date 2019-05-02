@@ -14,6 +14,7 @@ import org.openjfx.logic.Admin.Element;
 import org.openjfx.logic.Arrangement.Arrangement;
 import org.openjfx.logic.Arrangement.ArrangementHåndtering;
 import org.openjfx.logic.Arrangement.ArrangementSerialiser;
+import org.openjfx.logic.Billett.Billett;
 import org.openjfx.logic.Filhåndtering.skrivTilCsv;
 import org.openjfx.logic.Filhåndtering.skrivTilFil;
 import org.openjfx.logic.Lokale.LokaleSerialiser;
@@ -27,13 +28,16 @@ import org.openjfx.logic.Lokale.LokaleHåndtering;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ControllerAdminEndre{
+public class ControllerAdminEndre {
 
-    public void initialize() throws Exception{
+    public void initialize() throws Exception {
         Element elementerListe = new Element();
         choiceEndre.setItems(elementerListe.lagElementListe());
+
+        //choiceKontaktpersonArr.setItems(personer.lagObservableList(personSerialiser.lesArrayFraFil()));
     }
 
     @FXML
@@ -49,7 +53,7 @@ public class ControllerAdminEndre{
     private AnchorPane paneAdminEndre;
 
     @FXML
-    private ChoiceBox <String> choiceEndre;
+    private ChoiceBox<String> choiceEndre;
 
     @FXML
     private Button btnEndre;
@@ -58,17 +62,17 @@ public class ControllerAdminEndre{
     private ChoiceBox<Kontaktperson> choiceKontaktpersonArr;
 
     @FXML
-    public void endreInnhold (ActionEvent event) throws Exception {
+    public void endreInnhold(ActionEvent event) throws Exception {
 
         //LokaleHåndtering lokaler = new LokaleHåndtering();
         //LokaleSerialiser serialiser = new LokaleSerialiser();
 
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
 
-        if(valg.equals("Lokale")){
+        if (valg.equals("Lokale")) {
             listLokale.setVisible(true);
             //listKontaktperson.setVisible(false);
-            //listArrangement.setVisible(false);
+            listArrangement.setVisible(false);
 
             try {
                 LokaleSerialiser lSerialiser = new LokaleSerialiser();
@@ -76,11 +80,12 @@ public class ControllerAdminEndre{
                 ArrayList<Lokale> liste = lSerialiser.lesArrayFraFil();
 
                 listLokale.setItems(håndtering.lagObservableList(liste));
-            } catch(IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            } catch (IOException | ClassNotFoundException e) {
+                alertbox.feil(klasseException.klasseException());
             }
 
-        }else if(valg.equals("Kontaktperson")){
+        } else if (valg.equals("Kontaktperson")) {
+            //listArrangement.setVisible(true);
 
             try {
                 PersonSerialiser pSerialiser = new PersonSerialiser();
@@ -90,18 +95,20 @@ public class ControllerAdminEndre{
                 //EndreTabell.setItems(håndtering.lagObservableList(liste));
 
             } catch (Exception e) {
-                e.printStackTrace();
+                alertbox.feil(opprettException.opprettException());
             }
-        }else if(valg.equals("Arrangement")){
+        } else if (valg.equals("Arrangement")) {
+            listArrangement.setVisible(true);
+            listLokale.setVisible(false);
 
             try {
                 ArrangementSerialiser aSerialiser = new ArrangementSerialiser();
                 ArrangementHåndtering håndtering = new ArrangementHåndtering();
                 ArrayList<Arrangement> liste = aSerialiser.lesArrayFraFil();
 
-                //EndreTabell.setItems(håndtering.lagObservableList(liste));
-            } catch(Exception e) {
-                e.printStackTrace();
+                listArrangement.setItems(håndtering.lagObservableList(liste));
+            } catch (Exception e) {
+                alertbox.feil(opprettException.opprettException());
             }
 
 
@@ -109,8 +116,16 @@ public class ControllerAdminEndre{
     }
 
     @FXML
-    private void actionLokaleTrykk(MouseEvent event) { btnEndre.setDisable(false); }
+    private void actionLokaleTrykk(MouseEvent event) {
+        btnEndre.setDisable(false);
+    }
 
+    @FXML
+    private void actionArrangementTrykk(MouseEvent event) {
+        btnEndre.setDisable(false);
+    }
+
+    // Lokale
     @FXML
     private Pane paneLokale;
 
@@ -126,17 +141,79 @@ public class ControllerAdminEndre{
     @FXML
     private TextField textfieldPlasserLokale;
 
+
+    // Arrangement
     @FXML
-    private void actionEndreElement(ActionEvent event) {
+    private Pane paneArrangement;
+
+    @FXML
+    private ChoiceBox choiceKontaktperson;
+
+    @FXML
+    private ChoiceBox choiceLokale;
+
+    @FXML
+    private TextField textfieldNavn;
+
+    @FXML
+    private TextField textfieldArtist;
+
+    @FXML
+    private TextField textfieldSted;
+
+    @FXML
+    private DatePicker dateDato;
+
+    @FXML
+    private TextField textfieldTidspunkt;
+
+    @FXML
+    private TextField textfieldBillettpris;
+
+    @FXML
+    private TextField textfieldMaksBilletter;
+
+    @FXML
+    private TextArea textareaBeskrivelse;
+
+    @FXML
+    private void actionEndreElement(ActionEvent event) throws Exception{
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
         //Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
 
-        if(valg.equals("Lokale")){
+        if (valg.equals("Lokale")) {
             paneLokale.setVisible(true);
-            //paneKontaktperson.setVisible(false);
-            //paneArrangement.setVisible(false);
+            paneArrangement.setVisible(false);
 
-        } else{
+
+            try {
+                LokaleSerialiser serialiser = new LokaleSerialiser();
+                LokaleHåndtering håndtering = new LokaleHåndtering();
+                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+
+                listLokale.setItems(håndtering.lagObservableList(liste));
+            } catch(IOException io){
+               alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
+
+        } else if (valg.equals("Arrangement")) {
+            paneArrangement.setVisible(true);
+            paneLokale.setVisible(false);
+
+            try{
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
+                ArrangementHåndtering håndtering = new ArrangementHåndtering();
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+                listArrangement.setItems(håndtering.lagObservableList(liste));
+            }catch(IOException e){
+                alertbox.feil(inputException.ioException());
+            } catch(ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
+        } else {
 
         }
     }
@@ -153,34 +230,34 @@ public class ControllerAdminEndre{
         int plasser = 0;
 
         //Prøver å konvertere plasser til int
-        try{
+        try {
             plasser = Integer.parseInt(textfieldPlasserLokale.getText());
 
-        } catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             alertbox.feil("Antall plasser er nødt til å være heltall.");
         }
 
         Lokale lokale = new Lokale(lokaleID, navn, type, plasser);
         LokaleHåndtering lokaleHåndtering = new LokaleHåndtering();
         lokaleHåndtering.endreLokale(lokale);
-        textfieldLokaleID.clear();
+        //textfieldLokaleID.clear();
         textfieldNavnLokale.clear();
         textfieldTypeLokale.clear();
         textfieldPlasserLokale.clear();
 
-        try{
+        try {
 
 
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
             LokaleSerialiser serialiser = new LokaleSerialiser();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
-            //liste.add(lokale);
+            liste.add(lokale);
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
 
-            /*// Lagerer på fil
+            // Lagerer på fil
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
@@ -191,13 +268,118 @@ public class ControllerAdminEndre{
 
             skrivTilFil skriv = new skrivTilCsv();
             skriv.LokaleTilCsv(lokaleSerialiser.lesArrayFraFil(),path);
-            // Slutt*/
+            // Slutt
 
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException cnf){
-            cnf.printStackTrace();
+        } catch (IOException ioe) {
+           alertbox.feil(inputException.ioException());
+        } catch (ClassNotFoundException cnf) {
+
+            alertbox.feil(klasseException.klasseException());
         }
     }
 
+    /*@FXML
+    private void actionEndreArrangement(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+        Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
+        System.out.println("Du har trykket på legg til arrangement");
+
+        String arrangementID = etArrangement.getArrangementID();
+        //Kontaktperson kontaktperson = choiceKontaktperson.getSelectionModel().getSelectedItem();
+        //Lokale lokale = choiceLokale.getSelectionModel().getSelectedItem();
+        Kontaktperson enKontaktperson = (Kontaktperson) choiceKontaktperson.getSelectionModel().getSelectedItem();
+        Lokale etLokale = (Lokale) choiceLokale.getSelectionModel().getSelectedItem();
+        String navn = textfieldNavn.getText();
+        String artist = textfieldArtist.getText();
+        String sted = textfieldSted.getText();
+        LocalDate dato = dateDato.getValue();
+        String tidspunkt = textfieldTidspunkt.getText();
+        String beskrivelse = textareaBeskrivelse.getText();
+        int billettPris = 0;
+        int billettMaks = 0;
+        boolean ok = true;
+
+        // Sjekk om feltene er tomme
+        try {
+            if (navn.isEmpty() ||
+                    artist.isEmpty() || sted.isEmpty() || beskrivelse.isEmpty()) {
+                ok = false;
+                throw new inputException();
+
+            }
+
+        } catch (inputException ie) {
+            alertbox.feil(inputException.emptyException());
+
+        }
+
+        // Sjekk om menyene er lik NULL
+        try {
+            if (enKontaktperson == null || etLokale == null) {
+                ok = false;
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException npe) {
+            alertbox.feil(inputException.nullexception());
+
+        }
+
+
+        // Sjekker om input feltene inneholder tall der det trengs
+        try {
+            billettPris = Integer.parseInt(textfieldBillettpris.getText());
+            billettMaks = Integer.parseInt(textfieldMaksBilletter.getText());
+            //ok = false;
+            // throw new inputException();
+        } catch (NumberFormatException nfe) {
+            alertbox.feil(inputException.intException());
+
+        }
+
+        if (!ok) {
+
+        } else {
+            Billett[] billett = new Billett[billettMaks];
+
+            Arrangement arrangement = new Arrangement(arrangementID, kontaktperson, lokale, navn, artist, sted, dato, tidspunkt, beskrivelse, billettPris, billettMaks, billett);
+            //textfieldArrangementID.clear();
+            textfieldNavn.clear();
+            textfieldArtist.clear();
+            textfieldSted.clear();
+            textfieldTidspunkt.clear();
+            textfieldBillettpris.clear();
+            textfieldMaksBilletter.clear();
+            textareaBeskrivelse.clear();
+
+            try {
+                //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+
+                liste.add(arrangement);
+                System.out.println(liste);
+
+                serialiser.skrivArrayTilFil(liste);
+
+                // Lagerer på fil
+                Stage stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                String path = selectedFile.getPath();
+
+                ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
+
+                skrivTilFil skriv = new skrivTilCsv();
+                skriv.ArrangementTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
+                // Slutt
+
+
+            } catch (IOException io) {
+               alertbox.feil(inputException.ioexception());
+            } catch(| ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
+        }
+
+    }*/
 }

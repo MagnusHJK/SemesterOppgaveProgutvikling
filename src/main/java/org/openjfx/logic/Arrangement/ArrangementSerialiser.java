@@ -4,6 +4,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.openjfx.logic.Lokale.Lokale;
 import org.openjfx.logic.Person.Kontaktperson;
+import org.openjfx.logic.exceptions.alertbox;
+import org.openjfx.logic.exceptions.filException;
+import org.openjfx.logic.exceptions.inputException;
+import org.openjfx.logic.exceptions.klasseException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,16 +30,15 @@ public class ArrangementSerialiser implements Serializable {
             ois.close();
             fis.close();
         }catch(FileNotFoundException e){
-            e.printStackTrace();
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(filException.filException());
         }
         catch(IOException ois){
             System.err.println("Feil i I/O");
-            ois.printStackTrace();
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(inputException.ioException());
+
         }catch(ClassNotFoundException c){
-            System.err.println("Feil klasse");
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil(klasseException.klasseException());
+
         }
 
         return arrangementListe;
@@ -51,7 +54,7 @@ public class ArrangementSerialiser implements Serializable {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            //alertbox.display("Feil","En feil oppstod");
+           alertbox.feil(inputException.ioException());
         }
     }
 }
