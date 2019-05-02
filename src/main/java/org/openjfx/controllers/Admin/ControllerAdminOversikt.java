@@ -35,7 +35,7 @@ public class ControllerAdminOversikt {
         KolonneArrangementTidspunkt.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("tidspunkt"));
         KolonneArrangementPris.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettPris"));
         KolonneArrangementBillettMaks.setCellValueFactory(new PropertyValueFactory<Arrangement, String>("billettMaks"));
-        KolonneArrangementSolgte.setCellValueFactory(new PropertyValueFactory<Billett, Billett[]>("salg"));
+        KolonneArrangementSolgte.setCellValueFactory(cellData -> cellData.getValue().getSalgAntall());
 
 
         KolonneLokalerID.setCellValueFactory(new PropertyValueFactory<Lokale, String>("lokaleID"));
@@ -95,7 +95,7 @@ public class ControllerAdminOversikt {
     private TableColumn<Arrangement, String> KolonneArrangementBillettMaks;
 
     @FXML
-    private TableColumn<Billett, Billett[]> KolonneArrangementSolgte;
+    private TableColumn<Arrangement, Integer> KolonneArrangementSolgte;
 
 
 
@@ -145,8 +145,6 @@ public class ControllerAdminOversikt {
 
 
 
-
-
     @FXML
     private TableView<Billett> tabellBilletter;
 
@@ -187,6 +185,7 @@ public class ControllerAdminOversikt {
 
 
         try{
+            //Deserialiserer databasen, lager ObservableLister av det og legger det i tabellene
             tabellArrangementer.setItems(håndteringArr.lagObservableList(serialiserArr.lesArrayFraFil()));
             tabellLokaler.setItems(håndteringLok.lagObservableList(serialiserLok.lesArrayFraFil()));
             tabellKontaktpersoner.setItems(håndteringPer.lagObservableList(serialiserPer.lesArrayFraFil()));
