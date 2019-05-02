@@ -54,7 +54,7 @@ public class ArrangementSerialiser implements Serializable {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-           alertbox.feil(inputException.ioException());
+           alertbox.feil("dd");
         }
     }
 }

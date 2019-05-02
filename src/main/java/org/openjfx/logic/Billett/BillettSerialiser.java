@@ -23,10 +23,10 @@ public class BillettSerialiser {
             fis.close();
         }catch(FileNotFoundException e){
             alertbox.feil(filException.filException());
-        }
-        catch(IOException ois){
+        } catch(IOException ois){
             System.err.println("Feil i I/O");
-           alertbox.feil(inputException.ioException());
+           alertbox.feil("ee");
+           ois.printStackTrace();
         }catch(ClassNotFoundException c){
             alertbox.feil(klasseException.klasseException());
         }
@@ -44,7 +44,7 @@ public class BillettSerialiser {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            //alertbox.display("Feil","En feil oppstod");
+            alertbox.feil("En feil oppstod");
         }
     }
 }

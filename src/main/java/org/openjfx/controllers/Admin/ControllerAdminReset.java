@@ -81,6 +81,7 @@ public class ControllerAdminReset {
         ArrayList<Billett> billettListe = billettHåndtering.lagBillettListe();
 
         lblReset.setText("Billetter er resatt");
+       // ArrayList<Billett> billettListe = billettHåndtering.;
 
         try{
             billettSerialiser.skrivArrayTilFil(billettListe);

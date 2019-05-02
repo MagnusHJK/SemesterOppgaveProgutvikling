@@ -27,7 +27,7 @@ public class LokaleSerialiser {
             alertbox.feil(filException.filException());
         }
         catch(IOException ois){
-            alertbox.feil(inputException.ioException());
+            alertbox.feil("cc");
         }catch(ClassNotFoundException c){
            alertbox.feil(klasseException.klasseException());
         }
@@ -44,7 +44,7 @@ public class LokaleSerialiser {
             oos.close();
             fos.close();
         }catch(IOException ioe){
-            alertbox.feil(inputException.ioException());
+            alertbox.feil("bb");
         }
 
     }

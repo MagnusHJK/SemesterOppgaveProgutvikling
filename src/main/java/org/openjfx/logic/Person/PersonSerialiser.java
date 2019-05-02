@@ -27,7 +27,8 @@ public class PersonSerialiser {
             //alertbox.display("Feil","En feil oppstod");
         }
         catch(IOException ois){
-            alertbox.feil(inputException.ioException());
+            alertbox.feil(("aa"));
+            ois.getCause();
         }catch(ClassNotFoundException c){
             alertbox.feil(klasseException.klasseException());
         }
