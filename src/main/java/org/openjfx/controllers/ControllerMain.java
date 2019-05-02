@@ -56,6 +56,7 @@ public class ControllerMain {
             System.out.println("Tar deg til Admin siden. :--)");
         } catch (IOException e) {
             alertbox.feil("En feil oppstod");
+            e.printStackTrace();
         }
     }
 

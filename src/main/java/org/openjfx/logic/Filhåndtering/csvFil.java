@@ -35,4 +35,11 @@ public class csvFil extends fil {
     public String lesJobjFil(String path, ArrayList<String> data) {
         return "hei";
     }
+
+    @Override
+    public void lesObjFil() {
+        
+    }
+
+
 }
