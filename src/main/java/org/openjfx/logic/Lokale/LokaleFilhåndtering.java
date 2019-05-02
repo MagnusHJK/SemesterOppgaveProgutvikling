@@ -19,7 +19,7 @@ public class LokaleFilhåndtering {
         try {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.jobj"));
             File selectedFile = fileChooser.showOpenDialog(stage);
             String path = selectedFile.getPath();
             String navn = selectedFile.getName();
@@ -60,7 +60,7 @@ public class LokaleFilhåndtering {
         try {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.obj"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.jobj"));
             File selectedFile = fileChooser.showOpenDialog(stage);
             String path = selectedFile.getPath();
             String navn = selectedFile.getName();
