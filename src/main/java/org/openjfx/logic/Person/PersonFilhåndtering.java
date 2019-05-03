@@ -63,6 +63,7 @@ public class PersonFilhåndtering {
         } catch (IOException ioe){
             alertbox.feil(inputException.ioException());
         }
+        alertbox.godkjent("File ble lest av og lagt til");
     }
 
     public void personSkriv(){
@@ -83,5 +84,6 @@ public class PersonFilhåndtering {
         } catch (NullPointerException npe) {
             alertbox.feil(nullException.nullException());
         }
+        alertbox.godkjent("Filen ble skrevet til");
     }
 }

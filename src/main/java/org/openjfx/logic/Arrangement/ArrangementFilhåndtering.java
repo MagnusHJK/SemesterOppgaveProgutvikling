@@ -80,6 +80,7 @@ public class ArrangementFilhåndtering {
         }catch (IOException ioe){
             alertbox.feil(inputException.ioException());
         }
+        alertbox.godkjent("filen ble lest av og lagt til");
     }
 
     public void arrangementSkriv(){
@@ -100,5 +101,6 @@ public class ArrangementFilhåndtering {
         } catch (NullPointerException npe) {
           alertbox.feil(nullException.nullException());
         }
+        alertbox.godkjent("Filen ble skrevet til.");
     }
 }

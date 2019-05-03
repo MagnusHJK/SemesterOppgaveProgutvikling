@@ -54,6 +54,7 @@ public class LokaleFilhåndtering {
         }catch (IOException ioe){
             alertbox.feil(inputException.ioException());
         }
+        alertbox.godkjent("File ble lest av og lagt til");
     }
 
     public void lokaleSkriv(){
@@ -74,5 +75,6 @@ public class LokaleFilhåndtering {
         } catch (NullPointerException npe) {
            alertbox.feil(nullException.nullException());
         }
+        alertbox.godkjent("Filen ble skrevet til.");
     }
 }
