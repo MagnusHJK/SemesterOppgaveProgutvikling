@@ -26,9 +26,9 @@
         </Label>
         <ChoiceBox fx:id="choiceEndre" layoutX="350.0" layoutY="20.0" prefWidth="150.0" />
         <Button layoutX="550.0" layoutY="20.0" mnemonicParsing="false" onAction="#endreInnhold" text="Velg" />
-      <Pane fx:id="paneKontaktperson" layoutX="206.0" layoutY="260.0" prefHeight="320.0" prefWidth="297.0">
+      <Pane fx:id="paneKontaktperson" layoutX="206.0" layoutY="260.0" prefHeight="320.0" prefWidth="297.0" visible="false">
          <children>
-            <GridPane prefHeight="320.0" prefWidth="297.0" visible="false">
+            <GridPane prefHeight="320.0" prefWidth="297.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,9 +63,9 @@
             </GridPane>
          </children>
       </Pane>
-        <Pane fx:id="paneLokale" layoutX="208.0" layoutY="262.0" prefHeight="282.0" prefWidth="285.0">
+        <Pane fx:id="paneLokale" layoutX="208.0" layoutY="262.0" prefHeight="282.0" prefWidth="285.0" visible="false">
             <children>
-                <GridPane prefHeight="120.0" prefWidth="285.0" visible="false">
+                <GridPane prefHeight="120.0" prefWidth="285.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -88,7 +88,7 @@
                 </GridPane>
             </children>
         </Pane>
-      <Pane fx:id="paneArrangement" layoutX="228.0" layoutY="214.0" prefHeight="381.0" prefWidth="285.0">
+      <Pane fx:id="paneArrangement" layoutX="228.0" layoutY="214.0" prefHeight="381.0" prefWidth="285.0" visible="false">
          <children>
             <GridPane layoutY="-15.0" prefHeight="391.0" prefWidth="285.0">
               <columnConstraints>
