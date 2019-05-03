@@ -6,12 +6,12 @@ import javafx.scene.control.TextField;
 public class BillettNummerTextField extends TextField {
 
     public BillettNummerTextField(){
-        this.setPromptText("1-20");
+        this.setPromptText("1-10");
     }
 
     @Override
     public void replaceText(int i, int il, String string){
-        if(string.matches("^[1-9][0-9]*$") || string.isEmpty()){
+        if(string.matches("^[1-9]|10*$") || string.isEmpty()){
             super.replaceText(i, il, string);
         }
     }
