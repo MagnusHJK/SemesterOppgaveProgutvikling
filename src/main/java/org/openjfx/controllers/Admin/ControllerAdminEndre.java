@@ -58,6 +58,9 @@ public class ControllerAdminEndre {
     private ChoiceBox<String> choiceEndre;
 
     @FXML
+    private Label lblEndre;
+
+    @FXML
     public void endreInnhold(ActionEvent event) throws Exception {
         String valg = choiceEndre.getSelectionModel().getSelectedItem();
 
@@ -197,7 +200,7 @@ public class ControllerAdminEndre {
 
     // Metode som endrer lokalet
     @FXML
-    private void actionEndreLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException {
+    private void actionEndreLokale(ActionEvent event) throws Exception {
 
         Lokale etLokale = listLokale.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på endre lokale");
@@ -252,28 +255,15 @@ public class ControllerAdminEndre {
         try {
             // Henter det nåværende Array av Lokale
             LokaleSerialiser serialiser = new LokaleSerialiser();
+            LokaleHåndtering håndtering = new LokaleHåndtering();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
+            listLokale.setItems(håndtering.lagObservableList(liste));
+            lblEndre.setText("Lokalet endret!");
 
-            // Lagerer på fil
-            try {
-                Stage stage = new Stage();
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.jobj"));
-                File selectedFile = fileChooser.showOpenDialog(stage);
-                String path = selectedFile.getPath();
-
-                LokaleSerialiser lokaleSerialiser = new LokaleSerialiser();
-
-                skrivTilFil skriv = new skrivTilCsv();
-                skriv.skrivTilCsv(lokaleSerialiser.lesArrayFraFil(), path);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-            // Slutt
 
         } catch (IOException ioe) {
            alertbox.feil(inputException.ioException());
@@ -358,40 +348,25 @@ public class ControllerAdminEndre {
 
             //Henter det nåværende Array av Kontaktperson
             PersonSerialiser serialiser = new PersonSerialiser();
+            PersonHåndtering håndtering = new PersonHåndtering();
             ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
 
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
-
-            // Lagerer på fil
-            try {
-                Stage stage = new Stage();
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.jobj"));
-                File selectedFile = fileChooser.showOpenDialog(stage);
-                String path = selectedFile.getPath();
-
-                PersonSerialiser personSerialiser = new PersonSerialiser();
-
-                skrivTilFil skriv = new skrivTilCsv();
-                skriv.skrivTilCsv(personSerialiser.lesArrayFraFil(), path);
-            } catch (NullPointerException npe) {
-                alertbox.feil(nullException.nullException());
-            }
-            // Slutt
+            listKontaktperson.setItems(håndtering.lagObservableList(liste));
+            lblEndre.setText("Kontaktperson endret!");
 
         } catch (IOException ioe) {
             alertbox.feil(inputException.ioException());
         } catch (ClassNotFoundException cnf) {
-
             alertbox.feil(klasseException.klasseException());
         }
     }
 
     // Metode som endrer arrangement
     @FXML
-    private void actionEndreArrangement(ActionEvent event) throws idException, inputException, NullPointerException {
+    private void actionEndreArrangement(ActionEvent event) throws Exception {
         Arrangement etArrangement = listArrangement.getSelectionModel().getSelectedItem();
         System.out.println("Du har trykket på legg til arrangement");
 
@@ -482,28 +457,15 @@ public class ControllerAdminEndre {
         try {
             //Henter det nåværende Array av Arrangementer
             ArrangementSerialiser serialiser = new ArrangementSerialiser();
+            ArrangementHåndtering håndtering = new ArrangementHåndtering();
             ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
 
             System.out.println(liste);
 
             serialiser.skrivArrayTilFil(liste);
+            listArrangement.setItems(håndtering.lagObservableList(liste));
+            lblEndre.setText("Arrangement endret!");
 
-            // Lagerer på fil
-            try {
-                Stage stage = new Stage();
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.csv", "*.jobj"));
-                File selectedFile = fileChooser.showOpenDialog(stage);
-                String path = selectedFile.getPath();
-
-                ArrangementSerialiser arrangementSerialiser = new ArrangementSerialiser();
-
-                skrivTilFil skriv = new skrivTilCsv();
-                skriv.skrivTilCsv(arrangementSerialiser.lesArrayFraFil(), path);
-            } catch (NullPointerException npe) {
-                alertbox.feil(nullException.nullException());
-            }
-            // Slutt
         } catch (IOException ioe) {
             alertbox.feil(inputException.ioException());
         } catch (ClassNotFoundException cnf) {

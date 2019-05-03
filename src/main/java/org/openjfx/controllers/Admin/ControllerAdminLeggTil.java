@@ -178,7 +178,7 @@ public class ControllerAdminLeggTil {
 
     //Når brukeren trykker på "Legg til Lokale" knapp
     @FXML
-    private void actionLeggTilLokale(ActionEvent event) throws IOException, ClassNotFoundException, inputException{
+    private void actionLeggTilLokale(ActionEvent event) throws Exception{
         System.out.println("Du har trykket på legg til lokale");
 
         String lokaleID = textfieldLokaleID.getText();
@@ -236,6 +236,7 @@ public class ControllerAdminLeggTil {
 
             //Henter det nåværende Array av Arrangementer og legger det nye Arrangementet inn
             LokaleSerialiser serialiser = new LokaleSerialiser();
+            LokaleHåndtering håndtering = new LokaleHåndtering();
             ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
 
             System.out.println("før: " + liste);
@@ -244,8 +245,9 @@ public class ControllerAdminLeggTil {
 
             serialiser.skrivArrayTilFil(liste);
 
-            LokaleFilhåndtering filhåndtering = new LokaleFilhåndtering();
-            filhåndtering.lokaleSkriv();
+            //Oppdaterer Lokaler for Arrangementer
+            choiceTypeArr.setItems(håndtering.lagObservableList(liste));
+
             lblLeggTill.setText("Lokale lagt til!");
 
         } catch(IOException ioe){
@@ -330,6 +332,7 @@ public class ControllerAdminLeggTil {
 
         try {
             PersonSerialiser serialiser = new PersonSerialiser();
+            PersonHåndtering håndtering = new PersonHåndtering();
             ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
 
             liste.add(kontaktperson);
@@ -337,8 +340,10 @@ public class ControllerAdminLeggTil {
 
             serialiser.skrivArrayTilFil(liste);
 
-            PersonFilhåndtering filhåndtering = new PersonFilhåndtering();
-            filhåndtering.personSkriv();
+            //Oppdaterer kontaktperson liste for Arrangement
+            choiceKontaktpersonArr.setItems(håndtering.lagObservableList(liste));
+
+
             lblLeggTill.setText("Kontaktperson lagt til!");
 
         }catch(IOException ioe){
@@ -457,9 +462,6 @@ public class ControllerAdminLeggTil {
                 System.out.println(liste);
 
                 serialiser.skrivArrayTilFil(liste);
-
-                ArrangementFilhåndtering filhåndtering = new ArrangementFilhåndtering();
-                filhåndtering.arrangementSkriv();
 
                 lblLeggTill.setText("Arrangement lagt til!");
 

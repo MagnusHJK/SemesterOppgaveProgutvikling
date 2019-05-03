@@ -75,25 +75,7 @@ public class ArrangementHåndtering {
         return "";
     }
 
-    public void oppdaterArrangementSalg(Arrangement arrangement){
-        ArrangementSerialiser serialiser = new ArrangementSerialiser();
-
-        try{
-            ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
-
-            //Fjerner det gamle arrangementet og legger til det nye, med riktige plasser
-            liste.removeIf(Arrangement -> Arrangement.getArrangementID().equals(arrangement.getArrangementID()));
-            liste.add(arrangement);
-
-            serialiser.skrivArrayTilFil(liste);
-
-        }catch(IOException e){
-            alertbox.feil(inputException.ioException());
-        } catch(ClassNotFoundException cnf) {
-            alertbox.feil(klasseException.klasseException());
-        }
-    }
-
+    //Sletter et Arrangement som matcher ArrangementID
     public void slettArrangement(Arrangement arrangement){
         ArrangementSerialiser serialiser = new ArrangementSerialiser();
 
@@ -111,6 +93,7 @@ public class ArrangementHåndtering {
 
     }
 
+    //Sletter gamle Arrangement og legger inn nye
     public void endreArrangement(Arrangement arrangement) {
         ArrangementSerialiser serialiser = new ArrangementSerialiser();
 

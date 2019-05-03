@@ -76,7 +76,7 @@ public class BillettHåndtering {
                 billettListe.add(billett);
                 serialiserBill.skrivArrayTilFil(billettListe);
 
-                håndteringArr.oppdaterArrangementSalg(arrangement);
+                håndteringArr.endreArrangement(arrangement);
 
             }catch(IOException e){
                 alertbox.feil(inputException.ioException());
@@ -119,7 +119,7 @@ public class BillettHåndtering {
         billettList.add(new Billett(arrangementList.get(0), 1, arrangementList.get(0).getSted(),
                 arrangementList.get(0).getDato(), arrangementList.get(0).getTidspunkt(), "12345678"));
 
-        billettList.add(new Billett(arrangementList.get(1), 2, arrangementList.get(1).getSted(),
+        billettList.add(new Billett(arrangementList.get(1), 1, arrangementList.get(1).getSted(),
                 arrangementList.get(1).getDato(), arrangementList.get(1).getTidspunkt(), "87654321"));
 
         return billettList;

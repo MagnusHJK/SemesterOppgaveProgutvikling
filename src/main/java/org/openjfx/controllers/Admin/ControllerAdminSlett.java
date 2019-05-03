@@ -173,49 +173,92 @@ public class ControllerAdminSlett {
 
     //Sjekker typen brukeren har valgt, henter ut objektet de har valgt og sletter det spesifikke objektet
     @FXML
-    private void actionSlettElement(ActionEvent event){
+    private void actionSlettElement(ActionEvent event) throws Exception{
         String valg = choiceSlettValg.getSelectionModel().getSelectedItem();
 
 
         if(valg.equals("Lokale")){
-            LokaleHåndtering håndtering = new LokaleHåndtering();
+            try {
+                LokaleHåndtering håndtering = new LokaleHåndtering();
+                LokaleSerialiser serialiser = new LokaleSerialiser();
 
-            Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
 
-            håndtering.slettLokale(lokale);
+                Lokale lokale = listLokale.getSelectionModel().getSelectedItem();
 
-            lblSlett.setText("Lokale slettet!");
+                håndtering.slettLokale(lokale);
+
+
+                ArrayList<Lokale> liste = serialiser.lesArrayFraFil();
+                listLokale.setItems(håndtering.lagObservableList(liste));
+
+                lblSlett.setText("Lokale slettet!");
+            }catch (IOException ioe) {
+                alertbox.feil(inputException.ioException());
+            }catch (ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
 
         }else if(valg.equals("Kontaktperson")){
-            PersonHåndtering håndtering = new PersonHåndtering();
+            try {
+                PersonHåndtering håndtering = new PersonHåndtering();
+                PersonSerialiser serialiser = new PersonSerialiser();
 
-            Kontaktperson kontaktperson = listKontaktperson.getSelectionModel().getSelectedItem();
 
-            håndtering.slettPerson(kontaktperson);
+                Kontaktperson kontaktperson = listKontaktperson.getSelectionModel().getSelectedItem();
 
-            lblSlett.setText("Kontaktperson slettet!");
+                håndtering.slettPerson(kontaktperson);
+
+                ArrayList<Kontaktperson> liste = serialiser.lesArrayFraFil();
+                listKontaktperson.setItems(håndtering.lagObservableList(liste));
+
+                lblSlett.setText("Kontaktperson slettet!");
+            }catch (IOException ioe) {
+                alertbox.feil(inputException.ioException());
+            }catch (ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
 
         }else if(valg.equals("Arrangement")){
-            ArrangementHåndtering håndtering = new ArrangementHåndtering();
+            try {
+                ArrangementHåndtering håndtering = new ArrangementHåndtering();
+                ArrangementSerialiser serialiser = new ArrangementSerialiser();
 
-            Arrangement arrangement = listArrangement.getSelectionModel().getSelectedItem();
 
-            håndtering.slettArrangement(arrangement);
+                Arrangement arrangement = listArrangement.getSelectionModel().getSelectedItem();
 
-            lblSlett.setText("Arrangement slettet!");
+                håndtering.slettArrangement(arrangement);
+
+                ArrayList<Arrangement> liste = serialiser.lesArrayFraFil();
+                listArrangement.setItems(håndtering.lagObservableList(liste));
+
+                lblSlett.setText("Arrangement slettet!");
+            }catch (IOException ioe) {
+                alertbox.feil(inputException.ioException());
+            }catch (ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
         }
         else if(valg.equals("Billett")){
-            BillettHåndtering håndteringBill = new BillettHåndtering();
-            ArrangementHåndtering håndteringArr = new ArrangementHåndtering();
+            try {
+                BillettHåndtering håndteringBill = new BillettHåndtering();
+                BillettSerialiser serialiserBill = new BillettSerialiser();
+                ArrangementHåndtering håndteringArr = new ArrangementHåndtering();
 
-            Billett billett = listBillett.getSelectionModel().getSelectedItem();
+                Billett billett = listBillett.getSelectionModel().getSelectedItem();
 
-            håndteringBill.slettBillett(billett);
-            håndteringArr.oppdaterArrangementSalg(billett.getArrangement());
+                håndteringBill.slettBillett(billett);
+                håndteringArr.endreArrangement(billett.getArrangement());
 
-            lblSlett.setText("Billett slettet!");
+                //Oppdaterer listen
+                ArrayList<Billett> liste = serialiserBill.lesArrayFraFil();
+                listBillett.setItems(håndteringBill.lagObservableList(liste));
+
+                lblSlett.setText("Billett slettet!");
+            }catch (IOException ioe) {
+                alertbox.feil(inputException.ioException());
+            }catch (ClassNotFoundException cnf) {
+                alertbox.feil(klasseException.klasseException());
+            }
         }
-
-
     }
 }

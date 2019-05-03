@@ -20,7 +20,7 @@
                 <Font size="19.0" />
             </font>
         </Label>
-        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="140.0" prefHeight="503.0" prefWidth="460.0">
+        <Pane fx:id="paneArrangement" layoutX="230.0" layoutY="140.0" prefHeight="503.0" prefWidth="460.0" visible="false">
             <children>
                 <GridPane prefHeight="420.0" prefWidth="457.0">
                     <columnConstraints>
@@ -65,7 +65,7 @@
                   <TextField fx:id="textfieldTidspunktArr" promptText="HH:MM" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="452.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
+                <Button fx:id="btnLeggTilArrangement" layoutX="150.0" layoutY="447.0" mnemonicParsing="false" onAction="#actionLeggTilArrangement" text="Legg til Arrangement" />
             </children>
         </Pane>
         <ChoiceBox fx:id="choiceLeggTillValg" layoutX="300.0" layoutY="86.0" prefWidth="150.0" />
@@ -137,7 +137,7 @@
                 <Button layoutX="147.0" layoutY="406.0" mnemonicParsing="false" onAction="#actionLeggTilKontaktperson" text="Legg til Kontaktperson" />
             </children>
         </Pane>
-      <Label fx:id="lblLeggTill" alignment="CENTER" layoutX="247.0" layoutY="643.0" prefHeight="16.0" prefWidth="457.0">
+      <Label fx:id="lblLeggTill" alignment="CENTER" layoutX="247.0" layoutY="624.0" prefHeight="16.0" prefWidth="457.0">
          <font>
             <Font size="16.0" />
          </font></Label>

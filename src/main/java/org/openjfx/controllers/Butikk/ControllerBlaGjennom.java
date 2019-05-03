@@ -90,7 +90,6 @@ public class ControllerBlaGjennom {
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
-        //TODO fikse exceptions etter serialiserings id-ene er fikset
 
         //Sjekker om det valgte lokalet har noen arrangementer som bruker dette lokalet.
         try {
@@ -112,6 +111,10 @@ public class ControllerBlaGjennom {
         ArrangementHåndtering filterArr = new ArrangementHåndtering();
         ArrangementSerialiser serialiserArr = new ArrangementSerialiser();
 
+        Kontaktperson kontaktperson = arrangement.getKontaktperson();
+        PersonHåndtering filterKontakt = new PersonHåndtering();
+        PersonSerialiser serialiserKontakt = new PersonSerialiser();
+
         btnKjopSide.setDisable(false);
 
 
@@ -119,9 +122,9 @@ public class ControllerBlaGjennom {
         //Filtrerer riktig arrangement og setter teksten på labelen til å være informasjon om arrangementet
         //Velger kontaktperson fra samme arrangement og setter labelen til informasjon om han/henne
         try{
-            //lblArrangementDetaljer.setText(arrangement.getBeskrivelse().toString());
+
             lblArrangementDetaljer.setText(filterArr.filtrerArrangementDetaljer(serialiserArr.lesArrayFraFil(), arrangement));
-            lblKontaktpersonDetaljer.setText(arrangement.getKontaktperson().toString());
+            lblKontaktpersonDetaljer.setText(filterKontakt.filtrerKontaktpersonDetaljer(serialiserKontakt.lesArrayFraFil(), kontaktperson));
 
         }catch(ClassNotFoundException | IOException io){
             alertbox.feil(arrangementException.arrangementException());

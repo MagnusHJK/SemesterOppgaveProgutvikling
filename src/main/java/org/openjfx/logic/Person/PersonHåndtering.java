@@ -58,6 +58,24 @@ public class PersonHåndtering {
         }
     }
 
+    //Finner all info om det arrangementet du trykker på
+    public String filtrerKontaktpersonDetaljer(ArrayList<Kontaktperson> liste, Kontaktperson kontaktperson){
+        for(Kontaktperson index : liste){
+            if(index.getPersonID().equals(kontaktperson.getPersonID())){
+                return "Fornavn: " + kontaktperson.getFornavn() + "\n" +
+                        "Etternavn: " + kontaktperson.getEtternavn() + "\n" +
+                        "Telefon: " + kontaktperson.getTelefon() + "\n" +
+                        "Epost: " + kontaktperson.getEpost() + "\n" +
+                        "Nettside: " + kontaktperson.getNettside() + "\n" +
+                        "Virksomhet: " + kontaktperson.getVirksomhet() + "\n" +
+                        "Opplysninger: " + kontaktperson.getOpplysninger() + "\n";
+            }
+        }
+        return "";
+    }
+
+
+
     public ArrayList<Kontaktperson> lagKontaktpersonListe(){
         ArrayList<Kontaktperson>kontaktpersonListe = new ArrayList<>();
 
